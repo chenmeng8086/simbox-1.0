@@ -1,19 +1,20 @@
 <template>
   <div class="IconContainer">
     <el-scrollbar
-    wrap-class="el-demo2-scrollbar__wrap"
-    view-class="el-demo2-scrollbar__view"
+    wrap-class="scrollbar__wrap"
+    view-class="scrollbar__view"
     tag="ul">
      <ul class="box">
       <li
         v-for="item in iconList"
+        :id="item.id"
         :key="item.id"
         @click="clickIcon(item)"
         draggable="true"
         @dragend="dragend(item)"
         :class="item.className"
       >
-        <span v-html="item['show_svg']" :style="{color: item.color}" class="svgParent"></span>
+        <span v-html="item['show_svg']" :style="{color: item.color}"></span>
       </li>
     </ul>
     <IconPopUp
@@ -71,9 +72,8 @@ export default {
     /** 尺寸大小发生变化时 */
     sizeChange (selectedItem) {
       const {id} = selectedItem
-      console.log(selectedItem)
       const iconList = this.iconList.slice().map(item => {
-        if (item.id === id) return {...item, ...selectedItem, color: this.color}
+        if (item.id === id) return {...item, ...selectedItem, color: this.color, className: 'selectedClick'}
         return {...item}
       })
       this.size = selectedItem.size
@@ -82,14 +82,18 @@ export default {
     /** 颜色发生变化时 */
     colorChange (selectedItem) {
       const {id} = selectedItem
-      console.log(selectedItem)
       const iconList = this.iconList.slice().map(item => {
-        if (item.id === id) return {...item, ...selectedItem, size: this.size}
+        if (item.id === id) return {...item, ...selectedItem, size: this.size, className: 'selectedClick'}
         return {...item}
       })
-      console.log(selectedItem.color)
-      this.color = selectedItem.color
+      const color = selectedItem.color
+      this.color = color
       this.$emit('update:iconList', iconList)
+      // 修改path的填充
+      const pathNodeArr = document.getElementById(id).getElementsByTagName('path')
+      for (let i = 0; i < pathNodeArr.length; i++) {
+        pathNodeArr[i].setAttribute('fill', color)
+      }
     }
   }
 }
@@ -123,14 +127,7 @@ export default {
     border: 1px solid #3C99FC!important;
     background-color: #FFF!important;
   }
-  /deep/.el-demo2-scrollbar__wrap {
+  /deep/.scrollbar__wrap {
     max-height: 420px;
   }
-  // .svgParent{
-  //   /deep/svg{
-  //     path{
-  //       fill: red;
-  //     }
-  //   }
-  // }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <el-scrollbar
-    wrap-class="el-demo2-scrollbar__wrap"
-    view-class="el-demo2-scrollbar__view"
+    wrap-class="scrollbar__wrap"
+    view-class="scrollbar__view"
   >
     <el-collapse accordion>
       <el-collapse-item v-for="item in records" :key="item.id">
@@ -50,7 +50,7 @@ export default {
       line-height: 60px;
     }
   }
-  /deep/.el-demo2-scrollbar__wrap {
+  /deep/.scrollbar__wrap {
     max-height: 420px;
   }
 </style>
