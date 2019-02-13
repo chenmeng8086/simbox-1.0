@@ -16,9 +16,9 @@
           placeholder="请选择">
           <el-option
             v-for="item in departmentOpts"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
+            :key="item.id"
+            :label="item.initial"
+            :value="item.id">
           </el-option>
         </el-select>
       </div>
@@ -30,6 +30,7 @@
 import { Tabs } from './config.js'
 import symbols from './symbols/index'
 import symbolsManagement from './symbols-management/index'
+import { iconApi } from '@/api'
 export default {
   name: 'iconsLibraryTabs',
   data () {
@@ -49,8 +50,16 @@ export default {
     this.getDepartment()
   },
   methods: {
-    getDepartment () {
-      this.departmentOpts = [{label: 'BBG', value: 'BBG'}, {label: 'PBG', value: 'PBG'}]
+    /** 获取所在事业群 获取后台接口 */
+    async getDepartment (customParams) {
+      try {
+        const {data = []} = await iconApi.getDeptList({params: {deptId: 1, isPublic: true}})
+        this.departmentOpts = data
+      } catch (error) {
+        this.errorHandler(error)
+      } finally {
+        this.loading = false
+      }
     },
     handleTabClick (tab, event) {
       const { name } = tab

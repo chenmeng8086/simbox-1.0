@@ -1,8 +1,8 @@
-import queryCenterApi from './query-center.api'
+import iconApi from './icon.api'
 export default {
-  queryCenterApi
+  iconApi
 }
 // 支持按需引入特定API
 export {
-  queryCenterApi
+  iconApi
 }

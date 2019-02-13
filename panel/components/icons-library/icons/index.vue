@@ -21,9 +21,9 @@
           placeholder="请选择">
           <el-option
             v-for="opt in departmentOpts"
-            :key="opt.value"
-            :label="opt.label"
-            :value="opt.value">
+            :key="opt.id"
+            :label="opt.initial"
+            :value="opt.id">
           </el-option>
         </el-select>
       </template>
@@ -50,6 +50,7 @@ import IconContainer from './IconContainer'
 import {iconData} from './mockData.js'
 import getUUID from '../../quick-fill/text-fill/uuid.js'
 import { VisionOpts } from './config.js'
+import { iconApi } from '@/api'
 export default {
   name: 'icons',
   props: {
@@ -69,9 +70,10 @@ export default {
     return {
       visionOpts: [],
       groupOpts: [],
+      departmentOpts: [],
       options: [],
       group: 'all',
-      department: 'BBG',
+      department: '',
       name: '',
       iconList: [],
       version: '--'
@@ -88,12 +90,26 @@ export default {
       this.iconList = iconData.sort(function randomSort (a, b) { return Math.random() > 0.5 ? -1 : 1 }).map(item => ({...item, id: getUUID()}))
     },
     /** 获取分组信息 获取后台接口 */
-    getGroups () {
-      this.groupOpts = [{label: '第一分组', value: '1'}]
+    async getGroups (customParams) {
+      try {
+        const {data = []} = await iconApi.getGroupList({params: {deptId: 1, isPublic: true}})
+        this.groupOpts = data
+      } catch (error) {
+        this.errorHandler(error)
+      } finally {
+        this.loading = false
+      }
     },
     /** 获取所在事业群 获取后台接口 */
-    getDepartment () {
-      this.departmentOpts = [{label: 'BBG', value: 'BBG'}, {label: 'PBG', value: 'PBG'}]
+    async getDepartment (customParams) {
+      try {
+        const {data = []} = await iconApi.getDeptList({params: {deptId: 1, isPublic: true}})
+        this.departmentOpts = data
+      } catch (error) {
+        this.errorHandler(error)
+      } finally {
+        this.loading = false
+      }
     },
     getVisions () {
       this.visionOpts = VisionOpts

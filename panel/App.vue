@@ -1,10 +1,12 @@
 <template>
   <div id="app">
-    <ul :class="[!isFold ? 'displayBlock' : 'displayNone', 'left']">
-      <li v-for="(item, index) in config" :key="item.value" :tabindex="index" @click="click(item)" :class="_router()===item.router? 'selectedColor' : ''">
+    <div :class="[!isFold ? 'displayBlock' : 'displayNone', 'left']">
+      <div class="logo">Simbox</div>
+      <p v-for="(item, index) in config" :key="item.value" :tabindex="index" @click="click(item)" :class="_router()===item.router? 'selectedColor' : ''">
+        <i :class="item.icon"></i>
         {{item.label}}
-      </li>
-    </ul>
+      </p>
+    </div>
     <div class="center" @mouseover="mouseover" @mouseout="mouseout">
       <p
         :class="[isArrow ? 'displayBlock' : 'displayNone', 'arrow']"
@@ -19,18 +21,22 @@
 const config = [{
   label: '组件库',
   value: 'symbol',
-  router: '/components'
+  router: '/components',
+  icon: 'h-icon-internet'
 }, {
   label: '图标库',
   value: 'icon',
-  router: '/icons'
+  router: '/icons',
+  icon: 'h-icon-performance'
 }, {
   label: '快填',
   value: 'quickFill',
-  router: '/quickFill'
+  router: '/quickFill',
+  icon: 'h-icon-stick'
 }, {
   label: '交流群',
-  value: 'communicate'
+  value: 'communicate',
+  icon: 'h-icon-user'
 }]
 export default {
   name: 'App',
@@ -86,19 +92,25 @@ export default {
   height: 100%;
 }
 .left{
+  .logo{
+    margin: 24px 0px 60px 0px;
+    font-size: 24px;
+    font-family: LucidaGrande;
+    color: #3A3A3A;
+    letter-spacing: 2.16px;
+  }
   width: 10%;
   flex: 0 0 auto;
   background-color: #f2f2f2;
-  li{
-    height: 15%;
+  p{
+    height: 10%;
     text-align: center;
-    line-height: 60px;
+    line-height: 40px;
   }
   .selectedColor{
     color:#2080f7;
     font-weight: bold;
   }
-
 }
 .center{
   width: 1%;

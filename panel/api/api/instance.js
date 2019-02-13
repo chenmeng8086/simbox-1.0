@@ -3,7 +3,7 @@ import config from '../config'
 import axios from 'axios'
 import { Message } from 'hui'
 
-const REQUEST_SUCCESS = '200'
+const REQUEST_SUCCESS = '0'
 
 const baseUrl = {
   // 这里baseUrl不在这里指定，统一在API中指定，更方便灵活
