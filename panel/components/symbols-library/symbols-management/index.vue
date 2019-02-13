@@ -1,7 +1,7 @@
 <template>
   <el-scrollbar
-  wrap-class="el-demo2-scrollbar__wrap"
-  view-class="el-demo2-scrollbar__view">
+  wrap-class="scrollbar__wrap"
+  view-class="scrollbar__view">
   <template v-if="display === 'tree'">
     <div class="tree-wrap">
       <el-tree
@@ -26,17 +26,16 @@
     </div>
     </template>
     <template v-else>
-      <div>
-        <el-checkbox-group v-model="checkList">
-          <el-checkbox label="复选框 A">
-            <div class="hello">hello</div>
-          </el-checkbox>
-          <el-checkbox label="复选框 B"></el-checkbox>
-          <el-checkbox label="复选框 C"></el-checkbox>
-          <el-checkbox label="禁用" disabled></el-checkbox>
-          <el-checkbox label="选中且禁用" disabled></el-checkbox>
-        </el-checkbox-group>
-      </div>
+      <ul class="card">
+        <li class="cardList" v-for="item in simpleData" :key="item.id">
+          <div class="top">
+            <div class="checkbox"><el-checkbox v-model="checkedList[item.id]"></el-checkbox></div>
+            <div class="name">{{item.label}}</div>
+          </div>
+          <div class="name">{{item.label}}</div>
+          <div class="upload"><el-button size="primary" @click="() => downClickAgain(item)">下载</el-button></div>
+        </li>
+      </ul>
     </template>
     <div class="toolbar">
       <p class="left">
@@ -73,6 +72,8 @@ export default {
   data () {
     return {
       display: 'tree',
+      // 已勾选的库的id
+      checkedList: {},
       simpleData: [{
         id: 1,
         label: '表格组件库'
@@ -128,7 +129,7 @@ export default {
 
     },
     downClickAgain () {
-
+      console.log(this.checkedList)
     },
     tableClick () {
       this.display = 'tree'
@@ -170,20 +171,35 @@ export default {
       height: 36px;
     }
   }
-  /deep/.el-demo2-scrollbar__wrap {
-    max-height: 500px;
+  /deep/.scrollbar__wrap {
+    max-height: 420px;
   }
   .tree-wrap{
     text-align: left;
     /deep/.el-tree-node__content{
-      // .el-checkbox{
-      //   display: none;
-      // }
+
     }
   }
-  .hello{
-    width: 100px;
-    height: 100px;
-    border: 1px solid red;
+  .card{
+    display: flex;
+    flex-wrap: wrap;
+    .cardList{
+      width: 200px;
+      margin-bottom: 24px;
+      .top{
+        display: flex;
+        .checkbox{
+          width: 20%;
+        }
+        .name{
+          width: 80%;
+          height: 100px;
+          border: 1px solid #ededed;
+        }
+      }
+      .upload{
+        margin-top: 10px;
+      }
+    }
   }
 </style>
