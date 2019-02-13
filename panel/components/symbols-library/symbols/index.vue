@@ -46,7 +46,7 @@ export default {
     return {
       VisionOpts,
       options: IconQueryBarOption,
-      records: [{id: '1', name: '22'}],
+      records: [],
       version: '--',
       name: '',
       group: ''

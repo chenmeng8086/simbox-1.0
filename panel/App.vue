@@ -108,9 +108,9 @@ export default {
   justify-content: center;
   align-items: center;
   .arrow{
-    width: 8px;
+    width: 5px;
     border-radius: 4px;
-    height: 30%;
+    height: 42px;
     background-color:#2c3e50;
     margin: 0;
   }

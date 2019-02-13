@@ -10,7 +10,7 @@ export default (context, webContents) => {
   const Library = sketch.Library
   const libraries = Library.getLibraries()
   const lib = Library.getLibraryForDocumentAtPath(
-    '~/Desktop/sim.sketch'
+    '~/Desktop/BUI.sketch'
   )
   const id = lib.id
   console.log('id')

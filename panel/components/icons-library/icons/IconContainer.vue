@@ -13,7 +13,7 @@
         @dragend="dragend(item)"
         :class="item.className"
       >
-        <span v-html="item['show_svg']" :style="{color: item.color}"></span>
+        <span v-html="item['show_svg']" :style="{color: item.color}" class="svgParent"></span>
       </li>
     </ul>
     <IconPopUp
@@ -87,6 +87,7 @@ export default {
         if (item.id === id) return {...item, ...selectedItem, size: this.size}
         return {...item}
       })
+      console.log(selectedItem.color)
       this.color = selectedItem.color
       this.$emit('update:iconList', iconList)
     }
@@ -103,22 +104,33 @@ export default {
     display: flex;
     flex-wrap: wrap;
     li{
-      width: 15%;
-      background-color: #ededed;
+      width: 52px;
+      background-color:#F5F6F8;
       border: 1px solid #fff;
-      height: 5em;
-      line-height: 5em;
+      height: 52px;
+      line-height: 52px;
+      border-radius: 6px;
+      margin-right: 12px;
+      margin-bottom: 12px;
       /deep/svg{
-        width: 3em!important;
-        height: 3em!important;
+        width: 21px!important;
+        height: 21px!important;
         vertical-align: middle!important;
       }
     }
   }
   .selectedClick{
-    border: 1px solid #666!important;
+    border: 1px solid #3C99FC!important;
+    background-color: #FFF!important;
   }
   /deep/.el-demo2-scrollbar__wrap {
-    max-height: 400px;
+    max-height: 420px;
   }
+  // .svgParent{
+  //   /deep/svg{
+  //     path{
+  //       fill: red;
+  //     }
+  //   }
+  // }
 </style>
