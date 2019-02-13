@@ -16,7 +16,7 @@
       <template v-if="iconType==='common'">
         <el-select
           class="iconQueryBarSelect"
-          v-model="department"
+          v-model="deptId"
           @change="departmentChange"
           placeholder="请选择">
           <el-option
@@ -28,6 +28,7 @@
         </el-select>
       </template>
     </div>
+    <div>{{res}}</div>
     <icon-container :iconList.sync="iconList"></icon-container>
     <div class="vision">
       <label class="label">当前版本：</label>
@@ -51,6 +52,7 @@ import {iconData} from './mockData.js'
 import getUUID from '../../quick-fill/text-fill/uuid.js'
 import { VisionOpts } from './config.js'
 import { iconApi } from '@/api'
+// import fetch from 'sketch-polyfill-fetch'
 export default {
   name: 'icons',
   props: {
@@ -73,14 +75,15 @@ export default {
       departmentOpts: [],
       options: [],
       group: 'all',
-      department: '',
+      deptId: '',
       name: '',
       iconList: [],
-      version: '--'
+      version: '--',
+      res: '--'
     }
   },
   created () {
-    this.getGroups()
+    // this.getGroups()
     this.getDepartment()
     this.getIconList()
     this.getVisions()
@@ -100,7 +103,7 @@ export default {
         this.loading = false
       }
     },
-    /** 获取所在事业群 获取后台接口 */
+    // /** 获取所在事业群 获取后台接口 */
     async getDepartment (customParams) {
       try {
         const {data = []} = await iconApi.getDeptList({params: {deptId: 1, isPublic: true}})

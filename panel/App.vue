@@ -99,7 +99,7 @@ export default {
     color: #3A3A3A;
     letter-spacing: 2.16px;
   }
-  width: 10%;
+  width: 180px;
   flex: 0 0 auto;
   background-color: #f2f2f2;
   p{

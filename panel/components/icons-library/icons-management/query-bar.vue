@@ -5,21 +5,20 @@
     <template v-if="iconType==='common'">
       <el-select
       class="iconQueryBarSelect"
-      v-model="value2"
+      v-model="deptId"
       placeholder="请选择">
         <el-option
-          v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value">
+          v-for="item in departmentOpts"
+          :key="item.id"
+          :label="item.initial"
+          :value="item.id">
         </el-option>
       </el-select>
     </template>
   </div>
 </template>
-
 <script>
-import { IconQueryBarOption } from '../config.js'
+import { iconApi } from '@/api'
 export default {
   name: 'queryBar',
   props: {
@@ -30,13 +29,27 @@ export default {
   },
   data () {
     return {
-      options: IconQueryBarOption,
+      departmentOpts: [],
       select: '3',
-      value2: 'all',
+      deptId: '',
       input5: ''
     }
   },
+  created () {
+    this.getDepartment()
+  },
   methods: {
+    /** 获取所在事业群 获取后台接口 */
+    async getDepartment (customParams) {
+      try {
+        const {data = []} = await iconApi.getDeptList({params: {deptId: 1, isPublic: true}})
+        this.departmentOpts = data
+      } catch (error) {
+        this.errorHandler(error)
+      } finally {
+        this.loading = false
+      }
+    },
     handleIconClick: function () {
 
     },
