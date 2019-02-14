@@ -17,7 +17,16 @@
               <i class="h-icon-edit" @click="e => editClick(e, item)"></i>
               <i class="h-icon-upload" @click="uploadClick"></i>
             </template>
-            <div>{{item.name}}</div>
+            <ul class="card">
+          <li class="cardList" v-for="item in simpleData" :key="item.id">
+            <div class="top">
+              <div class="checkbox"><el-checkbox v-model="checkedList[item.id]"></el-checkbox></div>
+              <div class="name">{{item.label}}</div>
+            </div>
+            <div class="name">{{item.label}}</div>
+            <div class="upload"><el-button size="primary" @click="() => downClickAgain(item)">下载</el-button></div>
+          </li>
+        </ul>
           </el-collapse-item>
         </el-collapse>
       </div>
@@ -55,7 +64,35 @@ export default {
   data () {
     return {
       records: [],
-      mode: 'add'
+      mode: 'add',
+      simpleData: [{
+        id: 1,
+        label: '表格组件库'
+      }, {
+        id: 4,
+        pId: 1,
+        label: '表格头'
+      }, {
+        id: 9,
+        pId: 4,
+        label: '表头一'
+      }, {
+        id: 10,
+        pId: 4,
+        label: '表头二'
+      }, {
+        id: 2,
+        label: '导航组件库'
+      }, {
+        id: 5,
+        pId: 2,
+        label: '导航一'
+      }, {
+        id: 6,
+        pId: 2,
+        label: '导航二'
+      }],
+      checkedList: {}
     }
   },
   created () {
@@ -172,6 +209,9 @@ export default {
       height: 36px;
       line-height: 36px;
       overflow: hidden;
+      i{
+        font-style: normal!important;
+      }
       i:nth-child(1){
         float: left;
         margin-top: 12px;
@@ -188,5 +228,27 @@ export default {
   }
   .noGroupContainer{
     text-align: center;
+  }
+  .card{
+    display: flex;
+    flex-wrap: wrap;
+    .cardList{
+      width: 200px;
+      margin-bottom: 24px;
+      .top{
+        display: flex;
+        .checkbox{
+          width: 20%;
+        }
+        .name{
+          width: 80%;
+          height: 100px;
+          border: 1px solid #ededed;
+        }
+      }
+      .upload{
+        margin-top: 10px;
+      }
+    }
   }
 </style>

@@ -8,7 +8,16 @@
           <i class="h-icon-edit" @click="e => editClick(e, item)"></i>
           <i class="h-icon-upload" @click="uploadClick"></i>
         </template>
-        <div>{{item.name}}</div>
+        <ul class="card">
+          <li class="cardList" v-for="item in simpleData" :key="item.id">
+            <div class="top">
+              <div class="checkbox"><el-checkbox v-model="checkedList[item.id]"></el-checkbox></div>
+              <div class="name">{{item.label}}</div>
+            </div>
+            <div class="name">{{item.label}}</div>
+            <div class="upload"><el-button size="primary" @click="() => downClickAgain(item)">下载</el-button></div>
+          </li>
+        </ul>
       </el-collapse-item>
       <upload-icons-dialog ref="upload"></upload-icons-dialog>
       <add-group-dialog ref="addParam"></add-group-dialog>
@@ -39,7 +48,33 @@ export default {
   },
   data () {
     return {
-
+      simpleData: [{
+        id: 1,
+        label: '表格组件库'
+      }, {
+        id: 4,
+        pId: 1,
+        label: '表格头'
+      }, {
+        id: 9,
+        pId: 4,
+        label: '表头一'
+      }, {
+        id: 10,
+        pId: 4,
+        label: '表头二'
+      }, {
+        id: 2,
+        label: '导航组件库'
+      }, {
+        id: 5,
+        pId: 2,
+        label: '导航一'
+      }, {
+        id: 6,
+        pId: 2,
+        label: '导航二'
+      }]
     }
   },
   methods: {
