@@ -10,7 +10,7 @@
         @keyup.enter.native="handleIconClick">
         <el-select v-model="group" slot="prepend" placeholder="请选择分组" @change="groupChange">
           <el-option label="全部" value="all"></el-option>
-        <el-option v-for="opt in groupOpts" :key="opt.value" :value="opt.value" :label="opt.label"></el-option>
+        <el-option v-for="opt in groupOpts" :key="opt.groupId" :value="opt.groupId" :label="opt.name"></el-option>
         </el-select>
       </el-input>
       <template v-if="iconType==='common'">
@@ -28,7 +28,6 @@
         </el-select>
       </template>
     </div>
-    <div>{{res}}</div>
     <icon-container :iconList.sync="iconList"></icon-container>
     <div class="vision">
       <label class="label">当前版本：</label>
@@ -52,7 +51,6 @@ import {iconData} from './mockData.js'
 import getUUID from '../../quick-fill/text-fill/uuid.js'
 import { VisionOpts } from './config.js'
 import { iconApi } from '@/api'
-// import fetch from 'sketch-polyfill-fetch'
 export default {
   name: 'icons',
   props: {
@@ -78,12 +76,11 @@ export default {
       deptId: '',
       name: '',
       iconList: [],
-      version: '--',
-      res: '--'
+      version: '--'
     }
   },
   created () {
-    // this.getGroups()
+    this.getGroups()
     this.getDepartment()
     this.getIconList()
     this.getVisions()
@@ -95,7 +92,7 @@ export default {
     /** 获取分组信息 获取后台接口 */
     async getGroups (customParams) {
       try {
-        const {data = []} = await iconApi.getGroupList({params: {deptId: 1, isPublic: true}})
+        const {data = []} = await iconApi.getGroupList({params: {deptId: '33c5d86b-6bdb-4527-a8c3-4c0796a0ea20', isPublic: true}})
         this.groupOpts = data
       } catch (error) {
         this.errorHandler(error)
@@ -106,7 +103,7 @@ export default {
     /** 获取所在事业群 获取后台接口 */
     async getDepartment (customParams) {
       try {
-        const {data = []} = await iconApi.getDeptList({params: {deptId: 1, isPublic: true}})
+        const {data = []} = await iconApi.getDeptList({params: {deptId: '33c5d86b-6bdb-4527-a8c3-4c0796a0ea20', isPublic: true}})
         this.departmentOpts = data
       } catch (error) {
         this.errorHandler(error)

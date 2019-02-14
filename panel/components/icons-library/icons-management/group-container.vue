@@ -20,6 +20,7 @@ import QueryBar from './query-bar'
 import NoGroupContainer from './no-group-container'
 import UploadIconsDialog from './upload-icons-dialog'
 import AddGroupDialog from './add-group-dialog'
+import { iconApi } from '@/api'
 export default {
   name: 'groupContainer',
   props: {
@@ -53,17 +54,24 @@ export default {
       this.$refs.addParam.showDialog({mode: 'edit', data: Object.assign({}, item)})
     },
     /** 删除分组 */
-    deleteClick: function (e) {
+    async deleteClick (e, item) {
       e.stopPropagation()
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'question'
       }).then(() => {
-        this.$message({
-          type: 'success',
-          message: '删除成功!'
-        })
+        try {
+          iconApi.deleteGroup({params: {groupId: item.groupId}}).then(() => {
+            this.$message({
+              type: 'success',
+              message: '删除成功'
+            })
+          })
+        } catch (error) {
+          this.errorHandler(error)
+          this.records = []
+        }
       }).catch(() => {
         this.$message({
           type: 'info',

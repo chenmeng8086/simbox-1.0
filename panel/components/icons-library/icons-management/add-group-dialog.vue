@@ -34,7 +34,7 @@ export default {
     },
     okClick () {
       this.visible = false
-      this.$emit('okClick', this.form)
+      this.$emit('addClick', this.form)
     }
   }
 }
