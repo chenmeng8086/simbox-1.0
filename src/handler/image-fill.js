@@ -2,7 +2,7 @@
  * @Author: mikey.zhaopeng
  * @Date: 2019-01-18 19:30:14
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-02-01 10:52:40
+ * @Last Modified time: 2019-02-14 14:13:37
  * @Des 图片快填
  * https://github.com/turbobabr/Sketch-Plugins-Cookbook#create-custom-shape
  * https://sketchplugins.com/d/1107-how-to-use-formdata-for-uploading-files-to-private-server/4
@@ -70,27 +70,32 @@ const uploadImageHandler = (context, webContents) => {
   })
 }
 
+//https://sketchplugins.com/d/1107-how-to-use-formdata-for-uploading-files-to-private-server
 const addFillImageHandler = (context, data) => {
   console.log('我是添加的图片啊')
   console.log(data)
   console.log(JSON.stringify(data))
-  // const filePath = path.join(templatePath, templateFile)
-  // const formData = new FormData()
-  // formData.append('template', {
-  //   fileName: templateFile,
-  //   mimeType: 'image/png', // or whichever mime type is your file
-  //   data: NSData.alloc().initWithContentsOfFile(filePath)
-  // })
-  // const fetchOptions = {
-  //     method: 'PUT',
-  //     // headers: { 'Content-Type': 'multipart/form-data' } <- no need, it's automatically set by fetch when providing a FormData
-  //     body: formData
-  // }
-  // fetch(`${baseURL}/image/${imageId}/template/${fileHash}`, fetchOptions)
-  //     .then( checkStatus )
-  //     .then(response => response.json())
-  //     .then(data => log(data))
-  //     .catch(err => log(err))
+  const filePath = '/Users/yunmoushijue/Desktop/dog/hello.jpg'
+  const formData = new FormData()
+  formData.append('coverPhoto', {
+    fileName: 'hello.jpg',
+    mimeType: 'image/jpg', // or whichever mime type is your file
+    data: NSData.alloc().initWithContentsOfFile(filePath)
+  })
+  formData.append('iconLibrary', {
+    fileName: 'hello.jpg',
+    mimeType: 'image/jpg', // or whichever mime type is your file
+    data: NSData.alloc().initWithContentsOfFile(filePath)
+  })
+  const fetchOptions = {
+      method: 'POST',
+      // headers: { 'Content-Type': 'multipart/form-data' } <- no need, it's automatically set by fetch when providing a FormData
+      body: formData
+  }
+  fetch('http://10.10.83.30:9090/icon/icon/upload?groupId=1', fetchOptions)
+      .then(response => response.json())
+      .then(data => log(data))
+      .catch(err => log(err))
 }
 
 export default {imageFillHandler,uploadImageHandler, addFillImageHandler}
