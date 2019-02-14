@@ -142,7 +142,6 @@ export default {
     async editGroups (customParams) {
       const {groupId, name} = customParams
       const params = {groupId, name}
-      console.log(customParams)
       try {
         await iconApi.editGroup({params})
         this.getGroups()

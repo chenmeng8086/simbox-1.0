@@ -116,7 +116,6 @@ export default {
     },
     /** 分组发生变化 */
     groupChange (val) {
-      console.log('分组发生变化', val)
       this.getIconList()
     },
     /** 名称发生变化 */
