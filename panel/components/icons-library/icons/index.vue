@@ -103,7 +103,7 @@ export default {
         this.loading = false
       }
     },
-    // /** 获取所在事业群 获取后台接口 */
+    /** 获取所在事业群 获取后台接口 */
     async getDepartment (customParams) {
       try {
         const {data = []} = await iconApi.getDeptList({params: {deptId: 1, isPublic: true}})

@@ -34,7 +34,22 @@ export default (context, data) => {
   // eslint-disable-next-line no-undef
   const foreignSymbol = MSForeignSymbol.foreignSymbolWithMaster_inLibrary(symbol, library)
   context.document.documentData().addForeignSymbol(foreignSymbol)
-  const instance = foreignSymbol.symbolMaster().newSymbolInstance()
-  context.document.currentPage().addLayers([instance])
-  instance.select_byExtendingSelection(true, false)
+  // const instance = foreignSymbol.symbolMaster().newSymbolInstance()
+  // context.document.currentPage().addLayers([instance])
+  // 导入的symbol被选中
+  // instance.select_byExtendingSelection(true, false)
+  // https://sketchplugins.com/d/201-inserting-a-layer-into-a-document-with-sketch-ux/6
+  const instance = foreignSymbol.symbolMaster()
+  try {
+    // eslint-disable-next-line no-undef
+    var symbolRef = MSSymbolMasterReference.referenceForShareableObject(instance)
+    var insertAction = context.document.actionsController().actionForID('MSInsertSymbolAction')
+    // eslint-disable-next-line no-undef
+    var tempMenuItem = NSMenuItem.alloc().init()
+
+    tempMenuItem.setRepresentedObject([symbolRef])
+    insertAction.doPerformAction(tempMenuItem)
+  } catch (e) {
+    console.log('Exception: ' + e)
+  }
 }
