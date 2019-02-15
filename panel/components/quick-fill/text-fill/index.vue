@@ -6,13 +6,16 @@
     tag="ul">
       <Container @drop="onDrop" :get-ghost-parent="getGhostParent" drag-handle-selector=".column-drag-handle" lock-axis="y">
         <Draggable v-for="config in data" :key="config.type">
-          <div :class='{active:config.type==activeId}' @mouseover="mouseover(config)">
+          <div :class='{active:config.id==activeId}' @mouseover="mouseover(config)">
             <template v-if="config.isCustom">
               <div class="custom">
                 <div class="customText">
                   <i class="h-icon-fold"></i>
                   <span @click="fillClick(config)">{{config.name}}</span>
                 </div>
+                <template v-if="config.id==activeId">
+                  <i class="h-icon-update column-drag-handle" style="float:right; padding:10px;"></i>
+                </template>
                 <div v-if="isEdit" class="toolbarIcons">
                   <i class="h-icon-edit" @click="editClick(config)"></i>
                   <i class="h-icon-circle_error" @click="deleteClick(config)"></i>
@@ -56,6 +59,9 @@
                       {{opt.label}}
                     </el-radio-button>
                   </el-radio-group>
+                  <template v-if="config.id==activeId">
+                    <i class="h-icon-update column-drag-handle" style="float:right; padding:10px;"></i>
+                  </template>
                 </div>
               </template>
             </template>
@@ -70,9 +76,9 @@
                   {{opt.label}}
                 </el-radio-button>
               </el-radio-group>
-            </template>
-            <template v-if="config.type==activeId">
-              <i class="h-icon-update column-drag-handle" style="float:right; padding:0 10px;"></i>
+              <template v-if="config.id==activeId">
+                <i class="h-icon-update column-drag-handle" style="float:right; padding:10px;"></i>
+              </template>
             </template>
           </div>
         </Draggable>
@@ -137,7 +143,7 @@ export default {
       this.$refs.addText.showDialog({mode: 'add'})
     },
     mouseover (item) {
-      this.activeId = item.type
+      this.activeId = item.id
       console.log(item)
     },
     proTypeToText (item) {
@@ -232,7 +238,6 @@ export default {
       width: 100%;
       height: 36px;
       line-height: 40px;
-      background-color:#fff;
       margin-top: 10px;
       overflow: hidden;
       .customText{
@@ -277,6 +282,7 @@ export default {
     }
     /deep/.scrollbar__wrap {
       max-height: 500px;
+      margin-bottom: -16px!important;
     }
     .active{
       background-color: #F5F6F8;

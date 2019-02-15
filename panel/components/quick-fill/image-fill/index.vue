@@ -4,13 +4,13 @@
     wrap-class="scrollbar__wrap"
     view-class="scrollbar__view"
     tag="ul">
-      <Container @drop="onDrop" :get-ghost-parent="getGhostParent" lock-axis="y">
+      <Container @drop="onDrop" :get-ghost-parent="getGhostParent" drag-handle-selector=".column-drag-handle" lock-axis="y">
         <Draggable v-for="item in config" :key="item.type">
           <div @click="click(item)" @mouseover="mouseover(item)" :class='{active:item.value==activeId}'>
             <i :class="item.icon"></i>
             <span>{{item.label}}</span>
             <template v-if="item.value==activeId">
-              <i class="h-icon-update column-drag-handle" style="float:right; padding:0 10px;"></i>
+              <i class="h-icon-update column-drag-handle" style="float:right; padding:10px;"></i>
             </template>
           </div>
         </Draggable>
@@ -100,6 +100,7 @@ export default {
   }
   /deep/.scrollbar__wrap {
     max-height: 500px;
+    margin-bottom: -16px!important;
   }
   .active{
     background-color: #F5F6F8;
