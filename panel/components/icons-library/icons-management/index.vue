@@ -18,15 +18,15 @@
               <i class="h-icon-upload" @click="uploadClick"></i>
             </template>
             <ul class="card">
-          <li class="cardList" v-for="item in simpleData" :key="item.id">
-            <div class="top">
-              <div class="checkbox"><el-checkbox v-model="checkedList[item.id]"></el-checkbox></div>
-              <div class="name">{{item.label}}</div>
-            </div>
-            <div class="name">{{item.label}}</div>
-            <div class="upload"><el-button size="primary" @click="() => downClickAgain(item)">下载</el-button></div>
-          </li>
-        </ul>
+              <li class="cardList" v-for="item in simpleData" :key="item.id">
+                <div class="top">
+                  <div class="checkbox"><el-checkbox v-model="checkedList[item.id]"></el-checkbox></div>
+                  <div class="name">{{item.label}}</div>
+                </div>
+                <div class="name">{{item.label}}</div>
+                <div class="upload"><el-button size="primary" @click="() => downClickAgain(item)">下载</el-button></div>
+              </li>
+            </ul>
           </el-collapse-item>
         </el-collapse>
       </div>
@@ -224,6 +224,25 @@ export default {
         margin-top: 12px;
       }
     }
+    /deep/.el-collapse{
+      border: none!important;
+      .el-collapse-item__header{
+        border: none;
+      }
+      .el-collapse-item__wrap{
+        border: none;
+      }
+    }
+    /deep/.is-active{
+       .el-collapse-item__header{
+        border: none;
+        background-color: #fafafa;
+      }
+      .el-collapse-item__wrap{
+        border: none;
+        background-color: #fafafa;
+      }
+    }
   }
   .noGroupContainer{
     text-align: center;
@@ -236,6 +255,9 @@ export default {
       margin-bottom: 24px;
       .top{
         display: flex;
+        background-color: #fff;
+        padding: 10px;
+        margin-right: 24px;
         .checkbox{
           width: 20%;
         }
