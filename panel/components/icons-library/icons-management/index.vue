@@ -24,7 +24,7 @@
                   <div class="name">{{item.label}}</div>
                 </div>
                 <div class="name">{{item.label}}</div>
-                <div class="upload"><el-button size="primary" @click="() => downClickAgain(item)">下载</el-button></div>
+                <div class="upload"><el-button class="button" @click="() => downClickAgain(item)">下载</el-button></div>
               </li>
             </ul>
           </el-collapse-item>
@@ -269,6 +269,20 @@ export default {
       }
       .upload{
         margin-top: 10px;
+        /deep/.el-button{
+          border: 1px solid #D8D8D8;
+          border-radius: 50px;
+          width: 70px;
+          height: 24px;
+          padding: 0px;
+          span{
+            font-family: PingFangSC-Regular;
+            font-size: 14px;
+            color: rgba(24,25,26,0.70);
+            text-align: center;
+            line-height: 17px;
+          }
+        }
       }
     }
   }
