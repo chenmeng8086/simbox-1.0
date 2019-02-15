@@ -45,7 +45,6 @@
 </template>
 <script>
 import QueryBar from './query-bar'
-import NoGroupContainer from './no-group-container'
 import AddGroupDialog from './add-group-dialog'
 import UploadIconsDialog from './upload-icons-dialog'
 import { iconApi } from '@/api'
@@ -59,7 +58,6 @@ export default {
   },
   components: {
     QueryBar,
-    NoGroupContainer,
     AddGroupDialog,
     UploadIconsDialog
   },

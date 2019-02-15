@@ -2,7 +2,7 @@
   <div class="iconQueryBar">
     <el-input placeholder="请输入名称搜索" v-model="input5" clearable icon="h-icon-search">
     </el-input>
-    <template v-if="iconType==='common'">
+    <template v-if="isPublic">
       <el-select
       class="iconQueryBarSelect"
       v-model="deptId"
@@ -22,9 +22,9 @@ import { iconApi } from '@/api'
 export default {
   name: 'queryBar',
   props: {
-    iconType: {
-      type: String,
-      default: 'common'
+    isPublic: {
+      type: Boolean,
+      default: true
     }
   },
   data () {

@@ -13,7 +13,7 @@
         <el-option v-for="opt in groupOpts" :key="opt.groupId" :value="opt.groupId" :label="opt.name"></el-option>
         </el-select>
       </el-input>
-      <template v-if="iconType==='common'">
+      <template v-if="isPublic">
         <el-select
           class="iconQueryBarSelect"
           v-model="deptId"
@@ -54,9 +54,9 @@ import { iconApi } from '@/api'
 export default {
   name: 'icons',
   props: {
-    iconType: {
-      type: String,
-      default: 'common'
+    isPublic: {
+      type: Boolean,
+      default: true
     },
     currentTab: {
       type: String,

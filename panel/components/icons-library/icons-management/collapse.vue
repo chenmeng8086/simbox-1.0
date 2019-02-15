@@ -9,9 +9,9 @@
 export default {
   name: 'iconsMangement',
   props: {
-    iconType: {
-      type: String,
-      default: 'common'
+    isPublic: {
+      type: Boolean,
+      default: true
     }
   },
   data () {

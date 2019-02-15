@@ -2,16 +2,12 @@
   <div id="app">
     <div :class="[!isFold ? 'displayBlock' : 'displayNone', 'left']">
       <div class="logo">Simbox</div>
-      <p v-for="(item, index) in config" :key="item.value" :tabindex="index" @click="click(item)" :class="_router()===item.router? 'selectedColor' : ''">
-        <i :class="item.icon"></i>
-        {{item.label}}
+      <p v-for="(item, index) in config" :key="item.value" :tabindex="index" @click="click(item)" :class='{selectedColor:_router() ===item.router}'>
+        <i :class="item.icon"></i>{{item.label}}
       </p>
     </div>
     <div class="center" @mouseover="mouseover" @mouseout="mouseout">
-      <p
-        :class="[isArrow ? 'displayBlock' : 'displayNone', 'arrow']"
-        @click="arrowClick">
-      </p>
+      <p :class="[isArrow ? 'displayBlock' : 'displayNone', 'arrow']" @click="arrowClick"></p>
     </div>
     <div class="right"><router-view/></div>
   </div>
@@ -103,13 +99,21 @@ export default {
   flex: 0 0 auto;
   background-color: #f2f2f2;
   p{
-    height: 10%;
+    height: 40px;
     text-align: center;
     line-height: 40px;
+    margin-bottom: 5%;
+    width: 80%;
+    margin-left: 10%;
+    font-size: 14px;
   }
   .selectedColor{
-    color:#2080f7;
+    font-family: PingFangSC-Medium;
+    color: #50545D;
+    line-height: 40px;
     font-weight: bold;
+    background: #E8EBEF;
+    border-radius: 3px;
   }
 }
 .center{

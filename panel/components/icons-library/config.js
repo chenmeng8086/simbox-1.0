@@ -1,8 +1,8 @@
 const IconTypeOpts = [{
-  value: 'common',
+  value: true,
   label: '公共图标'
 }, {
-  value: 'custom',
+  value: false,
   label: '我的图标'
 }]
 
