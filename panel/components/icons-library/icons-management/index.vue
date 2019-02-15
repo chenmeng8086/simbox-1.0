@@ -21,7 +21,9 @@
               <li class="cardList" v-for="item in simpleData" :key="item.id">
                 <div class="top">
                   <div class="checkbox"><el-checkbox v-model="checkedList[item.id]"></el-checkbox></div>
-                  <div class="name">{{item.label}}</div>
+                  <div class="name">
+                    <img src="../../../assets/icon.jpg"/>>
+                  </div>
                 </div>
                 <div class="name">{{item.label}}</div>
                 <div class="upload"><el-button class="button" @click="() => downClickAgain(item)">下载</el-button></div>
@@ -124,7 +126,7 @@ export default {
         this.records = data
       } catch (error) {
         this.errorHandler(error)
-        this.records = []
+        this.records = [{name: 'hello', id: '1'}]
       }
     },
     /** 添加分组 */
@@ -265,6 +267,10 @@ export default {
           width: 80%;
           height: 100px;
           border: 1px solid #ededed;
+          img{
+            width: 100%;
+            height: 100%;
+          }
         }
       }
       .upload{

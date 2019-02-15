@@ -4,9 +4,9 @@
     wrap-class="scrollbar__wrap"
     view-class="scrollbar__view"
     tag="ul">
-      <Container @drop="onDrop" :get-ghost-parent="getGhostParent">
+      <Container @drop="onDrop" :get-ghost-parent="getGhostParent" drag-handle-selector=".column-drag-handle" lock-axis="y">
         <Draggable v-for="config in data" :key="config.type">
-          <div>
+          <div :class='{active:config.type==activeId}' @mouseover="mouseover(config)">
             <template v-if="config.isCustom">
               <div class="custom">
                 <div class="customText">
@@ -71,6 +71,9 @@
                 </el-radio-button>
               </el-radio-group>
             </template>
+            <template v-if="config.type==activeId">
+              <i class="h-icon-update column-drag-handle" style="float:right; padding:0 10px;"></i>
+            </template>
           </div>
         </Draggable>
       </Container>
@@ -114,6 +117,7 @@ export default {
       data: configs,
       isEdit: false,
       collapse: false,
+      activeId: '',
       form: {
         name: 'CN',
         phone: 'mobile',
@@ -127,11 +131,14 @@ export default {
   methods: {
     fillClick (item) {
       const text = this.proTypeToText(item)
-      console.log(text)
       window.postMessage('onTextFill', {text})
     },
     addClick () {
       this.$refs.addText.showDialog({mode: 'add'})
+    },
+    mouseover (item) {
+      this.activeId = item.type
+      console.log(item)
     },
     proTypeToText (item) {
       const {type} = item
@@ -270,6 +277,15 @@ export default {
     }
     /deep/.scrollbar__wrap {
       max-height: 500px;
+    }
+    .active{
+      background-color: #F5F6F8;
+    }
+    .sortButton{
+      // background: #D8D8D8;
+      // width: 16px;
+      // height: 16px;
+      // border-radius: 16px;
     }
   }
 </style>
