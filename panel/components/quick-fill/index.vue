@@ -41,5 +41,9 @@ export default {
 <style lang="less" scoped>
   .quickFillContainer{
     position: relative;
+    /deep/.el-tabs{
+      display: flex;
+      justify-content: center;
+    }
   }
 </style>

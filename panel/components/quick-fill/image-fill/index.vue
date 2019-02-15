@@ -1,12 +1,12 @@
 <template>
   <div class="container">
     <el-scrollbar
-    wrap-class="el-demo2-scrollbar__wrap"
-    view-class="el-demo2-scrollbar__view"
+    wrap-class="scrollbar__wrap"
+    view-class="scrollbar__view"
     tag="ul">
       <Container @drop="onDrop" :get-ghost-parent="getGhostParent">
         <Draggable v-for="item in config" :key="item.type">
-          <div class="draggable-item" @click="click(item)">
+          <div @click="click(item)" @mouseover="mouseover">
             <i :class="item.icon"></i>
             <span>{{item.label}}</span>
           </div>
@@ -46,6 +46,9 @@ export default {
     addClick () {
       this.$refs.addImage.showDialog({mode: 'add'})
     },
+    mouseover () {
+
+    },
     toolbarEditClick () {
 
     },
@@ -61,12 +64,12 @@ export default {
 <style lang="less" scoped>
 .container{
   height: 100%;
-  background-color: #ededed;
+  // background-color: #ededed;
   text-align: left;
   .smooth-dnd-draggable-wrapper{
-    height: 48px;
+    height: 40px;
     background-color: #fff;
-    line-height: 48px;
+    line-height: 40px;
     margin-bottom: 4px;
   }
   .text{
@@ -90,7 +93,7 @@ export default {
       height: 36px;
     }
   }
-  /deep/.el-demo2-scrollbar__wrap {
+  /deep/.scrollbar__wrap {
     max-height: 500px;
   }
 }

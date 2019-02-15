@@ -1,12 +1,12 @@
 <template>
   <div class="textFillContainer">
     <el-scrollbar
-    wrap-class="el-demo2-scrollbar__wrap"
-    view-class="el-demo2-scrollbar__view"
+    wrap-class="scrollbar__wrap"
+    view-class="scrollbar__view"
     tag="ul">
       <Container @drop="onDrop" :get-ghost-parent="getGhostParent">
         <Draggable v-for="config in data" :key="config.type">
-          <div class="draggable-item">
+          <div>
             <template v-if="config.isCustom">
               <div class="custom">
                 <div class="customText">
@@ -206,25 +206,25 @@ export default {
 <style lang="less" scoped>
   .textFillContainer{
     height: 100%;
-    background-color: #ededed;
+    // background-color: #ededed;
     text-align: left;
     .smooth-dnd-draggable-wrapper{
-      min-height: 48px;
+      min-height: 40px;
       background-color: #fff;
-      line-height: 48px;
+      line-height: 40px;
       margin-bottom: 4px;
     }
     .text{
       width: 100%;
       height: 36px;
-      line-height: 48px;
+      line-height: 40px;
       background-color:#fff;
       margin-top: 10px;
     }
     .custom{
       width: 100%;
       height: 36px;
-      line-height: 48px;
+      line-height: 40px;
       background-color:#fff;
       margin-top: 10px;
       overflow: hidden;
@@ -268,7 +268,7 @@ export default {
     .collapse{
       margin-left: 42px;
     }
-    /deep/.el-demo2-scrollbar__wrap {
+    /deep/.scrollbar__wrap {
       max-height: 500px;
     }
   }
