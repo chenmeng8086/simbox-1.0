@@ -5,6 +5,7 @@
         <el-button size="small" type="primary" @click="click">选取文件</el-button>
       </el-form-item>
       <el-form-item label="选择图片">
+        <input type='file' />
         <el-upload
           class="upload-demo"
           ref="upload"

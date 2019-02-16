@@ -7,7 +7,9 @@ const URL = {
   GET_GROUP_LIST: '/icon/group/list',
   ADD_GROUP: '/icon/group/add',
   EDIT_GROUP: '/icon/group/edit',
-  DELETE_GROUP: '/icon/group/delete'
+  DELETE_GROUP: '/icon/group/delete',
+  GET_LIBRARY_LIST: '/icon/library/list',
+  DELETE_LIBRATY: '/icon/library/delete'
 }
 
 // 这里在开发阶段预处理一下，用于适应同时请求多个后端的情况
@@ -68,6 +70,28 @@ const API = {
       method: 'get',
       url: URL.DELETE_GROUP,
       opts: opts
+    })
+  },
+  /** 获取图标库列表 */
+  getLibraryList (opts) {
+    return instance({
+      method: 'post',
+      url: URL.GET_LIBRARY_LIST,
+      opts: {...opts,
+        paramsSerializer: function (params) {
+          return Qs.stringify(params, {arrayFormat: 'repeat'})
+        }}
+    })
+  },
+  /** 删除图标库 */
+  deleteLibrary (opts) {
+    return instance({
+      method: 'post',
+      url: URL.DELETE_LIBRATY,
+      opts: {...opts,
+        paramsSerializer: function (params) {
+          return Qs.stringify(params, {arrayFormat: 'repeat'})
+        }}
     })
   }
 }

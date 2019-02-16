@@ -49,6 +49,7 @@ export default {
       window.postMessage('uploadClick')
       const _this = this
       window.imageFillSelectedImageName = function (fileName) {
+        console.log(fileName)
         _this.fileName = fileName[0]
       }
     }

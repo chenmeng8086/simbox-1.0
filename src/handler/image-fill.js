@@ -2,7 +2,7 @@
  * @Author: mikey.zhaopeng
  * @Date: 2019-01-18 19:30:14
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-02-14 14:13:37
+ * @Last Modified time: 2019-02-16 15:55:31
  * @Des 图片快填
  * https://github.com/turbobabr/Sketch-Plugins-Cookbook#create-custom-shape
  * https://sketchplugins.com/d/1107-how-to-use-formdata-for-uploading-files-to-private-server/4
@@ -10,6 +10,10 @@
 import dialog from '@skpm/dialog'
 import fetch from 'sketch-polyfill-fetch'
 import FormData from 'sketch-polyfill-fetch/lib/form-data'
+import fs from '@skpm/fs'
+
+console.log('FormData')
+console.log(FormData)
 
 const imageFillHandler = (context, data) => {
   /* eslint-disable */
@@ -59,15 +63,24 @@ const imageFillHandler = (context, data) => {
     })
 }
 
+//https://sketchplugins.com/d/811-how-to-access-a-file-for-upload-via-web-view/5
 const uploadImageHandler = (context, webContents) => {
   dialog.showOpenDialog({
     properties: ['openFile', 'openDirectory', 'multiSelections']
   }, function (filenames) {
     const fileNamesStr = JSON.stringify(filenames)
+    console.log('fileNamesStr', fileNamesStr)
     webContents
       .executeJavaScript(`imageFillSelectedImageName(${fileNamesStr})`)
       .catch(console.error)
   })
+}
+
+
+function getScriptFolder(context) {
+  const parts = context.scriptPath.split('/')
+  parts.pop()
+  return parts.join('/')
 }
 
 //https://sketchplugins.com/d/1107-how-to-use-formdata-for-uploading-files-to-private-server
@@ -77,25 +90,40 @@ const addFillImageHandler = (context, data) => {
   console.log(JSON.stringify(data))
   const filePath = '/Users/yunmoushijue/Desktop/dog/hello.jpg'
   const formData = new FormData()
+  console.log('formData', formData)
+  console.log('formData._isFormData', formData._isFormData)
+  console.log('formData.append', formData.append)
+  formData.append('username', 'john')
+  console.log('formData-username', JSON.stringify(formData._data.length()))
   formData.append('coverPhoto', {
     fileName: 'hello.jpg',
     mimeType: 'image/jpg', // or whichever mime type is your file
     data: NSData.alloc().initWithContentsOfFile(filePath)
   })
+  console.log('coverPhoto', NSData.alloc().initWithContentsOfFile(filePath))
+  console.log('formData-coverPhoto', JSON.stringify(formData._data))
+  const _filePath = '/Users/yunmoushijue/Desktop/font.zip'
   formData.append('iconLibrary', {
-    fileName: 'hello.jpg',
-    mimeType: 'image/jpg', // or whichever mime type is your file
-    data: NSData.alloc().initWithContentsOfFile(filePath)
+    fileName: 'font.zip',
+    mimeType: 'application/zip', // or whichever mime type is your file
+    // data: NSData.alloc().initWithContentsOfFile(_filePath)
+    data: fs.readFileSync(_filePath),
   })
+  console.log('formData-iconLibrary', JSON.stringify(formData._data))
+  console.log('iconLibrary', NSData.alloc().initWithContentsOfFile(_filePath))
   const fetchOptions = {
       method: 'POST',
       // headers: { 'Content-Type': 'multipart/form-data' } <- no need, it's automatically set by fetch when providing a FormData
       body: formData
   }
-  fetch('http://10.10.83.30:9090/icon/icon/upload?groupId=1', fetchOptions)
+  console.log(JSON.stringify(formData))
+  fetch('http://10.10.83.30:9090/icon/icon/upload?groupId="ff38a23c-ec9e-4f19-b801-032e20a67ce1"', fetchOptions)
       .then(response => response.json())
       .then(data => log(data))
-      .catch(err => log(err))
+      .catch(err => {
+        log(err)
+        log(err.encodeWithCoder())
+      })
 }
 
 export default {imageFillHandler,uploadImageHandler, addFillImageHandler}

@@ -3,8 +3,7 @@
     <query-bar :isPublic="isPublic"></query-bar>
     <el-scrollbar
       wrap-class="scrollbar__wrap"
-      view-class="scrollbar__view"
-      tag="ul">
+      view-class="scrollbar__view">
     <template v-if="records.length === 0">
       <div class="noGroupContainer">
         <p>这里太空旷，快来上传第一个图标库吧</p>
@@ -13,8 +12,8 @@
     </template>
     <template v-else>
       <div class="iconsManagementContainer">
-        <el-collapse accordion>
-          <el-collapse-item v-for="item in records" :key="item.groupId">
+        <el-collapse accordion  @change="handleChange">
+          <el-collapse-item v-for="item in records" :key="item.groupId" @click="handleChange(item)" :name="item.groupId">
             <!-- 头部 -->
             <template slot="title">
               <i>{{item.name}}</i>
@@ -24,14 +23,14 @@
             </template>
             <!-- 内容 -->
             <ul class="card">
-              <li class="cardList" v-for="_item in simpleData" :key="_item.id">
+              <li class="cardList" v-for="_item in simpleData" :key="_item.iconLibraryId">
                 <div class="top">
-                  <div class="checkbox"><el-checkbox v-model="checkedList[item.groupId][_item.id]"></el-checkbox></div>
+                  <div class="checkbox"><el-checkbox v-model="checkedList[_item.iconLibraryId]"></el-checkbox></div>
                   <div class="name">
-                    <img src="../../../assets/icon.jpg"/>
+                    <img :src="item.coverPhotoUrl"/>
                   </div>
                 </div>
-                <div class="name">{{_item.label}}</div>
+                <div class="name">{{_item.name}}</div>
                 <div class="upload"><el-button class="button" @click="() => downClickAgain(item)">下载</el-button></div>
               </li>
             </ul>
@@ -40,7 +39,7 @@
       </div>
     </template>
     <div class="toolbar">
-      <i class="h-icon-trashcan"></i>
+      <i class="h-icon-trashcan" @click="deleteLibrary"></i>
       <i class="h-icon-download" @click="downloadGlobalClick"></i>
       <i class="h-icon-plus" @click="addGlobalClick"></i>
       <i class="h-icon-edit"></i>
@@ -71,7 +70,7 @@ export default {
   },
   data () {
     return {
-      records: [{}],
+      records: [],
       mode: 'add',
       simpleData,
       checkedList: {}
@@ -81,6 +80,9 @@ export default {
     this.getGroups()
   },
   methods: {
+    handleChange (groupId) {
+      groupId && this.addLibraryByGroupId(groupId)
+    },
     addGlobalClick () {
       this.mode = 'add'
       this.$refs.addGroup.showDialog({mode: 'add'})
@@ -104,14 +106,39 @@ export default {
         this.editGroups(form)
       }
     },
+    deleteLibrary () {
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'question'
+      }).then(() => {
+        // TODO：需要处理checkedList,为字符串
+        console.log(this.checkedList)
+        const params = {ids: []}
+        try {
+          iconApi.deleteLibrary({params}).then(() => {
+            this.$message({
+              type: 'success',
+              message: '删除成功'
+            })
+            this.getGroups()
+          })
+        } catch (error) {
+          this.errorHandler(error)
+          this.records = []
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
+    },
     /** 获取分组信息 获取后台接口 */
     async getGroups (customParams) {
       try {
         const {data = []} = await iconApi.getGroupList({params: {deptId: '33c5d86b-6bdb-4527-a8c3-4c0796a0ea20', isPublic: this.isPublic}})
         this.records = data
-        data.forEach(element => {
-          this.checkedList[element.groupId] = {}
-        })
       } catch (error) {
         this.errorHandler(error)
         this.records = [{name: 'hello', groupId: '1'}]
@@ -126,6 +153,17 @@ export default {
       } catch (error) {
         this.errorHandler(error)
         this.records = []
+      }
+    },
+    /** 添加分组 */
+    async addLibraryByGroupId (groupId) {
+      const params = {groupId: '7a60a41c-0b83-406d-83f8-37cfd88e737a'}
+      try {
+        const {data = []} = await iconApi.getLibraryList({params})
+        this.simpleData = data
+      } catch (error) {
+        this.errorHandler(error)
+        this.simpleData = []
       }
     },
     /** 编辑分组 */
