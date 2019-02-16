@@ -22,6 +22,7 @@
       "dist/**/*"
     ]
   },
+  "appcast": "https://raw.githubusercontent.com/canisminor1990/sketch-name-organize/master/.appcast.xml",
   "peerDependencies": {
     "skpm": "^1.0.14"
   },

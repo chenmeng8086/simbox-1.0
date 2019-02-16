@@ -5,10 +5,10 @@
 	"bundleVersion": 1,
 	"icon": "icon.png",
 	"commands": [{
-		"name"      : "Simbox",
-		"script"    : "index.js",
+		"name": "Simbox",
+		"script": "index.js",
 		"identifier": "Simbox",
-		"shortcut"  : "ctrl cmd n"
+		"shortcut": "ctrl cmd n"
 	}],
 	"menu": {
 		"title": "Simbox",

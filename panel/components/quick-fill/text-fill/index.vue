@@ -144,7 +144,6 @@ export default {
     },
     mouseover (item) {
       this.activeId = item.id
-      console.log(item)
     },
     proTypeToText (item) {
       const {type} = item

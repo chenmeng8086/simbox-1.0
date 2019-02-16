@@ -52,7 +52,6 @@ export default {
     },
     mouseover (item) {
       this.activeId = item.value
-      console.log(item)
     },
     toolbarEditClick () {
 

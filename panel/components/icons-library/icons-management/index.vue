@@ -1,6 +1,10 @@
 <template>
   <div>
-    <query-bar :iconType="iconType"></query-bar>
+    <query-bar :isPublic="isPublic"></query-bar>
+    <el-scrollbar
+      wrap-class="scrollbar__wrap"
+      view-class="scrollbar__view"
+      tag="ul">
     <template v-if="records.length === 0">
       <div class="noGroupContainer">
         <p>这里太空旷，快来上传第一个图标库吧</p>
@@ -10,22 +14,24 @@
     <template v-else>
       <div class="iconsManagementContainer">
         <el-collapse accordion>
-          <el-collapse-item v-for="item in records" :key="item.id">
+          <el-collapse-item v-for="item in records" :key="item.groupId">
+            <!-- 头部 -->
             <template slot="title">
               <i>{{item.name}}</i>
               <i class="h-icon-trashcan" @click="e => deleteClick(e, item)"></i>
               <i class="h-icon-edit" @click="e => editClick(e, item)"></i>
               <i class="h-icon-upload" @click="uploadClick"></i>
             </template>
+            <!-- 内容 -->
             <ul class="card">
-              <li class="cardList" v-for="item in simpleData" :key="item.id">
+              <li class="cardList" v-for="_item in simpleData" :key="_item.id">
                 <div class="top">
-                  <div class="checkbox"><el-checkbox v-model="checkedList[item.id]"></el-checkbox></div>
+                  <div class="checkbox"><el-checkbox v-model="checkedList[item.groupId][_item.id]"></el-checkbox></div>
                   <div class="name">
-                    <img src="../../../assets/icon.jpg"/>>
+                    <img src="../../../assets/icon.jpg"/>
                   </div>
                 </div>
-                <div class="name">{{item.label}}</div>
+                <div class="name">{{_item.label}}</div>
                 <div class="upload"><el-button class="button" @click="() => downClickAgain(item)">下载</el-button></div>
               </li>
             </ul>
@@ -35,12 +41,13 @@
     </template>
     <div class="toolbar">
       <i class="h-icon-trashcan"></i>
-      <i class="h-icon-download"></i>
+      <i class="h-icon-download" @click="downloadGlobalClick"></i>
       <i class="h-icon-plus" @click="addGlobalClick"></i>
       <i class="h-icon-edit"></i>
     </div>
     <add-group-dialog ref="addGroup" @addClick="addClick"></add-group-dialog>
     <upload-icons-dialog ref="upload"></upload-icons-dialog>
+    </el-scrollbar>
   </div>
 </template>
 <script>
@@ -48,12 +55,13 @@ import QueryBar from './query-bar'
 import AddGroupDialog from './add-group-dialog'
 import UploadIconsDialog from './upload-icons-dialog'
 import { iconApi } from '@/api'
+import {simpleData} from './mockData.js'
 export default {
   name: 'iconsMangement',
   props: {
-    iconType: {
-      type: String,
-      default: 'common'
+    isPublic: {
+      type: Boolean,
+      default: true
     }
   },
   components: {
@@ -65,33 +73,7 @@ export default {
     return {
       records: [{}],
       mode: 'add',
-      simpleData: [{
-        id: 1,
-        label: '表格组件库'
-      }, {
-        id: 4,
-        pId: 1,
-        label: '表格头'
-      }, {
-        id: 9,
-        pId: 4,
-        label: '表头一'
-      }, {
-        id: 10,
-        pId: 4,
-        label: '表头二'
-      }, {
-        id: 2,
-        label: '导航组件库'
-      }, {
-        id: 5,
-        pId: 2,
-        label: '导航一'
-      }, {
-        id: 6,
-        pId: 2,
-        label: '导航二'
-      }],
+      simpleData,
       checkedList: {}
     }
   },
@@ -102,6 +84,11 @@ export default {
     addGlobalClick () {
       this.mode = 'add'
       this.$refs.addGroup.showDialog({mode: 'add'})
+      console.log(this.checkedList)
+    },
+    /** 全局下载 */
+    downloadGlobalClick () {
+      console.log(this.checkedList)
     },
     /** 编辑分组 */
     editClick: function (e, item) {
@@ -120,16 +107,19 @@ export default {
     /** 获取分组信息 获取后台接口 */
     async getGroups (customParams) {
       try {
-        const {data = []} = await iconApi.getGroupList({params: {deptId: '33c5d86b-6bdb-4527-a8c3-4c0796a0ea20', isPublic: true}})
+        const {data = []} = await iconApi.getGroupList({params: {deptId: '33c5d86b-6bdb-4527-a8c3-4c0796a0ea20', isPublic: this.isPublic}})
         this.records = data
+        data.forEach(element => {
+          this.checkedList[element.groupId] = {}
+        })
       } catch (error) {
         this.errorHandler(error)
-        this.records = [{name: 'hello', id: '1'}]
+        this.records = [{name: 'hello', groupId: '1'}]
       }
     },
     /** 添加分组 */
     async addGroups (customParams) {
-      const params = {deptId: '33c5d86b-6bdb-4527-a8c3-4c0796a0ea20', isPublic: true, name: customParams.name}
+      const params = {deptId: '33c5d86b-6bdb-4527-a8c3-4c0796a0ea20', isPublic: this.isPublic, name: customParams.name}
       try {
         await iconApi.addGroup({params})
         this.getGroups()
@@ -289,5 +279,9 @@ export default {
         }
       }
     }
+  }
+  /deep/.scrollbar__wrap {
+    max-height: 500px;
+    margin-bottom: -16px!important;
   }
 </style>

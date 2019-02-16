@@ -95,7 +95,7 @@ export default {
     color: #3A3A3A;
     letter-spacing: 2.16px;
   }
-  width: 180px;
+  width: 100px;
   flex: 0 0 auto;
   background-color: #f2f2f2;
   p{
