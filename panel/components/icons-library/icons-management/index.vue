@@ -157,7 +157,7 @@ export default {
     },
     /** 添加分组 */
     async addLibraryByGroupId (groupId) {
-      const params = {groupId: '7a60a41c-0b83-406d-83f8-37cfd88e737a'}
+      const params = {groupId}
       try {
         const {data = []} = await iconApi.getLibraryList({params})
         this.simpleData = data

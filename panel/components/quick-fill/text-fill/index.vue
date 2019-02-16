@@ -6,12 +6,12 @@
     tag="ul">
       <Container @drop="onDrop" :get-ghost-parent="getGhostParent" drag-handle-selector=".column-drag-handle" lock-axis="y">
         <Draggable v-for="config in data" :key="config.type">
-          <div :class='{active:config.id==activeId}' @mouseover="mouseover(config)">
+          <div :class='{active:config.id==activeId}' @mouseover="mouseover(config)" @click="fillClick(config)">
             <template v-if="config.isCustom">
               <div class="custom">
                 <div class="customText">
                   <i class="h-icon-fold"></i>
-                  <span @click="fillClick(config)">{{config.name}}</span>
+                  <span>{{config.name}}</span>
                 </div>
                 <template v-if="config.id==activeId">
                   <i class="h-icon-update column-drag-handle" style="float:right; padding:10px;"></i>
@@ -25,7 +25,7 @@
             <template v-else-if="config.collapse">
               <i :class="config.icon"></i>
               <span @click="fillClick(config)">{{config.name}}</span>
-              <el-radio-group v-model="form[config.type]">
+              <el-radio-group v-model="form[config.type]" @change="fillClick(config)">
                 <el-radio-button
                   v-for="opt in config.opts"
                   :label="opt.value"
@@ -67,8 +67,8 @@
             </template>
             <template v-else>
               <i :class="config.icon"></i>
-              <span @click="fillClick(config)">{{config.name}}</span>
-              <el-radio-group v-model="form[config.type]">
+              <span>{{config.name}}</span>
+              <el-radio-group v-model="form[config.type]" @change="fillClick(config)">
                 <el-radio-button
                   v-for="opt in config.opts"
                   :label="opt.value"
@@ -125,12 +125,12 @@ export default {
       collapse: false,
       activeId: '',
       form: {
-        name: 'CN',
-        phone: 'mobile',
-        time: 'CN',
-        date: 'YYYY年MM月DD日',
-        month: 'CN',
-        week: 'CN'
+        name: '',
+        phone: '',
+        time: '',
+        date: '',
+        month: '',
+        week: ''
       }
     }
   },

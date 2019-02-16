@@ -9,7 +9,8 @@ const URL = {
   EDIT_GROUP: '/icon/group/edit',
   DELETE_GROUP: '/icon/group/delete',
   GET_LIBRARY_LIST: '/icon/library/list',
-  DELETE_LIBRATY: '/icon/library/delete'
+  DELETE_LIBRATY: '/icon/library/delete',
+  UPLOAD_LIBRARY: '/icon/icon/upload'
 }
 
 // 这里在开发阶段预处理一下，用于适应同时请求多个后端的情况
@@ -92,6 +93,16 @@ const API = {
         paramsSerializer: function (params) {
           return Qs.stringify(params, {arrayFormat: 'repeat'})
         }}
+    })
+  },
+  /** 保存数据接入配置 */
+  uploadLibrary (opts) {
+    console.log('opts')
+    console.log(opts)
+    return instance({
+      method: 'post',
+      url: `${URL.UPLOAD_LIBRARY}?groupId=7a60a41c-0b83-406d-83f8-37cfd88e737a}`,
+      opts: opts
     })
   }
 }
