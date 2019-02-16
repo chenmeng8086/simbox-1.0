@@ -11,7 +11,7 @@
               <div class="custom">
                 <div class="customText">
                   <i class="h-icon-fold"></i>
-                  <span>{{config.name}}</span>
+                  <span class="text">{{config.name}}</span>
                 </div>
                 <template v-if="config.id==activeId">
                   <i class="h-icon-update column-drag-handle" style="float:right; padding:10px;"></i>
@@ -24,7 +24,7 @@
             </template>
             <template v-else-if="config.collapse">
               <i :class="config.icon"></i>
-              <span @click="fillClick(config)">{{config.name}}</span>
+              <span class="text" @click="fillClick(config)">{{config.name}}</span>
               <el-radio-group v-model="form[config.type]" @change="fillClick(config)">
                 <el-radio-button
                   v-for="opt in config.opts"
@@ -67,7 +67,7 @@
             </template>
             <template v-else>
               <i :class="config.icon"></i>
-              <span>{{config.name}}</span>
+              <span class="text">{{config.name}}</span>
               <el-radio-group v-model="form[config.type]" @change="fillClick(config)">
                 <el-radio-button
                   v-for="opt in config.opts"
@@ -248,6 +248,10 @@ export default {
           width: 20px;
         }
       }
+    }
+    .text{
+      font-size: 16px;
+      color: rgba(24,25,26,0.90);
     }
     /deep/.el-radio-group{
       margin-left: 12px;

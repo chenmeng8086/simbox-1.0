@@ -54,7 +54,6 @@ import QueryBar from './query-bar'
 import AddGroupDialog from './add-group-dialog'
 import UploadIconsDialog from './upload-icons-dialog'
 import { iconApi } from '@/api'
-import {simpleData} from './mockData.js'
 export default {
   name: 'iconsMangement',
   props: {
@@ -72,7 +71,7 @@ export default {
     return {
       records: [],
       mode: 'add',
-      simpleData,
+      simpleData: [],
       checkedList: {}
     }
   },

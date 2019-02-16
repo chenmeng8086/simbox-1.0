@@ -8,7 +8,7 @@
         <Draggable v-for="item in config" :key="item.type">
           <div @click="click(item)" @mouseover="mouseover(item)" :class='{active:item.value==activeId}'>
             <i :class="item.icon"></i>
-            <span>{{item.label}}</span>
+            <span class="text">{{item.label}}</span>
             <template v-if="item.value==activeId">
               <i class="h-icon-update column-drag-handle" style="float:right; padding:10px;"></i>
             </template>
@@ -103,6 +103,10 @@ export default {
   }
   .active{
     background-color: #F5F6F8;
+  }
+  .text{
+    font-size: 16px;
+    color: rgba(24,25,26,0.90);
   }
 }
 </style>
