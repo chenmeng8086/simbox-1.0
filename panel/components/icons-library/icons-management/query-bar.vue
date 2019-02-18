@@ -1,6 +1,6 @@
 <template>
   <div class="iconQueryBar">
-    <el-input placeholder="请输入名称搜索" v-model="input5" clearable icon="h-icon-search">
+    <el-input placeholder="请输入名称搜索" v-model="libraryName" clearable icon="h-icon-search">
     </el-input>
     <template v-if="isPublic">
       <el-select
@@ -32,7 +32,7 @@ export default {
       departmentOpts: [],
       select: '3',
       deptId: '',
-      input5: ''
+      libraryName: ''
     }
   },
   created () {

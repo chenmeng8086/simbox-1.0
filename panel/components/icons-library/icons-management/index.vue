@@ -1,6 +1,26 @@
 <template>
   <div>
-    <query-bar :isPublic="isPublic"></query-bar>
+    <!-- <query-bar :isPublic="isPublic"></query-bar> -->
+    <div class="iconQueryBar">
+      <el-input placeholder="请输入名称搜索"
+        v-model.trim="libraryName"
+        clearable
+        icon="h-icon-search"
+        :on-icon-click="handleIconClick"
+        :clear-icon-click="clearIconClick"
+        @keyup.enter.native="handleIconClick"></el-input>
+      <el-select
+        class="iconQueryBarSelect"
+        v-model="deptId"
+        placeholder="请选择">
+        <el-option
+          v-for="item in departmentOpts"
+          :key="item.id"
+          :label="item.initial"
+          :value="item.id">
+        </el-option>
+      </el-select>
+    </div>
     <el-scrollbar
       wrap-class="scrollbar__wrap"
       view-class="scrollbar__view">
@@ -73,13 +93,35 @@ export default {
       mode: 'add',
       simpleData: [],
       checkedList: {},
-      groupId: ''
+      groupId: '',
+      libraryName: '',
+      departmentOpts: [],
+      deptId: ''
     }
   },
   created () {
     this.getGroups()
+    this.getDepartment()
   },
   methods: {
+    /** 获取所在事业群 获取后台接口 */
+    async getDepartment (customParams) {
+      try {
+        const {data = []} = await iconApi.getDeptList({params: {deptId: 1, isPublic: true}})
+        this.departmentOpts = data
+      } catch (error) {
+        this.errorHandler(error)
+      } finally {
+        this.loading = false
+      }
+    },
+    handleIconClick () {
+      this.getGroups()
+    },
+    clearIconClick () {
+      this.libraryName = ''
+      this.getGroups()
+    },
     handleChange (groupId) {
       if (groupId) {
         this.addLibraryByGroupId(groupId)
@@ -145,7 +187,7 @@ export default {
     /** 获取分组信息 获取后台接口 */
     async getGroups (customParams) {
       try {
-        const {data = []} = await iconApi.getGroupList({params: {deptId: '33c5d86b-6bdb-4527-a8c3-4c0796a0ea20', isPublic: this.isPublic}})
+        const {data = []} = await iconApi.getGroupList({params: {deptId: '33c5d86b-6bdb-4527-a8c3-4c0796a0ea20', isPublic: this.isPublic, libraryName: this.libraryName}})
         this.records = data
       } catch (error) {
         this.errorHandler(error)
@@ -224,6 +266,28 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+  .iconQueryBar{
+  display: flex;
+  /deep/.el-input-group{
+    width: 70%;
+  }
+}
+.iconQueryBarSelect{
+  width: 30%;
+  /deep/.el-input{
+    input {
+      border: 0;
+      background: transparent;
+    }
+  }
+}
+.iconQueryBarInput{
+  display: inline-block;
+  width: 50%;
+}
+/deep/.el-input-group__prepend{
+  width: 20%;
+}
   .toolbar{
     position: fixed;
     bottom: 4px;
