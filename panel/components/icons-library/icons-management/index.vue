@@ -27,7 +27,7 @@
                 <div class="top">
                   <div class="checkbox"><el-checkbox v-model="checkedList[_item.iconLibraryId]"></el-checkbox></div>
                   <div class="name">
-                    <img :src="item.coverPhotoUrl"/>
+                    <img :src="_item.coverPhotoUrl"/>
                   </div>
                 </div>
                 <div class="name">{{_item.name}}</div>
