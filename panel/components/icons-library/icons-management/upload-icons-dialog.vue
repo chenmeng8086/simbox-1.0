@@ -80,9 +80,9 @@ export default {
       formData.append('iconLibrary', this.form.iconLibrary)
       formData.append('coverPhoto', this.form.coverPhoto)
       // formData.append('groupId', '7a60a41c-0b83-406d-83f8-37cfd88e737a')
-      this.addDataAccess(formData)
+      this.uploadImage(formData)
     },
-    async addDataAccess (formData) {
+    async uploadImage (formData) {
       try {
         await iconApi.uploadLibrary({
           data: formData

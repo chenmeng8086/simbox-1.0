@@ -101,7 +101,7 @@ const API = {
     console.log(opts)
     return instance({
       method: 'post',
-      url: `${URL.UPLOAD_LIBRARY}?groupId=7a60a41c-0b83-406d-83f8-37cfd88e737a}`,
+      url: `${URL.UPLOAD_LIBRARY}?groupId=7a60a41c-0b83-406d-83f8-37cfd88e737a`,
       opts: opts
     })
   }
