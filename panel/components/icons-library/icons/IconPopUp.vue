@@ -1,12 +1,12 @@
 <template>
   <div class="IconPopUp" :class="{iconActive: visible}">
     <div class="left">
-      <span v-html="iconItem['show_svg']"></span>
+      <span v-html="iconItem['svg']"></span>
     </div>
     <div class="center">
       <p class="name">{{iconItem.name}}</p>
       <p class="library">{{iconItem.library}}</p>
-      <p class="person">{{`上传人：${iconItem.person}`}}</p>
+      <p class="person">{{`上传人：${iconItem.uploadUser}`}}</p>
       <p class="time">{{iconItem.time}}</p>
     </div>
     <div class="right">

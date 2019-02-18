@@ -7,14 +7,14 @@
      <ul class="box">
       <li
         v-for="item in iconList"
-        :id="item.id"
-        :key="item.id"
+        :id="item.iconId"
+        :key="item.iconId"
         @click="clickIcon(item)"
         draggable="true"
         @dragend="dragend(item)"
         :class="item.className"
       >
-        <span v-html="item['show_svg']" :style="{color: item.color}"></span>
+        <span v-html="item['svg']" :style="{color: item.color}"></span>
       </li>
     </ul>
     <IconPopUp
@@ -54,11 +54,11 @@ export default {
   methods: {
     /** 点击图标 */
     clickIcon: function (item) {
-      const {id} = item
+      const {iconId} = item
       this.$data.visible = true
       this.iconItem = item
       const iconList = this.iconList.map(item => {
-        if (item.id === id) return {...item, className: 'selectedClick'}
+        if (item.iconId === iconId) return {...item, className: 'selectedClick'}
         return {...item, className: '', color: defaultColor}
       })
       this.$emit('update:iconList', iconList)
@@ -71,9 +71,9 @@ export default {
     },
     /** 尺寸大小发生变化时 */
     sizeChange (selectedItem) {
-      const {id} = selectedItem
+      const {iconId} = selectedItem
       const iconList = this.iconList.slice().map(item => {
-        if (item.id === id) return {...item, ...selectedItem, color: this.color, className: 'selectedClick'}
+        if (item.iconId === iconId) return {...item, ...selectedItem, color: this.color, className: 'selectedClick'}
         return {...item}
       })
       this.size = selectedItem.size
@@ -81,16 +81,16 @@ export default {
     },
     /** 颜色发生变化时 */
     colorChange (selectedItem) {
-      const {id} = selectedItem
+      const {iconId} = selectedItem
       const iconList = this.iconList.slice().map(item => {
-        if (item.id === id) return {...item, ...selectedItem, size: this.size, className: 'selectedClick'}
+        if (item.iconId === iconId) return {...item, ...selectedItem, size: this.size, className: 'selectedClick'}
         return {...item}
       })
       const color = selectedItem.color
       this.color = color
       this.$emit('update:iconList', iconList)
       // 修改path的填充
-      const pathNodeArr = document.getElementById(id).getElementsByTagName('path')
+      const pathNodeArr = document.getElementById(iconId).getElementsByTagName('path')
       for (let i = 0; i < pathNodeArr.length; i++) {
         pathNodeArr[i].setAttribute('fill', color)
       }

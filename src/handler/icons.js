@@ -2,7 +2,7 @@
  * @Author: mikey.zhaopeng
  * @Date: 2019-01-18 20:16:19
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-02-01 10:53:49
+ * @Last Modified time: 2019-02-18 14:55:19
  */
 import UI from 'sketch/ui'
 import sketch from 'sketch/dom'
@@ -14,7 +14,7 @@ function MSColorFromString (color) {
 export default (context, data) => {
   // TODO:添加缺省图
   // eslint-disable-next-line no-undef
-  const svgString = NSString.stringWithString(data['show_svg'])
+  const svgString = NSString.stringWithString(data['svg'])
   // eslint-disable-next-line no-undef
   const svgData = svgString.dataUsingEncoding(NSUTF8StringEncoding)
   // eslint-disable-next-line no-undef

@@ -10,7 +10,8 @@ const URL = {
   DELETE_GROUP: '/icon/group/delete',
   GET_LIBRARY_LIST: '/icon/library/list',
   DELETE_LIBRATY: '/icon/library/delete',
-  UPLOAD_LIBRARY: '/icon/icon/upload'
+  UPLOAD_LIBRARY: '/icon/icon/upload',
+  GET_ICON_LIST: '/icon/icon/list'
 }
 
 // 这里在开发阶段预处理一下，用于适应同时请求多个后端的情况
@@ -99,6 +100,14 @@ const API = {
     return instance({
       method: 'post',
       url: `${URL.UPLOAD_LIBRARY}?groupId=7a60a41c-0b83-406d-83f8-37cfd88e737a`,
+      opts: opts
+    })
+  },
+  /** 获取分组下图标 */
+  getIconList (opts) {
+    return instance({
+      method: 'get',
+      url: URL.GET_ICON_LIST,
       opts: opts
     })
   }

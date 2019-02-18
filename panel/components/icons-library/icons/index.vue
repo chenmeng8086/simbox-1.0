@@ -8,8 +8,8 @@
         :on-icon-click="handleIconClick"
         :clear-icon-click="clearIconClick"
         @keyup.enter.native="handleIconClick">
-        <el-select v-model="group" slot="prepend" placeholder="请选择分组" @change="groupChange">
-          <el-option label="全部" value="all"></el-option>
+        <el-select v-model="groupId" slot="prepend" placeholder="请选择分组" @change="groupChange">
+          <el-option label="全部" value=""></el-option>
         <el-option v-for="opt in groupOpts" :key="opt.groupId" :value="opt.groupId" :label="opt.name"></el-option>
         </el-select>
       </el-input>
@@ -47,8 +47,6 @@
 </template>
 <script>
 import IconContainer from './IconContainer'
-import {iconData} from './mockData.js'
-import getUUID from '../../quick-fill/text-fill/uuid.js'
 import { VisionOpts } from './config.js'
 import { iconApi } from '@/api'
 export default {
@@ -72,7 +70,7 @@ export default {
       groupOpts: [],
       departmentOpts: [],
       options: [],
-      group: 'all',
+      groupId: '',
       deptId: '',
       name: '',
       iconList: [],
@@ -87,7 +85,19 @@ export default {
   },
   methods: {
     getIconList () {
-      this.iconList = iconData.sort(function randomSort (a, b) { return Math.random() > 0.5 ? -1 : 1 }).map(item => ({...item, id: getUUID()}))
+      // this.iconList = iconData.sort(function randomSort (a, b) { return Math.random() > 0.5 ? -1 : 1 }).map(item => ({...item, id: getUUID()}))
+      this.getIcons()
+    },
+    /** 获取分组信息 获取后台接口 */
+    async getIcons (customParams) {
+      try {
+        const {data = []} = await iconApi.getIconList({params: {groupId: this.groupId, isPublic: true}})
+        this.iconList = data
+      } catch (error) {
+        this.errorHandler(error)
+      } finally {
+        this.loading = false
+      }
     },
     /** 获取分组信息 获取后台接口 */
     async getGroups (customParams) {
