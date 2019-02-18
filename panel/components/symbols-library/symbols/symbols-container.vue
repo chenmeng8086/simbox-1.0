@@ -36,8 +36,10 @@ export default {
 <style lang="less" scoped>
   /deep/.scrollbar__wrap {
     max-height: 420px;
+    max-width: 200px;
   }
-  .collapse{
+  /deep/.collapse{
+    width: 1000px;
     i{
       font-style: normal!important;
     }

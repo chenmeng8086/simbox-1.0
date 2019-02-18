@@ -128,6 +128,6 @@ export default {
     background-color: #FFF!important;
   }
   /deep/.scrollbar__wrap {
-    max-height: 420px;
+    max-height: 400px;
   }
 </style>

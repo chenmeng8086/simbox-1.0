@@ -270,7 +270,8 @@ export default {
       bottom: 0px;
       width: 100%;
       text-align: center;
-      background-color: #ededed;
+      border-top: 1px solid #E6E6E6;
+      background-color: #fff;
       height: 36px;
       margin-left: -3%;
       line-height: 36px;
@@ -284,7 +285,7 @@ export default {
       margin-left: 42px;
     }
     /deep/.scrollbar__wrap {
-      max-height: 500px;
+      height: 400px;
       margin-bottom: -16px!important;
     }
     .active{

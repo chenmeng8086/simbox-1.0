@@ -57,7 +57,7 @@ export default {
     padding: 8px;
     text-align: left;
     position:fixed;
-    bottom: 40px;
+    bottom: 36px;
     width: 100%;
     height: 105px;
     background-color: #f0f0f0;

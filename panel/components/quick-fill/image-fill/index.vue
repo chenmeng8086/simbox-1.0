@@ -88,7 +88,8 @@ export default {
     bottom: 4px;
     width: 100%;
     text-align: center;
-    background-color: #ededed;
+    border-top: 1px solid #E6E6E6;
+    background-color: #fff;
     height: 36px;
     line-height: 36px;
     i {
@@ -98,7 +99,7 @@ export default {
     }
   }
   /deep/.scrollbar__wrap {
-    max-height: 500px;
+    height: 400px;
     margin-bottom: -16px!important;
   }
   .active{

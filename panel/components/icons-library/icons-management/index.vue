@@ -26,6 +26,7 @@
       view-class="scrollbar__view">
     <template v-if="records.length === 0">
       <div class="noGroupContainer">
+        <img :src="defaultUrl" />
         <p>这里太空旷，快来上传第一个图标库吧</p>
         <el-button type="primary" @click="addGlobalClick">新建分组</el-button>
       </div>
@@ -74,6 +75,7 @@ import QueryBar from './query-bar'
 import AddGroupDialog from './add-group-dialog'
 import UploadIconsDialog from './upload-icons-dialog'
 import { iconApi } from '@/api'
+import defaultUrl from '../../../assets/noData.png'
 export default {
   name: 'iconsMangement',
   props: {
@@ -96,7 +98,8 @@ export default {
       groupId: '',
       libraryName: '',
       departmentOpts: [],
-      deptId: ''
+      deptId: '',
+      defaultUrl
     }
   },
   created () {
@@ -267,34 +270,35 @@ export default {
 </script>
 <style lang="less" scoped>
   .iconQueryBar{
-  display: flex;
-  /deep/.el-input-group{
-    width: 70%;
-  }
-}
-.iconQueryBarSelect{
-  width: 30%;
-  /deep/.el-input{
-    input {
-      border: 0;
-      background: transparent;
+    display: flex;
+    /deep/.el-input-group{
+      width: 70%;
     }
   }
-}
-.iconQueryBarInput{
-  display: inline-block;
-  width: 50%;
-}
-/deep/.el-input-group__prepend{
-  width: 20%;
-}
+  .iconQueryBarSelect{
+    width: 30%;
+    /deep/.el-input{
+      input {
+        border: 0;
+        background: transparent;
+      }
+    }
+  }
+  .iconQueryBarInput{
+    display: inline-block;
+    width: 50%;
+  }
+  /deep/.el-input-group__prepend{
+    width: 20%;
+  }
   .toolbar{
     position: fixed;
-    bottom: 4px;
+    bottom: 0px;
     width: 100%;
     text-align: center;
-    background-color: #ededed;
-    height: 36px;
+    border-top: 1px solid #E6E6E6;
+    background-color: #fff;
+    height: 40px;
     line-height: 36px;
     i {
       display: inline-block;
@@ -346,12 +350,19 @@ export default {
   }
   .noGroupContainer{
     text-align: center;
+    /deep/.el-button{
+      width: 250px;
+      height: 44px;
+      background: #3C99FC;
+      box-shadow: 0 6px 24px 0 rgba(60,153,252,0.24);
+      border-radius: 22px;
+    }
   }
   .card{
     display: flex;
     flex-wrap: wrap;
     .cardList{
-      width: 200px;
+      width: 180px;
       margin-bottom: 24px;
       .top{
         display: flex;
@@ -391,7 +402,7 @@ export default {
     }
   }
   /deep/.scrollbar__wrap {
-    max-height: 500px;
+    height: 400px;
     margin-bottom: -16px!important;
   }
 </style>

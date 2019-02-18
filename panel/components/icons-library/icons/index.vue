@@ -170,13 +170,14 @@ export default {
     width: 50%;
   }
   /deep/.el-input-group__prepend{
-    width: 20%;
+    width: 40%;
   }
   .vision{
     position: fixed;
     bottom: 4px;
     width: 100%;
     text-align: left;
+    background-color: #fff;
     .label{
       display: inline-block;
       width: 30%;
