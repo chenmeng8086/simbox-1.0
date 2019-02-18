@@ -4,7 +4,8 @@ import {
   imageHandler,
   iconDragHandler,
   symbolHandler,
-  dragSymbolHandler
+  dragSymbolHandler,
+  libraryHandler
 } from './handler'
 import {openURL} from './utils'
 const isDev = process.env.NODE_ENV === 'development'
@@ -51,5 +52,14 @@ export default context => {
   })
   webContents.on('addFillImage', data => {
     imageHandler.addFillImageHandler(context, data)
+  })
+  webContents.on('uploadIconLibraryClick', data => {
+    libraryHandler.uploadIconLibraryHandler(context, webContents)
+  })
+  webContents.on('uploadCoverPhotoClick', data => {
+    libraryHandler.uploadCoverPhotoHandler(context, webContents)
+  })
+  webContents.on('uploadLibrary', data => {
+    libraryHandler.uploadLibraryHandler(context, data)
   })
 }

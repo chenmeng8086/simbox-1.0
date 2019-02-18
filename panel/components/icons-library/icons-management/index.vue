@@ -19,7 +19,7 @@
               <i>{{item.name}}</i>
               <i class="h-icon-trashcan" @click="e => deleteClick(e, item)"></i>
               <i class="h-icon-edit" @click="e => editClick(e, item)"></i>
-              <i class="h-icon-upload" @click="uploadClick"></i>
+              <i class="h-icon-upload" @click="e => uploadClick(e, item)"></i>
             </template>
             <!-- 内容 -->
             <ul class="card">
@@ -72,7 +72,8 @@ export default {
       records: [],
       mode: 'add',
       simpleData: [],
-      checkedList: {}
+      checkedList: {},
+      groupId: ''
     }
   },
   created () {
@@ -80,12 +81,14 @@ export default {
   },
   methods: {
     handleChange (groupId) {
-      groupId && this.addLibraryByGroupId(groupId)
+      if (groupId) {
+        this.addLibraryByGroupId(groupId)
+        this.groupId = groupId
+      }
     },
     addGlobalClick () {
       this.mode = 'add'
       this.$refs.addGroup.showDialog({mode: 'add'})
-      console.log(this.checkedList)
     },
     /** 全局下载 */
     downloadGlobalClick () {
@@ -105,6 +108,12 @@ export default {
         this.editGroups(form)
       }
     },
+    formDataLibraryIds () {
+      const idsObj = this.checkedList
+      let arr = []
+      Object.keys(idsObj).forEach(item => arr.push(item))
+      return arr
+    },
     deleteLibrary () {
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
@@ -113,14 +122,14 @@ export default {
       }).then(() => {
         // TODO：需要处理checkedList,为字符串
         console.log(this.checkedList)
-        const params = {ids: []}
+        const params = {ids: this.formDataLibraryIds()}
         try {
           iconApi.deleteLibrary({params}).then(() => {
             this.$message({
               type: 'success',
               message: '删除成功'
             })
-            this.getGroups()
+            this.addLibraryByGroupId(this.groupId)
           })
         } catch (error) {
           this.errorHandler(error)
@@ -178,9 +187,9 @@ export default {
       }
     },
     /** 上传图片 */
-    uploadClick: function (e) {
+    uploadClick: function (e, item) {
       e.stopPropagation()
-      this.$refs.upload.showDialog()
+      this.$refs.upload.showDialog(item)
     },
     /** 删除分组 */
     async deleteClick (e, item) {

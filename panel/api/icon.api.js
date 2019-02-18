@@ -89,10 +89,7 @@ const API = {
     return instance({
       method: 'post',
       url: URL.DELETE_LIBRATY,
-      opts: {...opts,
-        paramsSerializer: function (params) {
-          return Qs.stringify(params, {arrayFormat: 'repeat'})
-        }}
+      opts: opts
     })
   },
   /** 保存数据接入配置 */

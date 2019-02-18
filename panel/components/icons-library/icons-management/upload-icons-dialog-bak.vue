@@ -2,12 +2,32 @@
   <el-dialog title="上传图标库至Simbox" :visible.sync="visible">
     <el-form :model="form">
       <el-form-item label="选择图标库">
-        <el-button type="primary" @click="uploadIconLibraryClick">上传图标库</el-button>
-        <span>{{libraryName}}</span>
+        <el-upload
+          class="upload-demo"
+          ref="upload"
+          action="/icon/icon/upload"
+          :on-preview="handlePreview"
+          :on-remove="handleRemove"
+          :on-change="onFileChange2"
+          :file-list="fileList"
+          :auto-upload="false">
+          <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+        </el-upload>
       </el-form-item>
       <el-form-item label="选择图片">
-        <el-button type="primary" @click="uploadCoverPhotoClick">选择图片</el-button>
-        <span>{{coverPhotoName}}</span>
+        <el-upload
+          class="upload-demo"
+          ref="upload"
+          action="/icon/icon/upload"
+          :on-preview="handlePreview"
+          :on-remove="handleRemove"
+          :file-list="fileList"
+          :on-change="onFileChange"
+          :auto-upload="false">
+          <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+        </el-upload>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -27,34 +47,12 @@ export default {
       visible: false,
       fileList: [],
       formLabelWidth: '120px',
-      form: {},
-      libraryName: '',
-      coverPhotoName: '',
-      groupId: ''
+      form: {}
     }
   },
   methods: {
-    uploadIconLibraryClick () {
-      window.postMessage('uploadIconLibraryClick')
-      const _this = this
-      window.uploadIconLibraryName = function (fileName) {
-        console.log('hello')
-        console.log(fileName)
-        _this.libraryName = fileName[0]
-      }
-    },
-    uploadCoverPhotoClick () {
-      window.postMessage('uploadCoverPhotoClick')
-      const _this = this
-      window.uploadCoverPhotoName = function (fileName) {
-        console.log('world')
-        console.log(fileName)
-        _this.coverPhotoName = fileName[0]
-      }
-    },
-    showDialog: function (item) {
+    showDialog: function () {
       this.visible = true
-      this.groupId = item.groupId
     },
     submitUpload () {
       this.$refs.upload.submit()
@@ -78,10 +76,11 @@ export default {
       // pluginCall('onUpload')
     },
     okClick () {
-      this.$emit('submit', this.form)
-      this.visible = false
-      const params = {groupId: this.groupId, libraryName: this.libraryName, coverPhotoName: this.coverPhotoName}
-      window.postMessage('uploadLibrary', params)
+      let formData = new FormData()
+      formData.append('iconLibrary', this.form.iconLibrary)
+      formData.append('coverPhoto', this.form.coverPhoto)
+      // formData.append('groupId', '7a60a41c-0b83-406d-83f8-37cfd88e737a')
+      this.uploadImage(formData)
     },
     async uploadImage (formData) {
       try {
