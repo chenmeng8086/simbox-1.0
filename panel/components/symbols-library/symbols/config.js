@@ -28,4 +28,9 @@ const VisionOpts = [{
   label: 'v0.1'
 }]
 
-export { IconQueryBarOption, Tabs, VisionOpts }
+const symbolsRecords = [{name: '文字/禁用文字/左/W55%', id: '1'},
+  {name: '文字/禁用文字/左/W55%', id: '1'},
+  {name: '文字/禁用文字/左/W55%', id: '1'},
+  {name: '文字/禁用文字/左/W55%', id: '1'}]
+
+export {IconQueryBarOption, Tabs, VisionOpts, symbolsRecords}
