@@ -2,7 +2,7 @@
  * @Author: mikey.zhaopeng
  * @Date: 2019-01-18 20:05:26
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-02-19 19:32:06
+ * @Last Modified time: 2019-02-20 10:44:47
  */
 const AVAILABLE_EXT = ['svg', 'pdf', 'png', 'jpg', 'jpeg', 'sketch']
 /**
@@ -15,7 +15,6 @@ function selectIconsFiles () {
   var panel = NSOpenPanel.openPanel()
   panel.setCanChooseDirectories(false)
   panel.setAllowsMultipleSelection(true)
-  panel
   panel.setCanCreateDirectories(true)
   panel.setMessage('select file')
   panel.setAllowedFileTypes(AVAILABLE_EXT)
