@@ -49,7 +49,8 @@ export default {
       records: [],
       version: '--',
       name: '',
-      group: ''
+      group: '',
+      Tabs: []
     }
   },
   watch: {

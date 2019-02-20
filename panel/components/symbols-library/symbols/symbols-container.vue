@@ -3,82 +3,95 @@
     wrap-class="scrollbar__wrap"
     view-class="scrollbar__view"
   >
-    <el-collapse accordion class="collapse">
-      <el-collapse-item v-for="item in records" :key="item.id">
-        <template slot="title">
-          <i>{{item.name}}</i>
-        </template>
-        <i class="h-icon-calendar"></i>
-        <i draggable="true" @dragend="dragend(item)">{{item.name}}</i>
-      </el-collapse-item>
-    </el-collapse>
-    <!-- <div class="container">
-      <enhanced-el-tree
-        tree-node-wrapper-class="hello"
-        horizontal
-        show-checkbox
-        node-key="id"
-        :data="data"
-      ></enhanced-el-tree>
-      <el-cascader
-        placeholder="试试搜索：指南"
-        :options="options"
-        filterable
-        change-on-select
-      ></el-cascader>
-    </div> -->
+  <el-tabs v-model="currentTab" @tab-click="handleClick">
+    <el-tab-pane
+      v-for="item in options"
+      :label="item.label"
+      :name="item.id"
+      :key="item.id">
+    </el-tab-pane>
+    </el-tabs>
+    <enhanced-el-tree
+    highlight-current
+    ref="tree"
+    horizontal
+    :accordion="true"
+    :data="currentChildren"
+    tree-node-wrapper-class="treeNodeclass"
+    @node-click="handleNodeClick"></enhanced-el-tree>
+   <!-- <tree-horizontal :data="options" :id="currentTab"></tree-horizontal> -->
   </el-scrollbar>
 </template>
 <script>
-import {symbolsRecords} from './config.js'
+import {symbolsRecords, TreeUtil} from './config.js'
 import EnhancedElTree from '@xlaoyu/enhanced-el-tree'
 import getUUID from '../../../utils/uuid.js'
+import TreeHorizontal from './tree-horizontal'
+import _ from 'lodash'
 export default {
   name: 'symbolsContainer',
   props: {
     records: Array
   },
   components: {
-    EnhancedElTree
+    EnhancedElTree,
+    TreeHorizontal
   },
   data () {
     return {
+      optionProps: {
+        value: 'id',
+        label: 'name',
+        children: 'children'
+      },
       str2: 'hello',
       str: '',
+      currentTab: '',
       symbolsRecords,
       options: [],
+      children: [],
       data: [
         {
-          id: 1,
+          id: '1',
           label: 'node-1',
           name: 'node-1',
           children: [
             {
-              id: 11,
+              id: '11',
               label: 'node-11',
               children: [
                 {
-                  id: 111,
-                  label: 'node-111'
+                  id: '111',
+                  label: 'node-111',
+                  children: [
+                    {
+                      id: '1111',
+                      label: 'node-1111',
+                      children: {
+                        id: '11111',
+                        label: 'node-11111'
+                      }
+                    }
+                  ]
                 },
                 {
-                  id: 112,
+                  id: '112',
                   label: 'node-112'
                 },
                 {
-                  id: 113,
+                  id: '113',
                   label: 'node-113'
                 }
               ]
             },
             {
-              id: 12,
+              id: '12',
               label: 'node-12'
             }
           ]
         },
         {
-          id: 2,
+          id: '2',
           label: 'node-2',
           children: [
             {
@@ -98,15 +111,36 @@ export default {
     // this.options = tree.toTree()
     // console.log(tree.toTree())
   },
-  // watch: {
-  //   records: function () {
-  //     const data = this.formDataRecords()
-  //     var tree = new TreeUtil(data, 'id', 'parent')
-  //     this.options = tree.toTree()
-  //     console.log(tree.toTree())
-  //   }
-  // },
+  computed: {
+    currentChildren () {
+      const _data = this.options.find(item => item.id === this.currentTab) || {}
+      console.log(JSON.stringify(_data))
+      return _data.children
+    }
+  },
+  watch: {
+    records: function () {
+      // this.str = JSON.stringify(this.records)
+      const data = this.formDataRecords()
+      // this.str = JSON.stringify(data)
+      var tree = new TreeUtil(data, 'id', 'parent')
+      var _data = tree.toTree()
+      this.str = JSON.stringify(_data)
+      this.options = _data
+    }
+  },
   methods: {
+    handleNodeClick (data) {
+      console.log('selected', JSON.stringify(data))
+    },
+    handleClick (tab, event) {
+      const { name } = tab
+      this.currentTab = name
+      console.log(name)
+    },
+    getAllCheckedKeys (keys) {
+      console.log(keys, 'keys')
+    },
     dragend (item) {
       window.postMessage('onDragSymbol', item)
     },
@@ -114,9 +148,8 @@ export default {
       return arr.filter(item => item.name === name)
     },
     formDataRecords (records) {
-      const _records = this.symbolsRecords
+      const _records = this.records
       var arr = []
-      console.log('_records', _records)
       _records.forEach((item, idx) => {
         const {id, name} = item
         const _names = name.split('/')
@@ -127,28 +160,25 @@ export default {
             arr.push({
               parent: i === 0 ? 0 : idsArr[i - 1],
               id: i === len - 1 ? id : idsArr[i],
-              name: _names[i]
+              label: _names[i]
             })
-            console.log('----------arr---------', arr)
           }
         }
-
-        console.log(arr)
         // 需要判断是否在arr中
-
         for (let i = 0; i < len; i++) {
           const idsArr = new Array(len).fill('0').map(item => getUUID())
-          const findItemByName = arr.find(item => item.name === _names[i]) || {}
+          // 判断是否存在时
+          const findItemByName = arr.find(item => item.label === _names[i]) || {}
           // 如果不存在时候
           if (!findItemByName.id) {
             // 找出他的父节点
             const name = _names[i]
             const pName = _names[i - 1]
-            const findPItemByName = arr.find(item => item.name === pName) || {}
+            const findPItemByName = arr.find(item => item.label === pName) || {}
             arr.push({
               parent: i === 0 ? 0 : findPItemByName.id,
               id: i === len - 1 ? id : idsArr[i],
-              name
+              label: name
             })
           }
         }
@@ -190,5 +220,9 @@ export default {
   }
   /deep/.el-tree-node__expand-icon{
     display: none;
+  }
+  /deep/.el-tree-node-wrapper{
+    width: 300px;
+    border: 1px solid red;
   }
 </style>
