@@ -28,18 +28,9 @@ const uploadCoverPhotoHandler = (context, webContents) => {
 // https://sketchplugins.com/d/1107-how-to-use-formdata-for-uploading-files-to-private-server
 /* eslint-disable */
 const uploadLibraryHandler = (context, data) => {
-  console.log('我是添加的图片啊')
-  console.log(data)
-  console.log(JSON.stringify(data))
   const {groupId, libraryName, coverPhotoName} = data
-  console.log('groupId', groupId)
-  console.log('libraryName', libraryName)
-  console.log('coverPhotoName', coverPhotoName)
   const filePath = coverPhotoName + '/photo.jpg'
   const formData = new FormData()
-  console.log('formData', formData)
-  console.log('formData._isFormData', formData._isFormData)
-  console.log('formData.append', formData.append)
   // formData.append('groupId', 'ff38a23c-ec9e-4f19-b801-032e20a67ce1')
   formData.append('coverPhoto', {
     fileName: 'photo.jpg',
@@ -60,7 +51,6 @@ const uploadLibraryHandler = (context, data) => {
     // headers: { 'Content-Type': 'multipart/form-data' } <- no need, it's automatically set by fetch when providing a FormData
     body: formData
   }
-  console.log(JSON.stringify(formData))
   const url = 'http://10.10.83.30:9090/icon/icon/upload?groupId='+groupId
   fetch(url, fetchOptions)
     .then(response => response.json())

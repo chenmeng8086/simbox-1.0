@@ -7,7 +7,7 @@
       <p class="name">{{iconItem.name}}</p>
       <p class="library">{{iconItem.library}}</p>
       <p class="person">{{`上传人：${iconItem.uploadUser}`}}</p>
-      <p class="time">{{iconItem.time}}</p>
+      <p class="time">{{iconItem.uploadTime}}</p>
     </div>
     <div class="right">
       <el-color-picker v-model="iconColor" @change="colorChange"></el-color-picker>

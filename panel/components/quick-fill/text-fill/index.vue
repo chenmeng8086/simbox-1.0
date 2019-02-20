@@ -105,7 +105,7 @@ import {
   getTimeByNum
 } from './config.js'
 import addTextDialog from './add-text-dialog'
-import getUUID from './uuid.js'
+import getUUID from '../../../utils/uuid.js'
 import { Container, Draggable } from 'vue-smooth-dnd'
 import { applyDrag } from './helper'
 import randomName from 'chinese-random-name'

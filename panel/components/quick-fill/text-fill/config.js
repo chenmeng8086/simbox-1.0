@@ -1,4 +1,4 @@
-import getUUID from './uuid'
+import getUUID from '../../../utils/uuid.js'
 const configs = [{
   name: '姓名',
   type: 'name',

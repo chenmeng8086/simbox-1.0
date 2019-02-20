@@ -49,6 +49,7 @@
 import IconContainer from './IconContainer'
 import { VisionOpts } from './config.js'
 import { iconApi } from '@/api'
+import getUUID from '../../../utils/uuid.js'
 export default {
   name: 'icons',
   props: {
@@ -92,7 +93,8 @@ export default {
     async getIcons (customParams) {
       try {
         const {data = []} = await iconApi.getIconList({params: {groupId: this.groupId, isPublic: true}})
-        this.iconList = data
+        const _data = data.map(item => ({...item, iconId: getUUID()}))
+        this.iconList = _data
       } catch (error) {
         this.errorHandler(error)
       } finally {

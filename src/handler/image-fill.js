@@ -2,7 +2,7 @@
  * @Author: mikey.zhaopeng
  * @Date: 2019-01-18 19:30:14
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-02-18 10:21:58
+ * @Last Modified time: 2019-02-19 18:27:03
  * @Des 图片快填
  * https://github.com/turbobabr/Sketch-Plugins-Cookbook#create-custom-shape
  * https://sketchplugins.com/d/1107-how-to-use-formdata-for-uploading-files-to-private-server/4
@@ -90,16 +90,12 @@ const addFillImageHandler = (context, data) => {
   console.log(JSON.stringify(data))
   const filePath = '/Users/yunmoushijue/Desktop/dog/hello.jpg'
   const formData = new FormData()
-  console.log('formData', formData)
-  console.log('formData._isFormData', formData._isFormData)
-  console.log('formData.append', formData.append)
   // formData.append('groupId', 'ff38a23c-ec9e-4f19-b801-032e20a67ce1')
   formData.append('coverPhoto', {
     fileName: 'hello.jpg',
     mimeType: 'image/jpg', // or whichever mime type is your file
     data: NSData.alloc().initWithContentsOfFile(filePath)
   })
-  console.log('coverPhoto', NSData.alloc().initWithContentsOfFile(filePath))
   const _filePath = '/Users/yunmoushijue/Desktop/font.zip'
   formData.append('iconLibrary', {
     fileName: 'font.zip',
@@ -113,7 +109,6 @@ const addFillImageHandler = (context, data) => {
       // headers: { 'Content-Type': 'multipart/form-data' } <- no need, it's automatically set by fetch when providing a FormData
       body: formData
   }
-  console.log(JSON.stringify(formData))
   fetch('http://10.10.83.30:9090/icon/icon/upload?groupId=ff38a23c-ec9e-4f19-b801-032e20a67ce1', fetchOptions)
       .then(response => response.json())
       .then(data => log(data))
