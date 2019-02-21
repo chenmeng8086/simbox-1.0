@@ -222,7 +222,6 @@ export default {
     text-align: left;
     .smooth-dnd-draggable-wrapper{
       min-height: 40px;
-      background-color: #fff;
       line-height: 40px;
       margin-bottom: 4px;
     }
@@ -230,7 +229,6 @@ export default {
       width: 100%;
       height: 36px;
       line-height: 40px;
-      background-color:#fff;
       margin-top: 10px;
     }
     .custom{
