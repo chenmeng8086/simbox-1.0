@@ -41,11 +41,9 @@
       <p class="left">
         <template v-if="display === 'card'">
           <i @click="tableClick"><svg-icon iconClass="listmode"></svg-icon></i>
-          <!-- <i class="h-icon-menu_leftbar" @click="tableClick"></i> -->
         </template>
         <template v-else>
           <i @click="cardClick"><svg-icon iconClass="cardmode"></svg-icon></i>
-          <!-- <i class="h-icon-menu_panel" @click="cardClick"></i> -->
         </template>
       </p>
       <p class="right">
