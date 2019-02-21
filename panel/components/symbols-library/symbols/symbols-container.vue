@@ -10,15 +10,24 @@
       :name="item.id"
       :key="item.id">
     </el-tab-pane>
-    </el-tabs>
-    <enhanced-el-tree
-    highlight-current
-    ref="tree"
-    horizontal
-    :accordion="true"
-    :data="currentChildren"
-    tree-node-wrapper-class="treeNodeclass"
-    @node-click="handleNodeClick"></enhanced-el-tree>
+  </el-tabs>
+  <div>
+    <template v-if="display==='list'">
+      <ul>
+        <li v-for="item in currentChildren" :key="item.id" @click="itemClick">
+          {{item.label}}
+        </li>
+      </ul>
+    </template>
+    <template v-else>
+      <div class="childrenContainer">
+        <div class="top">hello</div>
+        <div class="bottom">
+          world
+        </div>
+      </div>
+    </template>
+  </div>
    <!-- <tree-horizontal :data="options" :id="currentTab"></tree-horizontal> -->
   </el-scrollbar>
 </template>
@@ -49,8 +58,17 @@ export default {
       symbolsRecords,
       options: [],
       children: [],
-      data: symbolsRecords
+      data: symbolsRecords,
+      display: 'list'
     }
+  },
+  created () {
+    const symbolsRecords = [{name: '文字/禁用文字/左/W55%', id: '1'},
+      {name: '文字/二级标题/文字/左/W45%', id: '2'},
+      {name: '文字/禁用文字/左/W35%', id: '3'},
+      {name: '文字/禁用文字/左/W65%', id: '4'}]
+    const data = this.formDataRecordsNew(symbolsRecords)
+    console.log('data处理过后的', JSON.stringify(data))
   },
   computed: {
     currentChildren () {
@@ -74,6 +92,10 @@ export default {
     handleClick (tab, event) {
       const { name } = tab
       this.currentTab = name
+      this.display = 'list'
+    },
+    itemClick () {
+      this.display = 'breadcrumb'
     },
     dragend (item) {
       window.postMessage('onDragSymbol', item)
@@ -81,8 +103,15 @@ export default {
     findItemByName (arr, name) {
       return arr.filter(item => item.name === name)
     },
+    getParentId (names, i, obj, idsArr) {
+      if (i === 0) return 0
+      const parentName = names[i - 1]
+      const parentItem = Object.values(obj).find(item => item.label === parentName) || {}
+      if (parentItem.id) return parentItem.id
+      return idsArr[i - 1]
+    },
     formDataRecordsNew (records) {
-      const _records = this.records
+      const _records = records
       var obj = {}
       _records.forEach((item, idx) => {
         const {id, name} = item
@@ -91,7 +120,7 @@ export default {
         _names.forEach((_item, _idx) => {
           const idsArr = new Array(len).fill('0').map(item => getUUID())
           // 判断是否在
-          let parentId = _idx === 0 ? 0 : idsArr[_idx - 1]
+          let parentId = this.getParentId(_names, _idx, obj, idsArr)
           let label = _names[_idx]
           let _id = _idx === len - 1 ? id : idsArr[_idx]
           obj[`${parentId}_${label}`] = {
@@ -145,6 +174,9 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+  .childrenContainer{
+
+  }
   .container{
     width: 600px;
     text-align: left;
@@ -164,7 +196,6 @@ export default {
   }
   /deep/.scrollbar__wrap {
     height: 420px;
-    width: 400px;
   }
   /deep/.collapse{
     i{

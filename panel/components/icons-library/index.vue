@@ -69,6 +69,9 @@ export default {
       height: 28px;
       line-height: 28px;
     }
+    /deep/.el-radio__label{
+      font-size: 14px;
+    }
   }
   .vision{
     position: fixed;

@@ -129,6 +129,6 @@ export default {
     width: 50%;
   }
   /deep/.el-input-group__prepend{
-    width: 20%;
+    width: 40%;
   }
 </style>

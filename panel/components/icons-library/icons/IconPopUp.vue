@@ -68,7 +68,7 @@ export default {
     display: flex;
   }
   .left{
-    width: 30%;
+    width: 18%;
     height: 100%;
     flex: 0 0 auto;
     text-align: center;
@@ -76,7 +76,11 @@ export default {
     /deep/svg{
       width: 3em!important;
       height: 3em!important;
+      margin-top: 24px;
     }
+    background-image:url("../../../assets/bg.png");
+    background-repeat: no-repeat;
+    margin-right: 2%;
   }
   .center{
     width: 30%;

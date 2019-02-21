@@ -6,7 +6,7 @@
     tag="ul">
       <Container @drop="onDrop" :get-ghost-parent="getGhostParent" drag-handle-selector=".column-drag-handle" lock-axis="y">
         <Draggable v-for="config in data" :key="config.type">
-          <div :class='{active:config.id==activeId}' @mouseover="mouseover(config)" @click="fillClick(config)">
+          <div :class='{active:config.id==activeId, dragItem: true}' @mouseover="mouseover(config)" @click="fillClick(config)">
             <template v-if="config.isCustom">
               <div class="custom">
                 <div class="customText">
@@ -223,10 +223,8 @@ export default {
     height: 100%;
     // background-color: #ededed;
     text-align: left;
-    .smooth-dnd-draggable-wrapper{
-      min-height: 40px;
-      line-height: 40px;
-      margin-bottom: 4px;
+    .dragItem{
+      padding: 4px 20px;
     }
     .text{
       width: 100%;
@@ -286,7 +284,7 @@ export default {
       margin-left: 42px;
     }
     /deep/.scrollbar__wrap {
-      height: 400px;
+      height: 450px;
       margin-bottom: -16px!important;
     }
     .active{
