@@ -29,7 +29,7 @@ const VisionOpts = [{
 }]
 
 const symbolsRecords = [{name: '文字/禁用文字/左/W55%', id: '1'},
-  {name: '文字/禁用文字/左/W45%', id: '2'},
+  {name: '文字/二级标题/文字/左/W45%', id: '2'},
   {name: '文字/禁用文字/左/W35%', id: '3'},
   {name: '文字/禁用文字/左/W65%', id: '4'}]
 

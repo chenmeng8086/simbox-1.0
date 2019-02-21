@@ -27,7 +27,6 @@ import {symbolsRecords, TreeUtil} from './config.js'
 import EnhancedElTree from '@xlaoyu/enhanced-el-tree'
 import getUUID from '../../../utils/uuid.js'
 import TreeHorizontal from './tree-horizontal'
-import _ from 'lodash'
 export default {
   name: 'symbolsContainer',
   props: {
@@ -50,72 +49,13 @@ export default {
       symbolsRecords,
       options: [],
       children: [],
-      data: [
-        {
-          id: '1',
-          label: 'node-1',
-          name: 'node-1',
-          children: [
-            {
-              id: '11',
-              label: 'node-11',
-              children: [
-                {
-                  id: '111',
-                  label: 'node-111',
-                  children: [
-                    {
-                      id: '1111',
-                      label: 'node-1111',
-                      children: {
-                        id: '11111',
-                        label: 'node-11111'
-                      }
-                    }
-                  ]
-                },
-                {
-                  id: '112',
-                  label: 'node-112'
-                },
-                {
-                  id: '113',
-                  label: 'node-113'
-                }
-              ]
-            },
-            {
-              id: '12',
-              label: 'node-12'
-            }
-          ]
-        },
-        {
-          id: '2',
-          label: 'node-2',
-          children: [
-            {
-              id: '21',
-              label: 'node-21'
-            }
-          ]
-        }
-      ]
+      data: symbolsRecords
     }
-  },
-  created () {
-    // console.log('sy', this.symbolsRecords)
-    // const data = this.formDataRecords()
-    // console.log('data', JSON.stringify(data))
-    // var tree = new TreeUtil(data, 'id', 'parent')
-    // this.options = tree.toTree()
-    // console.log(tree.toTree())
   },
   computed: {
     currentChildren () {
-      const _data = this.options.find(item => item.id === this.currentTab) || {}
-      console.log(JSON.stringify(_data))
-      return _data.children
+      const data = this.options.find(item => item.id === this.currentTab) || {}
+      return data.children
     }
   },
   watch: {
@@ -125,27 +65,43 @@ export default {
       // this.str = JSON.stringify(data)
       var tree = new TreeUtil(data, 'id', 'parent')
       var _data = tree.toTree()
-      this.str = JSON.stringify(_data)
       this.options = _data
     }
   },
   methods: {
     handleNodeClick (data) {
-      console.log('selected', JSON.stringify(data))
     },
     handleClick (tab, event) {
       const { name } = tab
       this.currentTab = name
-      console.log(name)
-    },
-    getAllCheckedKeys (keys) {
-      console.log(keys, 'keys')
     },
     dragend (item) {
       window.postMessage('onDragSymbol', item)
     },
     findItemByName (arr, name) {
       return arr.filter(item => item.name === name)
+    },
+    formDataRecordsNew (records) {
+      const _records = this.records
+      var obj = {}
+      _records.forEach((item, idx) => {
+        const {id, name} = item
+        const _names = name.split('/')
+        const len = _names.length
+        _names.forEach((_item, _idx) => {
+          const idsArr = new Array(len).fill('0').map(item => getUUID())
+          // 判断是否在
+          let parentId = _idx === 0 ? 0 : idsArr[_idx - 1]
+          let label = _names[_idx]
+          let _id = _idx === len - 1 ? id : idsArr[_idx]
+          obj[`${parentId}_${label}`] = {
+            parent: parentId,
+            id: _id,
+            label
+          }
+        })
+      })
+      return Object.values(obj)
     },
     formDataRecords (records) {
       const _records = this.records
