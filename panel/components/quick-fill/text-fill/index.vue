@@ -249,7 +249,7 @@ export default {
       }
     }
     .text{
-      font-size: 16px;
+      font-size: 14px;
       color: rgba(24,25,26,0.90);
     }
     /deep/.el-radio-group{

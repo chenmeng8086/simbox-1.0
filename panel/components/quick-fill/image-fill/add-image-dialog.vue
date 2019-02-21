@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="新建文本" :visible.sync="visible">
+  <el-dialog title="新建图片" :visible.sync="visible" :center="true" :show-close="false">
     <el-form :model="form" label-position="left" ref="addImageForm">
       <el-form-item label="类别">
         <el-input v-model="form.type" auto-complete="off" placeholder="请输入图片类别名称"></el-input>
@@ -63,5 +63,9 @@ export default {
       visibility: hidden;
       position: absolute;
     }
+  }
+  /deep/.el-dialog{
+    width: 400px;
+    height: 400px;
   }
 </style>

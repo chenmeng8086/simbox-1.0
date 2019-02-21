@@ -6,7 +6,7 @@
     tag="ul">
       <Container @drop="onDrop" :get-ghost-parent="getGhostParent" drag-handle-selector=".column-drag-handle" lock-axis="y">
         <Draggable v-for="item in config" :key="item.type">
-          <div @click="click(item)" @mouseover="mouseover(item)" :class='{active:item.value==activeId}'>
+          <div @click="click(item)" @mouseover="mouseover(item)" :class='{active:item.value==activeId, dragItem: true}'>
             <svg-icon :iconClass="item.icon"></svg-icon>
             <!-- <i :class="item.icon"></i> -->
             <span class="text">{{item.label}}</span>
@@ -71,11 +71,8 @@ export default {
   height: 100%;
   // background-color: #ededed;
   text-align: left;
-  .smooth-dnd-draggable-wrapper{
-    height: 40px;
-    background-color: #fff;
-    line-height: 40px;
-    margin-bottom: 4px;
+  .dragItem{
+    padding: 4px 20px;
   }
   .text{
     width: 100%;
@@ -106,7 +103,7 @@ export default {
     background-color: #F5F6F8;
   }
   .text{
-    font-size: 16px;
+    font-size: 14px;
     color: rgba(24,25,26,0.90);
   }
 }

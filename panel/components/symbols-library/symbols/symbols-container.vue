@@ -104,6 +104,7 @@ export default {
       return arr.filter(item => item.name === name)
     },
     getParentId (names, i, obj, idsArr) {
+      debugger
       if (i === 0) return 0
       const parentName = names[i - 1]
       const parentItem = Object.values(obj).find(item => item.label === parentName) || {}
@@ -196,6 +197,7 @@ export default {
   }
   /deep/.scrollbar__wrap {
     height: 420px;
+    width: 400px;
   }
   /deep/.collapse{
     i{
