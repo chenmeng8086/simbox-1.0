@@ -40,10 +40,12 @@
     <div class="toolbar">
       <p class="left">
         <template v-if="display === 'card'">
-          <i class="h-icon-menu_leftbar" @click="tableClick"></i>
+          <i @click="tableClick"><svg-icon iconClass="listmode"></svg-icon></i>
+          <!-- <i class="h-icon-menu_leftbar" @click="tableClick"></i> -->
         </template>
         <template v-else>
-          <i class="h-icon-menu_panel" @click="cardClick"></i>
+          <i @click="cardClick"><svg-icon iconClass="cardmode"></svg-icon></i>
+          <!-- <i class="h-icon-menu_panel" @click="cardClick"></i> -->
         </template>
       </p>
       <p class="right">
