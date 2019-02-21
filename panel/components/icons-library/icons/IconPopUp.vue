@@ -60,7 +60,7 @@ export default {
     bottom: 36px;
     width: 100%;
     height: 105px;
-    background-color: #f0f0f0;
+    background-color: #fff;
     display: none;
   }
   .iconActive{

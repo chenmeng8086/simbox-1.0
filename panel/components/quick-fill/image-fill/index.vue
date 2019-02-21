@@ -81,7 +81,6 @@ export default {
     width: 100%;
     height: 36px;
     line-height: 36px;
-    background-color:#fff;
     margin-top: 10px;
   }
   .toolbar{
