@@ -3,7 +3,7 @@ const configs = [{
   name: '姓名',
   type: 'name',
   opts: [{label: '中', value: 'CN'}, {label: '英', value: 'EN'}],
-  icon: 'h-icon-users'
+  icon: 'name'
 }, {
   name: '电话',
   type: 'phone',
@@ -37,12 +37,12 @@ const configs = [{
     {label: '2018/11/19', value: 'YYYY/MM/DD'}
   ],
   collapse: true,
-  icon: 'h-icon-plan'
+  icon: 'date'
 }, {
   name: '星期',
   type: 'week',
   opts: [{label: '中', value: 'CN'}, {label: '英', value: 'EN'}],
-  icon: 'h-icon-plan'
+  icon: 'week'
 }, {
   name: '月份',
   type: 'month',

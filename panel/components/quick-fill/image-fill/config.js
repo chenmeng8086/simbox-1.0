@@ -1,7 +1,7 @@
 const config = [{
   label: '头像',
   value: 'avatar',
-  icon: 'h-icon-eye_open',
+  icon: 'name',
   url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547818028969&di=557c5a7f58fb75de4ffd049118acdca5&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F267f9e2f07082838958e6d2db399a9014c08f10c.jpg'
 }, {
   label: '猫',

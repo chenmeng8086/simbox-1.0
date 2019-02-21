@@ -6,6 +6,7 @@ import HUI from 'hui'
 import './index.less'
 import 'hui/lib/theme-default/index.css'
 import axios from 'axios'
+import './icons'
 
 Vue.use(HUI)
 Vue.config.productionTip = false

@@ -7,7 +7,8 @@
       <Container @drop="onDrop" :get-ghost-parent="getGhostParent" drag-handle-selector=".column-drag-handle" lock-axis="y">
         <Draggable v-for="item in config" :key="item.type">
           <div @click="click(item)" @mouseover="mouseover(item)" :class='{active:item.value==activeId}'>
-            <i :class="item.icon"></i>
+            <svg-icon :iconClass="item.icon"></svg-icon>
+            <!-- <i :class="item.icon"></i> -->
             <span class="text">{{item.label}}</span>
             <template v-if="item.value==activeId">
               <i class="h-icon-update column-drag-handle" style="float:right; padding:10px;"></i>

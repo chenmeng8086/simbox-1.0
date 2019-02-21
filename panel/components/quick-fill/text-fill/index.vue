@@ -10,7 +10,8 @@
             <template v-if="config.isCustom">
               <div class="custom">
                 <div class="customText">
-                  <i class="h-icon-fold"></i>
+                  <!-- <i class="h-icon-fold"></i> -->
+                  <svg-icon iconClass="document"></svg-icon>
                   <span class="text">{{config.name}}</span>
                 </div>
                 <template v-if="config.id==activeId">
@@ -23,7 +24,8 @@
               </div>
             </template>
             <template v-else-if="config.collapse">
-              <i :class="config.icon"></i>
+              <svg-icon :iconClass="config.icon"></svg-icon>
+              <!-- <i :class="config.icon"></i> -->
               <span class="text" @click="fillClick(config)">{{config.name}}</span>
               <el-radio-group v-model="form[config.type]" @change="fillClick(config)">
                 <el-radio-button
@@ -66,7 +68,8 @@
               </template>
             </template>
             <template v-else>
-              <i :class="config.icon"></i>
+              <!-- <i :class="config.icon"></i> -->
+              <svg-icon :iconClass="config.icon"></svg-icon>
               <span class="text">{{config.name}}</span>
               <el-radio-group v-model="form[config.type]" @change="fillClick(config)">
                 <el-radio-button

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>系统操作类/常用/文件夹/文件夹</title>
+    <desc>Created with Sketch.</desc>
+    <g id="系统操作类/常用/文件夹/文件夹" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M24,32 L93.1116653,32 C95.2774313,32 97.3506574,32.878098 98.8575871,34.4336383 L112,48 L232,48 C236.418278,48 240,51.581722 240,56 L240,216 C240,220.418278 236.418278,224 232,224 L24,224 C19.581722,224 16,220.418278 16,216 L16,40 C16,35.581722 19.581722,32 24,32 Z M32,48 L32,208 L224,208 L224,64 L108.611665,64 C106.445899,64 104.372673,63.121902 102.865744,61.5663617 L92.0809177,50.4336383 C90.573988,48.878098 88.5007619,48 86.3349959,48 L32,48 Z M48,96 L208,96 L208,112 L48,112 L48,96 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
+    </g>
+</svg>

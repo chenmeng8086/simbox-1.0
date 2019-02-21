@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="33px" viewBox="0 0 32 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon05</title>
+    <desc>Created with Sketch.</desc>
+    <g id="快填" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="4快填-copy-3" transform="translate(-1859.000000, -937.000000)" fill="#000000" fill-rule="nonzero">
+            <g id="内容" transform="translate(1824.000000, 181.000000)">
+                <g id="列表内容" transform="translate(0.000000, 158.000000)">
+                    <g id="数据展示/列表/填充--copy-3" transform="translate(0.000000, 576.000000)">
+                        <g id="Group" transform="translate(35.000000, 20.745690)">
+                            <g id="Icon05" transform="translate(0.000000, 2.000000)">
+                                <g id="Group-2">
+                                    <path d="M24,5 L29,5 C29.5522847,5 30,5.44771525 30,6 L30,28 C30,28.5522847 29.5522847,29 29,29 L3,29 C2.44771525,29 2,28.5522847 2,28 L2,6 C2,5.44771525 2.44771525,5 3,5 L8,5 L8,3 L10,3 L10,5 L22,5 L22,3 L24,3 L24,5 Z M24,7 L24,9 L22,9 L22,7 L10,7 L10,9 L8,9 L8,7 L4,7 L4,27 L28,27 L28,7 L24,7 Z M4,11 L28,11 L28,13 L4,13 L4,11 Z" id="Combined-Shape"></path>
+                                    <rect id="矩形" x="12" y="15" width="6" height="2"></rect>
+                                    <rect id="矩形" x="17" y="15" width="2" height="9"></rect>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
