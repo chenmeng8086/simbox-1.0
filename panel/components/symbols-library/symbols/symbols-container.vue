@@ -3,53 +3,49 @@
     wrap-class="scrollbar__wrap"
     view-class="scrollbar__view"
   >
-  <el-tabs v-model="currentTab" @tab-click="handleClick">
-    <el-tab-pane
-      v-for="item in options"
-      :label="item.name"
-      :name="item.id"
-      :key="item.id">
-    </el-tab-pane>
-  </el-tabs>
-  <div>
-    <template v-if="display==='list'">
-      <ul>
-        <li v-for="item in currentChildren" :key="item.id">
-          <template v-if="!item['is_leaf']">
-            <span @click="nodeClick(item)">{{item.name}}</span>
-          </template>
-          <template v-else>
-            <span style="color: red">{{item.name.split('_')[0]}}</span>
-          </template>
-        </li>
-      </ul>
-    </template>
-    <template v-else>
-      <div class="childrenContainer">
-        <div class="top" style="color: green;border:1px solid red;">
-          <p v-for="item in breadcrumbTitle" :key="item.id" @click="breadcrumbClick(item)">{{item.name}}</p>
+    <el-tabs v-model="currentTab" @tab-click="handleClick">
+      <el-tab-pane
+        v-for="item in options"
+        :label="item.name"
+        :name="item.id"
+        :key="item.id">
+      </el-tab-pane>
+    </el-tabs>
+    <div>
+      <template v-if="display==='list'">
+        <ul class="firstChildren">
+          <li class="bottomItem" v-for="item in currentChildren" :key="item.id">
+            <template v-if="!item['is_leaf']">
+              <span @click="nodeContentClick(item)">{{item.name}}</span>
+            </template>
+            <template v-else>
+              <span class="leaf" @mouseenter="mouseenter(item)" @mouseleave="mouseleave">{{item.name.split('_')[0]}}</span>
+              <p class="picture" :class="{active: activeId === item.id, noActive: activeId !== item.id}"><img src="../../../assets/logo.png"/></p>
+            </template>
+          </li>
+        </ul>
+      </template>
+      <template v-else>
+        <div class="childrenContainer">
+          <div class="top">
+            <p v-for="item in parentRecords" :key="item.id" @click="nodeContentClick(item)">{{item.name}}</p>
+          </div>
+          <div class="bottom">
+            <ul>
+              <li class="bottomItem" v-for="item in content" :key="item.id">
+                <template v-if="!item['is_leaf']">
+                  <span @click="nodeContentClick(item)">{{item.name}}</span>
+                </template>
+                <template v-else>
+                  <p class="leaf" draggable="true" @dragend="dragend(item)" @mouseenter="mouseenter(item)" @mouseleave="mouseleave">{{item.name.split('_')[0]}}</p>
+                  <p class="picture" :class="{active: activeId === item.id, noActive: activeId !== item.id}"><img src="../../../assets/logo.png"/></p>
+                </template>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="bottom">
-          <ul>
-            <li v-for="item in content" :key="item.id">
-              <template v-if="!item['is_leaf']">
-                <span @click="nodeContentClick(item)">{{item.name}}</span>
-              </template>
-              <template v-else>
-                <p
-                  draggable="true"
-                  @dragend="dragend(item)">
-                <span style="color: red"
-                  >{{item.name.split('_')[0]}}</span>
-                </p>
-              </template>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </template>
-  </div>
-   <!-- <tree-horizontal :data="options" :id="currentTab"></tree-horizontal> -->
+      </template>
+    </div>
   </el-scrollbar>
 </template>
 <script>
@@ -73,17 +69,15 @@ export default {
         label: 'name',
         children: 'children'
       },
-      str2: 'hello',
-      str: '',
       currentTab: '',
       symbolsRecords,
       options: [],
       children: [],
-      data: symbolsRecords,
       display: 'list',
-      breadcrumbTitle: [],
+      parentRecords: [],
       content: [],
-      originData: []
+      originData: [],
+      activeId: ''
     }
   },
   computed: {
@@ -115,31 +109,24 @@ export default {
         arr.push(_selectedItem)
         parentId = _selectedItem['parent_id'] || 0
       }
-      // return str.split('/').filter(item => item)
       return arr.filter(item => item['parent_id'] !== 0).reverse()
+    },
+    mouseenter (item) {
+      this.activeId = item.id
+    },
+    mouseleave () {
+      this.activeId = ''
     },
     handleClick (tab, event) {
       const { name } = tab
       this.currentTab = name
       this.display = 'list'
     },
-    nodeClick (item) {
-      this.display = 'breadcrumb'
-      const selectedItem = this.deepQuery(this.options, item.id)
-      this.content = selectedItem.children
-      this.breadcrumbTitle = this.getTitle(selectedItem)
-    },
-    breadcrumbClick (item) {
-      this.display = 'breadcrumb'
-      const selectedItem = this.deepQuery(this.options, item.id)
-      this.content = selectedItem.children
-      this.breadcrumbTitle = this.getTitle(selectedItem)
-    },
     nodeContentClick (item) {
       this.display = 'breadcrumb'
       const selectedItem = this.deepQuery(this.options, item.id)
       this.content = selectedItem.children
-      this.breadcrumbTitle = this.getTitle(selectedItem)
+      this.parentRecords = this.getTitle(selectedItem)
     },
     dragend (item) {
       const {name} = item
@@ -152,10 +139,10 @@ export default {
       return arr.filter(item => item.name === name)
     },
     deepQuery (tree, id) {
-      var isGet = false
-      var retNode = null
+      let isGet = false
+      let retNode = null
       function deepSearch (tree, id) {
-        for (var i = 0; i < tree.length; i++) {
+        for (let i = 0; i < tree.length; i++) {
           if (tree[i].children && tree[i].children.length > 0) {
             deepSearch(tree[i].children, id)
           }
@@ -170,17 +157,17 @@ export default {
       return retNode
     },
     process_symbols (params) {
-      var destDict = {}
-      for (var i = 0; i < params.length; i++) {
-        var tmp = params[i]
-        var tmpStr = tmp['name'] + '_' + tmp['id']
-        var tmpArr = tmpStr.split('/')
-        var parentId = 0
-        var id = getUUID()
-        for (var j = 0; j < tmpArr.length; j++) {
-          var tmpKey = `${parentId}_${tmpArr[j]}`
-          var isLeaf = j === tmpArr.length - 1
-          var tmpVal = {'id': id, 'parent_id': parentId, 'name': tmpArr[j], 'is_leaf': isLeaf}
+      let destDict = {}
+      for (let i = 0; i < params.length; i++) {
+        let tmp = params[i]
+        let tmpStr = tmp['name'] + '_' + tmp['id']
+        let tmpArr = tmpStr.split('/')
+        let parentId = 0
+        let id = getUUID()
+        for (let j = 0; j < tmpArr.length; j++) {
+          let tmpKey = `${parentId}_${tmpArr[j]}`
+          let isLeaf = j === tmpArr.length - 1
+          let tmpVal = {'id': id, 'parent_id': parentId, 'name': tmpArr[j], 'is_leaf': isLeaf}
           if (tmpKey in destDict) {
             parentId = destDict[tmpKey]['id']
           } else {
@@ -215,12 +202,37 @@ export default {
     width: 300px;
     border: 1px solid red;
   }
+  .leaf{
+    color:green;
+  }
+  .firstChildren{
+    text-align: left;
+  }
   .childrenContainer{
+    text-align: left;
     .top{
+      border-bottom: 1px solid rgb(204, 204, 204);
       display: flex;
-      p:nth-child(n+2)::before{
-        content: '/'
+      p:nth-child(n+2)::before {
+        content: '/';
       }
+      p{
+        color: #2080f7;
+      }
+    }
+  }
+  .active{
+    display: block;
+  }
+  .noActive{
+    display: none;
+  }
+  .bottomItem{
+    position: relative;
+    .picture{
+      position: absolute;
+      top: 0;
+      left: 60px;
     }
   }
 </style>
