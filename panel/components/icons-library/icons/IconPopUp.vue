@@ -5,7 +5,7 @@
     </div>
     <div class="center">
       <p class="name">{{iconItem.name}}</p>
-      <p class="library">{{iconItem.library}}</p>
+      <p class="library">{{iconItem.iconLibraryName}}</p>
       <p class="person">{{`上传人：${iconItem.uploadUser}`}}</p>
       <p class="time">{{iconItem.uploadTime}}</p>
     </div>

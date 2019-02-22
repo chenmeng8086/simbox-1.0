@@ -67,7 +67,7 @@ export default {
       {name: '文字/二级标题/文字/左/W45%', id: '2'},
       {name: '文字/禁用文字/左/W35%', id: '3'},
       {name: '文字/禁用文字/左/W65%', id: '4'}]
-    const data = this.formDataRecordsNew(symbolsRecords)
+    const data = this.process_symbols(symbolsRecords)
     console.log('data处理过后的', JSON.stringify(data))
   },
   computed: {
@@ -79,7 +79,7 @@ export default {
   watch: {
     records: function () {
       // this.str = JSON.stringify(this.records)
-      const data = this.formDataRecords()
+      const data = this.process_symbols(this.records)
       // this.str = JSON.stringify(data)
       var tree = new TreeUtil(data, 'id', 'parent')
       var _data = tree.toTree()
@@ -110,6 +110,29 @@ export default {
       const parentItem = Object.values(obj).find(item => item.label === parentName) || {}
       if (parentItem.id) return parentItem.id
       return idsArr[i - 1]
+    },
+    process_symbols (params) {
+      var destDict = {}
+      for (var i = 0; i < params.length; i++) {
+        var tmp = params[i]
+        var tmpStr = tmp['name'] + '_' + tmp['id']
+        var tmpArr = tmpStr.split('/')
+        var parentId = 0
+        var id = getUUID()
+        for (var j = 0; j < tmpArr.length; j++) {
+          var tmpKey = `${parentId}_${tmpArr[j]}`
+          var isLeaf = j === tmpArr.length - 1
+          var tmpVal = {'id': id, 'parent_id': parentId, 'name': tmpArr[j], 'is_leaf': isLeaf}
+          if (tmpKey in destDict) {
+            parentId = destDict[tmpKey]['id']
+          } else {
+            destDict[tmpKey] = tmpVal
+            parentId = id
+            id = getUUID()
+          }
+        }
+      }
+      return Object.values(destDict)
     },
     formDataRecordsNew (records) {
       const _records = records
