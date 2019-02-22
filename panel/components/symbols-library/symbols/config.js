@@ -90,5 +90,4 @@ function TreeUtil (data, key, parentKey, map) {
     return _temp
   }
 }
-
 export {IconQueryBarOption, Tabs, VisionOpts, symbolsRecords, TreeUtil}
