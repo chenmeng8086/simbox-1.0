@@ -228,6 +228,7 @@ export default {
     display: none;
   }
   .bottomItem{
+    line-height: 30px;
     position: relative;
     .picture{
       position: absolute;
