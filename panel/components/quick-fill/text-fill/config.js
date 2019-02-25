@@ -8,7 +8,7 @@ const configs = [{
   name: '电话',
   type: 'phone',
   opts: [{label: '手机', value: 'mobile'}, {label: '座机', value: 'landline'}],
-  icon: 'h-icon-phone'
+  icon: 'mobile'
 }, {
   name: '邮箱',
   type: 'email',
@@ -16,12 +16,12 @@ const configs = [{
 }, {
   name: '地址',
   type: 'address',
-  icon: 'h-icon-local'
+  icon: 'address'
 }, {
   name: '时刻',
   type: 'time',
   opts: [{label: '上午xx:xx', value: 'CN'}, {label: 'xx:xxAM', value: 'EN'}],
-  icon: 'h-icon-calendar'
+  icon: 'time'
 }, {
   name: '日期',
   type: 'date',

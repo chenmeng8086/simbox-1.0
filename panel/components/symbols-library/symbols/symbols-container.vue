@@ -23,7 +23,9 @@
               <span class="leaf" @mouseenter="mouseenter(item)" @mouseleave="mouseleave">{{item.name.split('_')[0]}}</span>
               <p class="picture" :class="{active: activeId === item.id, noActive: activeId !== item.id}"><img src="../../../assets/logo.png"/></p>
             </template>
-            <span class="svg"><svg-icon iconClass="expand"></svg-icon></span>
+            <template v-if="!item['is_leaf']">
+              <span class="svg"><svg-icon iconClass="expand"></svg-icon></span>
+            </template>
           </li>
         </ul>
       </template>
@@ -31,13 +33,17 @@
       <template v-else>
         <div class="childrenContainer">
           <div class="top">
-            <p v-for="item in parentRecords" :key="item.id" @click="nodeContentClick(item)">{{item.name}}</p>
+            <span v-for="(item, idx) in parentRecords" :key="item.id" @click="nodeContentClick(item)">
+              {{item.name}}
+              <i v-if="idx !==parentRecords.length-1">></i>
+            </span>
           </div>
           <div class="bottom">
             <ul>
               <li class="bottomItem" v-for="item in content" :key="item.id">
                 <template v-if="!item['is_leaf']">
                   <span @click="nodeContentClick(item)">{{item.name}}</span>
+                  <span class="svg"><svg-icon iconClass="expand"></svg-icon></span>
                 </template>
                 <template v-else>
                   <p class="leaf" draggable="true" @dragend="dragend(item)" @mouseenter="mouseenter(item)" @mouseleave="mouseleave">{{item.name.split('_')[0]}}</p>
@@ -202,9 +208,6 @@ export default {
     width: 300px;
     border: 1px solid red;
   }
-  .leaf{
-    color:green;
-  }
   .noLeaf{
     cursor:pointer
   }
@@ -219,10 +222,15 @@ export default {
       background: #FBFBFB;
       height: 32px;
       line-height: 32px;
-      p:nth-child(n+2)::before {
-        content: '>';
+      span{
+        display: inline-block;
+        width: 70px;
+        text-align: center;
       }
-      p:nth-last-child(1){
+      // span:nth-child(n+2)::before {
+      //   content: '>';
+      // }
+      span:nth-last-child(1){
         color: #3C99FC;
       }
       cursor:pointer

@@ -29,7 +29,7 @@ const config = [{
   label: '图标库',
   value: 'icon',
   router: '/icons',
-  icon: 'h-icon-performance'
+  icon: 'iconlogo'
 }, {
   label: '快填',
   value: 'quickFill',
