@@ -22,8 +22,10 @@
           </el-option>
         </el-select>
       </div>
+      <div class="upload" @click="batchUploadPicture"><svg-icon iconClass="document"></svg-icon></div>
     </div>
     <component :is="currentTab" :department="department"></component>
+    <batch-upload-picture ref="batchUploadPicture"></batch-upload-picture>
   </div>
 </template>
 <script>
@@ -31,6 +33,7 @@ import { Tabs } from './config.js'
 import symbols from './symbols/index'
 import symbolsManagement from './symbols-management/index'
 import { iconApi } from '@/api'
+import batchUploadPicture from './bacth-upload-pictures'
 export default {
   name: 'iconsLibraryTabs',
   data () {
@@ -44,7 +47,8 @@ export default {
   },
   components: {
     symbols,
-    symbolsManagement
+    symbolsManagement,
+    batchUploadPicture
   },
   created () {
     this.getDepartment()
@@ -64,6 +68,9 @@ export default {
     handleTabClick (tab, event) {
       const { name } = tab
       this.currentTab = name
+    },
+    batchUploadPicture () {
+      this.$refs.batchUploadPicture.showDialog({mode: 'add'})
     }
   }
 }
@@ -75,6 +82,11 @@ export default {
       /deep/.el-tabs{
         width: 40%;
         float: left;
+      }
+      .upload{
+        width: 5%;
+        float: right;
+        margin-top: 16px;
       }
       .department{
         width: 20%;

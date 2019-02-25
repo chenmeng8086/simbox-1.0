@@ -2,9 +2,10 @@
   <div id="app">
     <div :class="[!isFold ? 'displayBlock' : 'displayNone', 'left']">
       <div class="logo"><img src="./assets/logo.png"/></div>
-      <p v-for="(item, index) in config" :key="item.value" :tabindex="index" @click="click(item)" :class='{selectedColor:_router() ===item.router}'>
-        <svg-icon :iconClass="item.icon"></svg-icon>{{item.label}}
-      </p>
+      <div v-for="(item, index) in config" :key="item.value" :tabindex="index" @click="click(item)" :class='{selectedColor:_router() ===item.router, logoList: true, clearfix: true}'>
+        <p><svg-icon :iconClass="item.icon"></svg-icon></p>
+        <p>{{item.label}}</p>
+      </div>
     </div>
     <div class="center" @mouseover="mouseover" @mouseout="mouseout">
       <p @click="arrowClick">
@@ -35,10 +36,6 @@ const config = [{
   value: 'quickFill',
   router: '/quickFill',
   icon: 'quicklogo'
-}, {
-  label: '交流群',
-  value: 'communicate',
-  icon: 'h-icon-user'
 }]
 export default {
   name: 'App',
@@ -106,32 +103,35 @@ export default {
 }
 .left{
   .logo{
-    margin: 24px 0px 60px 0px;
+    margin: 24px 0px 20px 0px;
     font-size: 24px;
     font-family: LucidaGrande;
     color: #3A3A3A;
     letter-spacing: 2.16px;
+    padding: 10px;
   }
   width: 100px;
   flex: 0 0 auto;
   background: #F5F6F8;
   box-shadow: inset -1px 0 0 0 #E6E6E6;
-  p{
-    height: 40px;
-    text-align: center;
-    line-height: 40px;
-    margin-bottom: 5%;
+  .logoList{
+    margin: 20px 10px;
     width: 80%;
-    margin-left: 10%;
-    font-size: 14px;
+    height: 24px;
+    line-height: 24px;
+    padding-left: 10px;
+    p{
+      float: left;
+      margin: 0px 2px;
+    }
   }
   .selectedColor{
     font-family: PingFangSC-Medium;
     color: #50545D;
-    line-height: 40px;
     font-weight: bold;
     background: #E8EBEF;
     border-radius: 3px;
+    line-height: 24px;
   }
 }
 .center{
@@ -170,5 +170,11 @@ export default {
     width: 100%;
     height: 100%;
   }
+}
+.clearfix:after {
+    content: ' ';
+    height: 0;
+    display: block;
+    clear: both;
 }
 </style>
