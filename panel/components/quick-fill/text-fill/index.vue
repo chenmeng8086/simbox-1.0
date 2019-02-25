@@ -272,7 +272,6 @@ export default {
       border-top: 1px solid #E6E6E6;
       background-color: #fff;
       height: 36px;
-      margin-left: -3%;
       line-height: 36px;
       i {
         display: inline-block;

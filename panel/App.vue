@@ -152,12 +152,13 @@ export default {
     width: 100%;
     height: 100%;
   }
+  margin-right: 8px;
 }
 .right{
   flex: 1 1 auto;
   position: relative;
   height: 100%;
-  padding: 2%;
+  // padding: 2%;
 }
 .displayBlock{
   display: block;
