@@ -205,6 +205,9 @@ export default {
   .leaf{
     color:green;
   }
+  .noLeaf{
+    cursor:pointer
+  }
   .firstChildren{
     text-align: left;
   }
@@ -219,6 +222,7 @@ export default {
       p{
         color: #2080f7;
       }
+      cursor:pointer
     }
   }
   .active{
@@ -234,6 +238,11 @@ export default {
       position: absolute;
       top: 0;
       left: 60px;
+      width: 300px;
+      height: 300px;
+      border: 1px solid rgb(204, 204, 204);
+      text-align: center;//图片水平居中
+      padding-top: 50px;
     }
   }
 </style>
