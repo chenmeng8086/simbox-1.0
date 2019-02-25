@@ -92,7 +92,7 @@ export default {
     /** 获取分组信息 获取后台接口 */
     async getIcons (customParams) {
       try {
-        const {data = []} = await iconApi.getIconList({params: {groupId: this.groupId, isPublic: true}})
+        const {data = []} = await iconApi.getIconList({params: {groupId: this.groupId, isPublic: this.isPublic}})
         const _data = data.map(item => ({...item, iconId: getUUID()}))
         this.iconList = _data
       } catch (error) {
@@ -104,7 +104,7 @@ export default {
     /** 获取分组信息 获取后台接口 */
     async getGroups (customParams) {
       try {
-        const {data = []} = await iconApi.getGroupList({params: {deptId: '33c5d86b-6bdb-4527-a8c3-4c0796a0ea20', isPublic: true}})
+        const {data = []} = await iconApi.getGroupList({params: {deptId: '33c5d86b-6bdb-4527-a8c3-4c0796a0ea20', isPublic: this.isPublic}})
         this.groupOpts = data
       } catch (error) {
         this.errorHandler(error)
@@ -115,7 +115,7 @@ export default {
     /** 获取所在事业群 获取后台接口 */
     async getDepartment (customParams) {
       try {
-        const {data = []} = await iconApi.getDeptList({params: {deptId: '33c5d86b-6bdb-4527-a8c3-4c0796a0ea20', isPublic: true}})
+        const {data = []} = await iconApi.getDeptList({params: {deptId: '33c5d86b-6bdb-4527-a8c3-4c0796a0ea20', isPublic: this.isPublic}})
         this.departmentOpts = data
       } catch (error) {
         this.errorHandler(error)

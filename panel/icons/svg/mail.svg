@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="33px" viewBox="0 0 32 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <g id="框架设计" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="4快填-copy" transform="translate(-1859.000000, -554.000000)" fill="#18191A">
+            <g id="内容" transform="translate(1824.000000, 181.000000)">
+                <g id="列表内容" transform="translate(0.000000, 158.000000)">
+                    <g id="数据展示/列表/填充--copy-2" transform="translate(0.000000, 192.000000)">
+                        <g id="Group" transform="translate(35.000000, 20.745690)">
+                            <g id="系统操作类/常用/消息" transform="translate(0.000000, 3.000000)">
+                                <path d="M28,6.5600524 L28,6 L4,6 L4,6.59281683 L15.4368341,15.442473 C15.7989272,15.7226553 16.3050494,15.7211503 16.6654697,15.4388194 L28,6.5600524 Z M28,9.10061788 L16.673007,17.9734806 C16.3125867,18.2558115 15.8064645,18.2573165 15.4443714,17.9771342 L4,9.12164578 L4,24 L28,24 L28,9.10061788 Z M30,5 L30,25 C30,25.5522847 29.5522847,26 29,26 L3,26 C2.44771525,26 2,25.5522847 2,25 L2,5 C2,4.44771525 2.44771525,4 3,4 L29,4 C29.5522847,4 30,4.44771525 30,5 Z" id="Combined-Shape"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

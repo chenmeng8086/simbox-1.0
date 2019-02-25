@@ -12,7 +12,7 @@ const configs = [{
 }, {
   name: '邮箱',
   type: 'email',
-  icon: 'h-icon-bell'
+  icon: 'mail'
 }, {
   name: '地址',
   type: 'address',
@@ -47,7 +47,7 @@ const configs = [{
   name: '月份',
   type: 'month',
   opts: [{label: '中', value: 'CN'}, {label: '英', value: 'EN'}],
-  icon: 'h-icon-clock'
+  icon: 'month'
 }].map(item => ({...item, id: getUUID()}))
 const prefixMobil = [139, 138, 137, 136, 135, 134, 159, 158, 157, 150, 151, 152, 147, 188, 187, 182, 183, 184, 178, 130, 131, 132, 156, 155, 186, 185, 145, 176, 133, 153, 189, 180, 181, 177, 173]
 const generateMobile = () => {
