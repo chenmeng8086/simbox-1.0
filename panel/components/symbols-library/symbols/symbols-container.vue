@@ -13,6 +13,7 @@
     </el-tabs>
     <div>
       <template v-if="display==='list'">
+        <!-- 第一层children -->
         <ul class="firstChildren">
           <li class="bottomItem" v-for="item in currentChildren" :key="item.id">
             <template v-if="!item['is_leaf']">
@@ -22,9 +23,11 @@
               <span class="leaf" @mouseenter="mouseenter(item)" @mouseleave="mouseleave">{{item.name.split('_')[0]}}</span>
               <p class="picture" :class="{active: activeId === item.id, noActive: activeId !== item.id}"><img src="../../../assets/logo.png"/></p>
             </template>
+            <span class="svg"><svg-icon iconClass="expand"></svg-icon></span>
           </li>
         </ul>
       </template>
+      <!-- children的children -->
       <template v-else>
         <div class="childrenContainer">
           <div class="top">
@@ -49,7 +52,7 @@
   </el-scrollbar>
 </template>
 <script>
-import {symbolsRecords, TreeUtil} from './config.js'
+import {TreeUtil} from './config.js'
 import EnhancedElTree from '@xlaoyu/enhanced-el-tree'
 import getUUID from '../../../utils/uuid.js'
 import TreeHorizontal from './tree-horizontal'
@@ -64,13 +67,7 @@ export default {
   },
   data () {
     return {
-      optionProps: {
-        value: 'id',
-        label: 'name',
-        children: 'children'
-      },
       currentTab: '',
-      symbolsRecords,
       options: [],
       children: [],
       display: 'list',
@@ -183,6 +180,9 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+  /deep/.el-tabs__header{
+    margin: 0px;
+  }
   /deep/.scrollbar__wrap {
     height: 420px;
     width: 400px;
@@ -210,17 +210,20 @@ export default {
   }
   .firstChildren{
     text-align: left;
+    position: relative;
   }
   .childrenContainer{
     text-align: left;
     .top{
-      border-bottom: 1px solid rgb(204, 204, 204);
       display: flex;
+      background: #FBFBFB;
+      height: 32px;
+      line-height: 32px;
       p:nth-child(n+2)::before {
-        content: '/';
+        content: '>';
       }
-      p{
-        color: #2080f7;
+      p:nth-last-child(1){
+        color: #3C99FC;
       }
       cursor:pointer
     }
@@ -232,8 +235,13 @@ export default {
     display: none;
   }
   .bottomItem{
-    line-height: 30px;
+    line-height: 40px;
     position: relative;
+    .svg{
+      position: absolute;
+      right: 0px;
+      bottom: 0px;
+    }
     .picture{
       position: absolute;
       top: 0;
