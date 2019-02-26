@@ -91,7 +91,7 @@ export default {
   },
   data () {
     return {
-      records: [],
+      records: [{}],
       mode: 'add',
       simpleData: [],
       checkedList: {},
