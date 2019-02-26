@@ -2,7 +2,7 @@
  * @Author: mikey.zhaopeng
  * @Date: 2019-01-18 19:30:14
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-02-19 18:27:03
+ * @Last Modified time: 2019-02-26 20:03:16
  * @Des 图片快填
  * https://github.com/turbobabr/Sketch-Plugins-Cookbook#create-custom-shape
  * https://sketchplugins.com/d/1107-how-to-use-formdata-for-uploading-files-to-private-server/4
@@ -11,6 +11,7 @@ import dialog from '@skpm/dialog'
 import fetch from 'sketch-polyfill-fetch'
 import FormData from 'sketch-polyfill-fetch/lib/form-data'
 import fs from '@skpm/fs'
+import file from './file'
 
 console.log('FormData')
 console.log(FormData)
@@ -65,15 +66,25 @@ const imageFillHandler = (context, data) => {
 
 //https://sketchplugins.com/d/811-how-to-access-a-file-for-upload-via-web-view/5
 const uploadImageHandler = (context, webContents) => {
-  dialog.showOpenDialog({
-    properties: ['openFile', 'openDirectory', 'multiSelections']
-  }, function (filenames) {
-    const fileNamesStr = JSON.stringify(filenames)
+  file.selectIconsFiles(function(resultUrl){
+    const firstUrl = resultUrl[0]
+    const name = firstUrl.lastPathComponent().split('.')[0]
+    const extension = firstUrl.lastPathComponent().split('.')[1]
+    const fileNamesStr = JSON.stringify(name + '.'+ extension)
     console.log('fileNamesStr', fileNamesStr)
     webContents
       .executeJavaScript(`imageFillSelectedImageName(${fileNamesStr})`)
       .catch(console.error)
   })
+  // dialog.showOpenDialog({
+  //   properties: ['openFile', 'openDirectory', 'multiSelections']
+  // }, function (filenames) {
+  //   const fileNamesStr = JSON.stringify(filenames)
+  //   console.log('fileNamesStr', fileNamesStr)
+  //   webContents
+  //     .executeJavaScript(`imageFillSelectedImageName(${fileNamesStr})`)
+  //     .catch(console.error)
+  // })
 }
 
 

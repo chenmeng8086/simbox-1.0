@@ -42,7 +42,7 @@ export default {
     /** 获取所在事业群 获取后台接口 */
     async getDepartment (customParams) {
       try {
-        const {data = []} = await iconApi.getDeptList({params: {deptId: 1, isPublic: true}})
+        const {data = []} = await iconApi.getDeptList({params: {isPublic: this.isPublic}})
         this.departmentOpts = data
       } catch (error) {
         this.errorHandler(error)

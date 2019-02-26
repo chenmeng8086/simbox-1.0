@@ -11,7 +11,7 @@ import './icons'
 Vue.use(HUI)
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
-document.cookie = 'JSESSIONID=DA42019AEB4632B0083AE0A3FE8B0CEF'
+document.cookie = 'JSESSIONID=B3FC118B89B7F9630111CAD36CB4745C'
 Vue.mixin({
   methods: {
     // 全局错误处理方法，传入对象则显示msg字段，传入string则直接显示string内容

@@ -50,7 +50,7 @@ export default {
       const _this = this
       window.imageFillSelectedImageName = function (fileName) {
         console.log(fileName)
-        _this.fileName = fileName[0]
+        _this.fileName = fileName
       }
     }
   }
