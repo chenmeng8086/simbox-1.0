@@ -220,6 +220,7 @@ export default {
 </script>
 <style lang="less" scoped>
   .textFillContainer{
+    transform: scale(1);
     height: 100%;
     // background-color: #ededed;
     text-align: left;
@@ -267,6 +268,7 @@ export default {
     .toolbar{
       position: fixed;
       bottom: 0px;
+      left: 0px;
       width: 100%;
       text-align: center;
       border-top: 1px solid #E6E6E6;
@@ -283,7 +285,7 @@ export default {
       margin-left: 42px;
     }
     /deep/.scrollbar__wrap {
-      height: 450px;
+      height: 540px;
       margin-bottom: -16px!important;
     }
     .active{

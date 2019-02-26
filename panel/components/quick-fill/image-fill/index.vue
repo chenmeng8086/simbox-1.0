@@ -68,6 +68,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .container{
+  transform: scale(1);
   height: 100%;
   // background-color: #ededed;
   text-align: left;
@@ -96,7 +97,7 @@ export default {
     }
   }
   /deep/.scrollbar__wrap {
-    height: 400px;
+    height: 540px;
     margin-bottom: -16px!important;
   }
   .active{
