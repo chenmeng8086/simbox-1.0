@@ -21,7 +21,7 @@
               <p class="picture" :class="{active: activeId === item.id, noActive: activeId !== item.id}"><img src="../../../assets/logo.png"/></p>
             </template>
             <template v-if="!item['is_leaf']">
-              <span class="svg"><svg-icon iconClass="expand"></svg-icon></span>
+              <span class="svg"><svg-icon iconClass="arrowRight"></svg-icon></span>
             </template>
           </li>
         </ul>
@@ -40,7 +40,7 @@
               <li class="bottomItem" v-for="item in content" :key="item.id">
                 <template v-if="!item['is_leaf']">
                   <span @click="nodeContentClick(item)">{{item.name}}</span>
-                  <span class="svg"><svg-icon iconClass="expand"></svg-icon></span>
+                  <span class="svg"><svg-icon iconClass="arrowRight"></svg-icon></span>
                 </template>
                 <template v-else>
                   <p class="leaf" draggable="true" @dragend="dragend(item)" @mouseenter="mouseenter(item)" @mouseleave="mouseleave">{{item.name.split('_')[0]}}</p>
@@ -238,6 +238,7 @@ export default {
   .bottomItem{
     line-height: 40px;
     position: relative;
+    padding-left: 12px;
     .svg{
       position: absolute;
       right: 0px;

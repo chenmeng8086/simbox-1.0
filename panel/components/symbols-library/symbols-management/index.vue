@@ -18,10 +18,11 @@
               <span>
                 <span>{{ node.label }}</span>
               </span>
-              <span class="custom-tree-btn">
-                <el-button size="mini" @click="() => downClickSingle(store, data)">下载</el-button>
-                <el-button size="mini" @click="() => downClickAgain(store, data)">已下载</el-button>
-              </span>
+              <template v-if="node.isLeaf">
+                <span class="custom-tree-btn" style="float: right; margin-right: 20px; line-height: 32px;">
+                  <el-button size="mini" @click="() => downClickSingle(store, data)">下载</el-button>
+                </span>
+              </template>
             </span>
           </el-tree>
       </div>
@@ -31,10 +32,10 @@
           <li class="cardList" v-for="item in simpleData" :key="item.id">
             <div class="top">
               <div class="checkbox"><el-checkbox v-model="checkedList[item.id]"></el-checkbox></div>
-              <div class="name">{{item.label}}</div>
+              <div class="name"><img src="../../../assets/documentBig.png"/></div>
             </div>
             <div class="name">{{item.label}}</div>
-            <div class="upload"><el-button size="primary" @click="() => downClickAgain(item)">下载</el-button></div>
+            <div class="upload"><el-button @click="() => downClickAgain(item)">重新下载</el-button></div>
           </li>
         </ul>
       </template>
@@ -97,7 +98,8 @@ export default {
       }, {
         id: 5,
         pId: 2,
-        label: '导航一'
+        label: '导航一',
+        _isLeaf: true
       }, {
         id: 6,
         pId: 2,
@@ -106,7 +108,7 @@ export default {
       defaultProps: {
         children: 'children',
         label: 'label',
-        icon: 'icon'
+        icon: 'h-icon-fold'
       },
       checkList: ['选中且禁用', '复选框 A']
     }
@@ -153,7 +155,8 @@ export default {
     left: 0px;
     width: 100%;
     text-align: center;
-    background-color: #ededed;
+    background-color: #fff;
+    border-top: 1px solid #E6E6E6;
     height: 36px;
     line-height: 36px;
     display: flex;
@@ -190,21 +193,32 @@ export default {
     display: flex;
     flex-wrap: wrap;
     .cardList{
-      width: 200px;
-      margin-bottom: 24px;
+      width: 120px;
+      height: 154px;
       .top{
         display: flex;
         .checkbox{
           width: 20%;
+          margin-right: 10px;
         }
         .name{
-          width: 80%;
-          height: 100px;
-          border: 1px solid #ededed;
+          width: 60px;
+          height: 60px;
+          img{
+            width: 100%;
+            height: 100%;
+          }
         }
       }
       .upload{
         margin-top: 10px;
+        /deep/.el-button{
+          line-height: 24px;
+          padding: 3px 16px;
+          border: 1px solid #D8D8D8;
+          border-radius: 50px;
+          height: 30px;
+        }
       }
     }
   }

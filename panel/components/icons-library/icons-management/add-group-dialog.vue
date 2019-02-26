@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="添加分组" :visible.sync="visible">
+  <el-dialog title="添加分组" :visible.sync="visible" :append-to-body="true">
     <el-form :model="form">
       <el-form-item label="分组名称" :label-width="formLabelWidth">
         <el-input v-model="form.name" auto-complete="off"></el-input>

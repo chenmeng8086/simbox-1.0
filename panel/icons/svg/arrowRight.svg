@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon/32/箭头/向右</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icon/32/箭头/向右" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M16.6176469,12.4308804 L21.4131016,19.3576483 C21.7274675,19.8117325 21.6142035,20.4346845 21.1601193,20.7490505 C20.9928818,20.8648303 20.7943138,20.9268583 20.5909094,20.9268583 L11,20.9268583 C10.4477153,20.9268583 10,20.479143 10,19.9268583 C10,19.7234538 10.062028,19.5248859 10.1778078,19.3576483 L14.9732625,12.4308804 C15.2876285,11.9767962 15.9105804,11.8635322 16.3646647,12.1778982 C16.463514,12.2463324 16.5492127,12.3320311 16.6176469,12.4308804 Z" id="Triangle" fill="#C2C5CC" transform="translate(15.795500, 16.463429) rotate(90.000000) translate(-15.795500, -16.463429) "></path>
+    </g>
+</svg>
