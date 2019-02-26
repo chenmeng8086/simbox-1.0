@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="上传图标库至Simbox" :visible.sync="visible">
+  <el-dialog title="上传图标库至Simbox" :visible.sync="visible" :append-to-body="true">
     <el-form :model="form">
       <el-form-item label="选择图标库">
         <el-button type="primary" @click="uploadIconLibraryClick">上传图标库</el-button>

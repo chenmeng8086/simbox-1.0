@@ -1,6 +1,6 @@
 <template>
   <div class="iconContainer">
-      <div class="iconQueryBar">
+    <div class="iconQueryBar">
         <el-input placeholder="请输入名称搜索"
           v-model.trim="name"
           clearable
@@ -27,7 +27,7 @@
             </el-option>
           </el-select>
         </template>
-      </div>
+    </div>
       <el-scrollbar
         wrap-class="scrollbar__wrap"
         view-class="scrollbar__view"
@@ -89,12 +89,19 @@ export default {
     this.getIconList()
     this.getVisions()
   },
+  watch: {
+    isPublic () {
+      this.getGroups()
+      this.getDepartment()
+      this.getIconList()
+      this.getVisions()
+    }
+  },
   methods: {
     getIconList () {
-      // this.iconList = iconData.sort(function randomSort (a, b) { return Math.random() > 0.5 ? -1 : 1 }).map(item => ({...item, id: getUUID()}))
       this.getIcons()
     },
-    /** 获取分组信息 获取后台接口 */
+    /** 获取icon信息 */
     async getIcons (customParams) {
       try {
         const {data = []} = await iconApi.getIconList({params: {groupId: this.groupId, isPublic: this.isPublic}})
@@ -106,7 +113,7 @@ export default {
         this.loading = false
       }
     },
-    /** 获取分组信息 获取后台接口 */
+    /** 获取分组信息 */
     async getGroups (customParams) {
       try {
         const {data = []} = await iconApi.getGroupList({params: {deptId: '33c5d86b-6bdb-4527-a8c3-4c0796a0ea20', isPublic: this.isPublic}})
@@ -117,7 +124,7 @@ export default {
         this.loading = false
       }
     },
-    /** 获取所在事业群 获取后台接口 */
+    /** 获取所在事业群 */
     async getDepartment (customParams) {
       try {
         const {data = []} = await iconApi.getDeptList({params: {deptId: '33c5d86b-6bdb-4527-a8c3-4c0796a0ea20', isPublic: this.isPublic}})

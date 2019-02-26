@@ -40,9 +40,6 @@ export default {
         window.postMessage('onTabClick', name)
       }
     },
-    search (val) {
-      console.log('result' + val)
-    },
     iconTypeChange (val) {
       this.currentTab = 'icons'
     }

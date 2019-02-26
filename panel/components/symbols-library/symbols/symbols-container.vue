@@ -87,7 +87,7 @@ export default {
     }
   },
   watch: {
-    records: function () {
+    records () {
       const parallelData = this.process_symbols(this.records.slice())
       const freezeData = parallelData.slice()
       this.originData = freezeData

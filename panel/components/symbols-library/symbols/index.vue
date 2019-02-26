@@ -59,7 +59,7 @@ export default {
     }
   },
   watch: {
-    department: function () {
+    department () {
       /** name group vision department */
       this.getSymbols()
     }
@@ -121,7 +121,7 @@ export default {
   .iconQueryBar{
     display: flex;
     /deep/.el-input-group{
-      width: 70%;
+      width: 90%;
     }
     margin-bottom: 12px;
   }
