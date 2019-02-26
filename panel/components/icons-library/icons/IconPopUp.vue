@@ -10,21 +10,26 @@
       <p class="time">{{iconItem.uploadTime}}</p>
     </div>
     <div class="right">
-      <el-color-picker v-model="iconColor" @change="colorChange"></el-color-picker>
-      <el-select v-model="iconSize" placeholder="请选择" class="size" @change="selectChange" color-format="rgb">
-        <el-option
-          v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value">
-        </el-option>
-      </el-select>
+      <ul class="top">
+        <li v-for="item in colorConfig" :key="item.id" @click="colorClick(item)"></li>
+      </ul>
+      <div class="bottom">
+        <el-color-picker v-model="iconColor" @change="colorChange"></el-color-picker>
+        <el-select v-model="iconSize" placeholder="请选择" class="size" @change="selectChange" color-format="rgb">
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import {sizeOpts, defaultColor, defaultSize} from './config.js'
+import {sizeOpts, defaultColor, defaultSize, colorConfig} from './config.js'
 export default {
   name: 'iconPopUp',
   props: {
@@ -35,7 +40,8 @@ export default {
     return {
       options: sizeOpts,
       iconColor: defaultColor,
-      iconSize: defaultSize
+      iconSize: defaultSize,
+      colorConfig
     }
   },
   methods: {
@@ -48,16 +54,19 @@ export default {
     setDefault () {
       this.iconColor = defaultColor
       this.iconSize = defaultSize
+    },
+    colorClick (item) {
+      this.$emit('colorChange', {...this.iconItem, color: item.value})
     }
   }
 }
 </script>
 <style lang="less" scoped>
   .IconPopUp{
-    padding: 8px;
+    padding: 12px;
     text-align: left;
     position: fixed;
-    bottom: 0px;
+    bottom: 30px;
     left: 0px;
     width: 100%;
     height: 105px;
@@ -69,34 +78,41 @@ export default {
     display: flex;
   }
   .left{
-    width: 18%;
-    height: 100%;
+    width: 60px;
+    height: 60px;
     flex: 0 0 auto;
     text-align: center;
-    line-height: 92px;
     /deep/svg{
       width: 3em!important;
       height: 3em!important;
-      margin-top: 24px;
+      margin-top: 12px;
     }
     background-image:url("../../../assets/bg.png");
     background-repeat: no-repeat;
     margin-right: 2%;
   }
   .center{
-    width: 30%;
+    width: 40%;
     height: 100%;
     flex: 0 0 auto;
     p{
       margin: 0 0;
-      line-height: 20px;
+      font-size: 12px;
+      color: rgba(24,25,26,0.30);
+      line-height: 16px;
     }
     .name{
-      font-weight: bold;
       font-size: 14px;
+      color: rgba(24,25,26,0.70);
+      line-height: 17px;
     }
     .library{
-      font-weight: bold;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 12px;
+      color: rgba(24,25,26,0.50);
+      line-height: 26px;
     }
   }
   .right{
@@ -117,6 +133,53 @@ export default {
       /deep/.el-color-picker__icon{
         float: right;
         line-height: 36px;
+      }
+    }
+    .top{
+      display: flex;
+      li{
+        flex: 0 0 auto;
+        width: 16px;
+        height: 16px;
+      }
+      li:nth-child(1){
+        background-color:#8CC4FF;
+      }
+      li:nth-child(2){
+        background-color:#C7E6FC;;
+      }
+      li:nth-child(3){
+        background-color:#0DA194;
+      }
+      li:nth-child(4){
+        background-color:#84D9D2;
+      }
+      li:nth-child(5){
+        background-color:#B9EBE6;
+      }
+      li:nth-child(6){
+        background-color:#E84A10;
+      }
+      li:nth-child(7){
+        background-color:#F7B197;
+      }
+      li:nth-child(8){
+        background-color: #FCD6C7;;
+      }
+      li:nth-child(9){
+        background-color:#E8A01C;
+      }
+      li:nth-child(10){
+        background-color:#F7D797;
+      }
+      li:nth-child(11){
+        background-color: #FCEBC7;
+      }
+      li:nth-child(12){
+        background-color:#fff;
+      }
+      li:nth-child(13){
+        background-color:#000;
       }
     }
   }

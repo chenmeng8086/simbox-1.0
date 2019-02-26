@@ -1,26 +1,26 @@
 <template>
   <div class="iconListContainer">
     <ul class="box">
-    <li
-      :class="item.className"
-      v-for="item in iconList"
-      :id="item.iconId"
-      :key="item.iconId"
-      @click="clickIcon(item)"
-      draggable="true"
-      @dragend="dragend(item)"
-    >
-      <span v-html="item['svg']" :style="{color: item.color}"></span>
-    </li>
-  </ul>
-  <IconPopUp
-    ref="iconPopUp"
-    :visible="visible"
-    :iconItem="iconItem"
-    @sizeChange="sizeChange"
-    @colorChange="colorChange"
-  />
-</div>
+      <li
+        :class="item.className"
+        v-for="item in iconList"
+        :id="item.iconId"
+        :key="item.iconId"
+        @click="clickIcon(item)"
+        draggable="true"
+        @dragend="dragend(item)"
+      >
+        <span v-html="item['svg']" :style="{color: item.color}"></span>
+      </li>
+    </ul>
+    <IconPopUp
+      ref="iconPopUp"
+      :visible="visible"
+      :iconItem="iconItem"
+      @sizeChange="sizeChange"
+      @colorChange="colorChange"
+    />
+  </div>
 </template>
 <script>
 import IconPopUp from './IconPopUp'

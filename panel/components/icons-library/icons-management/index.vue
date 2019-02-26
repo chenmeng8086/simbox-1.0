@@ -315,6 +315,7 @@ export default {
       height: 36px;
       line-height: 36px;
       overflow: hidden;
+      padding: 0px;
       i{
         font-style: normal!important;
       }

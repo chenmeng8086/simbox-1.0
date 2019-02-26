@@ -158,7 +158,7 @@ export default {
   flex: 1 1 auto;
   position: relative;
   height: 100%;
-  // padding: 2%;
+  padding: 0px 12px;
 }
 .displayBlock{
   display: block;
