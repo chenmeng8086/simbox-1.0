@@ -1,9 +1,5 @@
 <template>
   <div class="iconContainer">
-    <el-scrollbar
-    wrap-class="scrollbar__wrap"
-    view-class="scrollbar__view"
-    >
       <div class="iconQueryBar">
         <el-input placeholder="请输入名称搜索"
           v-model.trim="name"
@@ -32,7 +28,12 @@
           </el-select>
         </template>
       </div>
-      <icon-container :iconList.sync="iconList"></icon-container>
+      <el-scrollbar
+        wrap-class="scrollbar__wrap"
+        view-class="scrollbar__view"
+      >
+        <icon-container :iconList.sync="iconList"></icon-container>
+      </el-scrollbar>
       <div class="vision">
         <label class="label">当前版本：</label>
         <el-select
@@ -47,7 +48,6 @@
           </el-option>
         </el-select>
       </div>
-    </el-scrollbar>
   </div>
 </template>
 <script>
@@ -157,7 +157,7 @@ export default {
 </script>
 <style lang="less" scoped>
   /deep/.scrollbar__wrap {
-    height: 493px;
+    height: 458px;
   }
   .iconContainer{
     transform: scale(1);

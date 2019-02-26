@@ -7,7 +7,7 @@
       <p class="name">{{iconItem.name}}</p>
       <p class="library">{{iconItem.iconLibraryName}}</p>
       <p class="person">{{`上传人：${iconItem.uploadUser}`}}</p>
-      <p class="time">{{iconItem.uploadTime}}</p>
+      <!-- <p class="time">{{iconItem.uploadTime}}</p> -->
     </div>
     <div class="right">
       <ul class="top">
@@ -15,14 +15,16 @@
       </ul>
       <div class="bottom">
         <el-color-picker v-model="iconColor" @change="colorChange"></el-color-picker>
-        <el-select v-model="iconSize" placeholder="请选择" class="size" @change="selectChange" color-format="rgb">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
+        <div class="sizeContainer">
+          <el-select v-model="iconSize" placeholder="请选择" class="size" @change="selectChange" color-format="rgb">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
       </div>
     </div>
   </div>
@@ -63,7 +65,7 @@ export default {
 </script>
 <style lang="less" scoped>
   .IconPopUp{
-    padding: 12px;
+    padding: 12px 0px;
     text-align: left;
     position: fixed;
     bottom: 30px;
@@ -120,26 +122,44 @@ export default {
     height: 100%;
     flex: 1 1 auto;
     overflow: hidden;
-    .size{
-      margin-top: 12px;
-      width: 48%;
-      display: block;
-    }
-    /deep/.el-color-picker{
-      width: 48%;
-      .el-color-picker__trigger{
-        width: 100%;
+    .bottom{
+      display: flex;
+      /deep/.el-color-picker{
+        width: 44%!important;
+        height: 32px;
+        margin-right: 12px;
+        .el-color-picker__trigger{
+          width: 100%;
+        }
+        /deep/.el-color-picker__icon{
+          float: right;
+          line-height: 36px;
+        }
+        /deep/.el-color-picker__color{
+          width: 18px;
+          height: 18px;
+        }
+        flex: 0 0 auto;
       }
-      /deep/.el-color-picker__icon{
-        float: right;
-        line-height: 36px;
+      .sizeContainer{
+        width: 100%;
+        flex: 0 0 auto;
+        margin: 0;
+        .size{
+          width: 48%;
+          display: block;
+        }
+        /deep/.el-input__inner{
+          height: 36px;
+        }
       }
     }
     .top{
       display: flex;
+      margin-bottom: 12px;
       li{
         flex: 0 0 auto;
-        width: 16px;
+        width: 7%;
         height: 16px;
       }
       li:nth-child(1){
