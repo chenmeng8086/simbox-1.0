@@ -1,8 +1,5 @@
 <template>
-  <el-scrollbar
-    wrap-class="scrollbar__wrap"
-    view-class="scrollbar__view"
-  >
+  <div>
     <el-tabs v-model="currentTab" @tab-click="handleClick">
       <el-tab-pane
         v-for="item in options"
@@ -55,7 +52,7 @@
         </div>
       </template>
     </div>
-  </el-scrollbar>
+  </div>
 </template>
 <script>
 import {TreeUtil} from './config.js'
@@ -188,10 +185,6 @@ export default {
 <style lang="less" scoped>
   /deep/.el-tabs__header{
     margin: 0px;
-  }
-  /deep/.scrollbar__wrap {
-    height: 420px;
-    width: 400px;
   }
   /deep/.collapse{
     i{

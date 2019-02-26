@@ -1,61 +1,63 @@
 <template>
-  <el-scrollbar
-  wrap-class="scrollbar__wrap"
-  view-class="scrollbar__view">
-  <template v-if="display === 'tree'">
-    <div class="tree-wrap">
-      <el-tree
-        :data.sync="simpleData"
-        node-key="id"
-        parent-key="pId"
-        :props="defaultProps"
-        ref="simpleTree"
-        simple-data
-        show-checkbox
-        @node-click="handleNodeClick">
-          <span class="custom-tree-node" slot-scope="{ node, data, store }">
-            <span>
-              <span>{{ node.label }}</span>
+  <div class="symbolManagmentContainer">
+    <el-scrollbar
+    wrap-class="scrollbar__wrap"
+    view-class="scrollbar__view">
+    <template v-if="display === 'tree'">
+      <div class="tree-wrap">
+        <el-tree
+          :data.sync="simpleData"
+          node-key="id"
+          parent-key="pId"
+          :props="defaultProps"
+          ref="simpleTree"
+          simple-data
+          show-checkbox
+          @node-click="handleNodeClick">
+            <span class="custom-tree-node" slot-scope="{ node, data, store }">
+              <span>
+                <span>{{ node.label }}</span>
+              </span>
+              <span class="custom-tree-btn">
+                <el-button size="mini" @click="() => downClickSingle(store, data)">下载</el-button>
+                <el-button size="mini" @click="() => downClickAgain(store, data)">已下载</el-button>
+              </span>
             </span>
-            <span class="custom-tree-btn">
-              <el-button size="mini" @click="() => downClickSingle(store, data)">下载</el-button>
-              <el-button size="mini" @click="() => downClickAgain(store, data)">已下载</el-button>
-            </span>
-          </span>
-        </el-tree>
-    </div>
-    </template>
-    <template v-else>
-      <ul class="card">
-        <li class="cardList" v-for="item in simpleData" :key="item.id">
-          <div class="top">
-            <div class="checkbox"><el-checkbox v-model="checkedList[item.id]"></el-checkbox></div>
+          </el-tree>
+      </div>
+      </template>
+      <template v-else>
+        <ul class="card">
+          <li class="cardList" v-for="item in simpleData" :key="item.id">
+            <div class="top">
+              <div class="checkbox"><el-checkbox v-model="checkedList[item.id]"></el-checkbox></div>
+              <div class="name">{{item.label}}</div>
+            </div>
             <div class="name">{{item.label}}</div>
-          </div>
-          <div class="name">{{item.label}}</div>
-          <div class="upload"><el-button size="primary" @click="() => downClickAgain(item)">下载</el-button></div>
-        </li>
-      </ul>
-    </template>
-    <div class="toolbar">
-      <p class="left">
-        <template v-if="display === 'card'">
-          <i @click="tableClick"><svg-icon iconClass="listmode"></svg-icon></i>
-        </template>
-        <template v-else>
-          <i @click="cardClick"><svg-icon iconClass="cardmode"></svg-icon></i>
-        </template>
-      </p>
-      <p class="right">
-        <i class="h-icon-trashcan"></i>
-        <i class="h-icon-plus" @click="addClick"></i>
-        <i class="h-icon-download"></i>
-        <i class="h-icon-upload" @click="uploadClick"></i>
-      </p>
-    </div>
-    <add-file ref="addFile"></add-file>
-    <upload-file ref="uploadFile"></upload-file>
-  </el-scrollbar>
+            <div class="upload"><el-button size="primary" @click="() => downClickAgain(item)">下载</el-button></div>
+          </li>
+        </ul>
+      </template>
+      <div class="toolbar">
+        <p class="left">
+          <template v-if="display === 'card'">
+            <i @click="tableClick"><svg-icon iconClass="listmode"></svg-icon></i>
+          </template>
+          <template v-else>
+            <i @click="cardClick"><svg-icon iconClass="cardmode"></svg-icon></i>
+          </template>
+        </p>
+        <p class="right">
+          <i class="h-icon-trashcan"></i>
+          <i class="h-icon-plus" @click="addClick"></i>
+          <i class="h-icon-download"></i>
+          <i class="h-icon-upload" @click="uploadClick"></i>
+        </p>
+      </div>
+      <add-file ref="addFile"></add-file>
+      <upload-file ref="uploadFile"></upload-file>
+    </el-scrollbar>
+  </div>
 </template>
 <script>
 import addFile from './add-file'
@@ -142,9 +144,13 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+  .symbolManagmentContainer{
+    transform: scale(1);
+  }
   .toolbar{
     position: fixed;
     bottom: 4px;
+    left: 0px;
     width: 100%;
     text-align: center;
     background-color: #ededed;
@@ -172,7 +178,7 @@ export default {
     }
   }
   /deep/.scrollbar__wrap {
-    max-height: 420px;
+    height: 530px;
   }
   .tree-wrap{
     text-align: left;

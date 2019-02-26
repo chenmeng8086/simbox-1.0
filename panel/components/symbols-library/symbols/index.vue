@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="symbolContainer">
     <div class="iconQueryBar">
       <el-input
         placeholder="请输入名称搜索"
@@ -14,21 +14,26 @@
         </el-select>
       </el-input>
     </div>
-    <symbols-container :records="records"></symbols-container>
-    <div class="vision">
-      <label class="label">当前版本：</label>
-      <el-select
-        v-model="version"
-        @change="visionChange"
-        placeholder="请选择当前版本">
-        <el-option
-          v-for="item in VisionOpts"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value">
-        </el-option>
-      </el-select>
-    </div>
+    <el-scrollbar
+      wrap-class="scrollbar__wrap"
+      view-class="scrollbar__view"
+    >
+      <symbols-container :records="records"></symbols-container>
+      <div class="vision">
+        <label class="label">当前版本：</label>
+        <el-select
+          v-model="version"
+          @change="visionChange"
+          placeholder="请选择当前版本">
+          <el-option
+            v-for="item in VisionOpts"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+      </div>
+    </el-scrollbar>
   </div>
 </template>
 <script>
@@ -90,6 +95,10 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+  .symbolContainer{
+    transform: scale(1);
+    height: 100%;
+  }
   .vision{
     position: fixed;
     bottom: 4px;
@@ -130,5 +139,9 @@ export default {
   }
   /deep/.el-input-group__prepend{
     width: 40%;
+  }
+  /deep/.scrollbar__wrap {
+    height: 488px;
+    width: 400px;
   }
 </style>
