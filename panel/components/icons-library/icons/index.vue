@@ -104,7 +104,7 @@ export default {
     /** 获取icon信息 */
     async getIcons (customParams) {
       try {
-        const {data = []} = await iconApi.getIconList({params: {groupId: this.groupId, isPublic: this.isPublic}})
+        const {data = []} = await iconApi.getIconList({params: {groupId: this.groupId, isPublic: this.isPublic, name: this.name}})
         const _data = data.map(item => ({...item, iconId: getUUID()}))
         this.iconList = _data
       } catch (error) {

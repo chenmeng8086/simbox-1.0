@@ -2,7 +2,7 @@
  * @Author: mikey.zhaopeng
  * @Date: 2019-01-18 19:30:14
  * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-02-26 20:03:16
+ * @Last Modified time: 2019-02-26 21:19:49
  * @Des 图片快填
  * https://github.com/turbobabr/Sketch-Plugins-Cookbook#create-custom-shape
  * https://sketchplugins.com/d/1107-how-to-use-formdata-for-uploading-files-to-private-server/4
@@ -68,12 +68,15 @@ const imageFillHandler = (context, data) => {
 const uploadImageHandler = (context, webContents) => {
   file.selectIconsFiles(function(resultUrl){
     const firstUrl = resultUrl[0]
+    const path = String(firstUrl.path())
     const name = firstUrl.lastPathComponent().split('.')[0]
     const extension = firstUrl.lastPathComponent().split('.')[1]
-    const fileNamesStr = JSON.stringify(name + '.'+ extension)
-    console.log('fileNamesStr', fileNamesStr)
+    const fileName = name + '.'+ extension
+    const params = {fileName: fileName, path: path}
+    const paramsStr = JSON.stringify(params)
+    console.log('fileNamesStr', paramsStr)
     webContents
-      .executeJavaScript(`imageFillSelectedImageName(${fileNamesStr})`)
+      .executeJavaScript(`imageFillSelectedImageName(${paramsStr})`)
       .catch(console.error)
   })
   // dialog.showOpenDialog({

@@ -25,7 +25,8 @@ export default {
       form: {
         type: ''
       },
-      fileName: ''
+      fileName: '',
+      path: ''
     }
   },
   methods: {
@@ -42,15 +43,16 @@ export default {
     okClick () {
       this.$emit('submit', this.form)
       this.visible = false
-      const params = {fileName: this.fileName, type: this.form.type}
+      const params = {fileName: this.fileName, type: this.form.type, path: this.path}
       window.postMessage('addFillImage', params)
     },
     uploadClick () {
       window.postMessage('uploadClick')
       const _this = this
-      window.imageFillSelectedImageName = function (fileName) {
-        console.log(fileName)
+      window.imageFillSelectedImageName = function (params) {
+        const {fileName, path} = params
         _this.fileName = fileName
+        _this.path = path
       }
     }
   }
