@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="iconsManagementContainer">
     <!-- <query-bar :isPublic="isPublic"></query-bar> -->
     <div class="iconQueryBar">
       <el-input placeholder="请输入名称搜索"
@@ -32,7 +32,7 @@
       </div>
     </template>
     <template v-else>
-      <div class="iconsManagementContainer">
+      <div class="listContainer">
         <el-collapse accordion  @change="handleChange">
           <el-collapse-item v-for="item in records" :key="item.groupId" @click="handleChange(item)" :name="item.groupId">
             <!-- 头部 -->
@@ -269,6 +269,9 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+  .iconsManagementContainer{
+    transform: scale(1);
+  }
   .iconQueryBar{
     display: flex;
     /deep/.el-input-group{
@@ -306,7 +309,7 @@ export default {
       height: 36px;
     }
   }
-  .iconsManagementContainer{
+  .listContainer{
     margin-top: 12px;
     /deep/.el-collapse-item__header{
       height: 36px;
@@ -402,7 +405,7 @@ export default {
     }
   }
   /deep/.scrollbar__wrap {
-    height: 400px;
+    height: 474px;
     margin-bottom: -16px!important;
   }
 </style>

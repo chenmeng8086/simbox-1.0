@@ -1,31 +1,26 @@
 <template>
-  <div class="IconContainer">
-    <el-scrollbar
-    wrap-class="scrollbar__wrap"
-    view-class="scrollbar__view"
-    tag="ul">
-     <ul class="box">
-      <li
-        :class="item.className"
-        v-for="item in iconList"
-        :id="item.iconId"
-        :key="item.iconId"
-        @click="clickIcon(item)"
-        draggable="true"
-        @dragend="dragend(item)"
-      >
-        <span v-html="item['svg']" :style="{color: item.color}"></span>
-      </li>
-    </ul>
-    <IconPopUp
-      ref="iconPopUp"
-      :visible="visible"
-      :iconItem="iconItem"
-      @sizeChange="sizeChange"
-      @colorChange="colorChange"
-    />
-    </el-scrollbar>
-  </div>
+  <div class="iconListContainer">
+    <ul class="box">
+    <li
+      :class="item.className"
+      v-for="item in iconList"
+      :id="item.iconId"
+      :key="item.iconId"
+      @click="clickIcon(item)"
+      draggable="true"
+      @dragend="dragend(item)"
+    >
+      <span v-html="item['svg']" :style="{color: item.color}"></span>
+    </li>
+  </ul>
+  <IconPopUp
+    ref="iconPopUp"
+    :visible="visible"
+    :iconItem="iconItem"
+    @sizeChange="sizeChange"
+    @colorChange="colorChange"
+  />
+</div>
 </template>
 <script>
 import IconPopUp from './IconPopUp'
@@ -99,9 +94,8 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-  .IconContainer{
+  .iconListContainer{
     margin-top: 20px;
-    // height: 300px;
     overflow: auto;
   }
   .box{
@@ -126,8 +120,5 @@ export default {
   .selectedClick{
     border: 1px solid #3C99FC!important;
     background-color: #FFF!important;
-  }
-  /deep/.scrollbar__wrap {
-    max-height: 400px;
   }
 </style>

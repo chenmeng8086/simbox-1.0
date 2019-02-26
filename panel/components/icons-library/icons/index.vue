@@ -1,48 +1,53 @@
 <template>
-  <div>
-    <div class="iconQueryBar">
-      <el-input placeholder="请输入名称搜索"
-        v-model.trim="name"
-        clearable
-        icon="h-icon-search"
-        :on-icon-click="handleIconClick"
-        :clear-icon-click="clearIconClick"
-        @keyup.enter.native="handleIconClick">
-        <el-select v-model="groupId" slot="prepend" placeholder="请选择分组" @change="groupChange">
-          <el-option label="全部" value=""></el-option>
-        <el-option v-for="opt in groupOpts" :key="opt.groupId" :value="opt.groupId" :label="opt.name"></el-option>
-        </el-select>
-      </el-input>
-      <template v-if="isPublic">
+  <div class="iconContainer">
+    <el-scrollbar
+    wrap-class="scrollbar__wrap"
+    view-class="scrollbar__view"
+    >
+      <div class="iconQueryBar">
+        <el-input placeholder="请输入名称搜索"
+          v-model.trim="name"
+          clearable
+          icon="h-icon-search"
+          :on-icon-click="handleIconClick"
+          :clear-icon-click="clearIconClick"
+          @keyup.enter.native="handleIconClick">
+          <el-select v-model="groupId" slot="prepend" placeholder="请选择分组" @change="groupChange">
+            <el-option label="全部" value=""></el-option>
+          <el-option v-for="opt in groupOpts" :key="opt.groupId" :value="opt.groupId" :label="opt.name"></el-option>
+          </el-select>
+        </el-input>
+        <template v-if="isPublic">
+          <el-select
+            class="iconQueryBarSelect"
+            v-model="deptId"
+            @change="departmentChange"
+            placeholder="请选择">
+            <el-option
+              v-for="opt in departmentOpts"
+              :key="opt.id"
+              :label="opt.initial"
+              :value="opt.id">
+            </el-option>
+          </el-select>
+        </template>
+      </div>
+      <icon-container :iconList.sync="iconList"></icon-container>
+      <div class="vision">
+        <label class="label">当前版本：</label>
         <el-select
-          class="iconQueryBarSelect"
-          v-model="deptId"
-          @change="departmentChange"
-          placeholder="请选择">
+          v-model="version"
+          @change="visionChange"
+          placeholder="请选择当前版本">
           <el-option
-            v-for="opt in departmentOpts"
-            :key="opt.id"
-            :label="opt.initial"
-            :value="opt.id">
+            v-for="item in visionOpts"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
           </el-option>
         </el-select>
-      </template>
-    </div>
-    <icon-container :iconList.sync="iconList"></icon-container>
-    <div class="vision">
-      <label class="label">当前版本：</label>
-      <el-select
-        v-model="version"
-        @change="visionChange"
-        placeholder="请选择当前版本">
-        <el-option
-          v-for="item in visionOpts"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value">
-        </el-option>
-      </el-select>
-    </div>
+      </div>
+    </el-scrollbar>
   </div>
 </template>
 <script>
@@ -151,6 +156,12 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+  /deep/.scrollbar__wrap {
+    height: 490px;
+  }
+  .iconContainer{
+    transform: scale(1);
+  }
   .iconQueryBar{
     display: flex;
     /deep/.el-input-group{

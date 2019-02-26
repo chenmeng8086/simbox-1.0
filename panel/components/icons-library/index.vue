@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="iconsLibraryContainer">
     <el-radio-group v-model="isPublic" class="iconType" @change="iconTypeChange">
       <el-radio v-for="item in IconTypeOpts" :key="item.value" :label="item.value">{{item.label}}</el-radio>
     </el-radio-group>
@@ -50,7 +50,8 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.container{
+.iconsLibraryContainer{
+  margin-top: 12px;
   .iconType{
     /deep/.el-radio__inner{
       display: none;

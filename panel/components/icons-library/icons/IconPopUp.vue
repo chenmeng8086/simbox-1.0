@@ -56,8 +56,9 @@ export default {
   .IconPopUp{
     padding: 8px;
     text-align: left;
-    position:fixed;
-    bottom: 36px;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
     width: 100%;
     height: 105px;
     background-color: #fff;
