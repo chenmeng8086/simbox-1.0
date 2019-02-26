@@ -157,7 +157,7 @@ export default {
 </script>
 <style lang="less" scoped>
   /deep/.scrollbar__wrap {
-    height: 490px;
+    height: 493px;
   }
   .iconContainer{
     transform: scale(1);

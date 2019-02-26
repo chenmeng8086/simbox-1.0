@@ -38,8 +38,6 @@ export default {
       window.postMessage('uploadIconLibraryClick')
       const _this = this
       window.uploadIconLibraryName = function (fileName) {
-        console.log('hello')
-        console.log(fileName)
         _this.libraryName = fileName[0]
       }
     },
@@ -47,8 +45,6 @@ export default {
       window.postMessage('uploadCoverPhotoClick')
       const _this = this
       window.uploadCoverPhotoName = function (fileName) {
-        console.log('world')
-        console.log(fileName)
         _this.coverPhotoName = fileName[0]
       }
     },

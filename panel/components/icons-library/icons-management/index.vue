@@ -194,7 +194,7 @@ export default {
         this.records = data
       } catch (error) {
         this.errorHandler(error)
-        this.records = [{name: 'hello', groupId: '1'}]
+        this.records = []
       }
     },
     /** 添加分组 */

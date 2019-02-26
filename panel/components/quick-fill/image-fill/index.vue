@@ -97,7 +97,7 @@ export default {
     }
   }
   /deep/.scrollbar__wrap {
-    height: 540px;
+    height: 544px;
     margin-bottom: -16px!important;
   }
   .active{

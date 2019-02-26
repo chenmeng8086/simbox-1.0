@@ -104,6 +104,7 @@ export default {
     bottom: 4px;
     width: 100%;
     text-align: left;
+    background-color: #fff;
     .label{
       display: inline-block;
       width: 30%;
@@ -141,7 +142,7 @@ export default {
     width: 40%;
   }
   /deep/.scrollbar__wrap {
-    height: 488px;
+    height: 490px;
     width: 400px;
   }
 </style>
