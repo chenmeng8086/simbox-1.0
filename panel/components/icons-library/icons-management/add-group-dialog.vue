@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="添加分组" :visible.sync="visible" :append-to-body="true" :show-close="false">
+  <el-dialog :title="title" :visible.sync="visible" :append-to-body="true" :show-close="false">
     <el-form :model="form">
       <el-form-item label="分组名称" :label-width="formLabelWidth">
         <el-input v-model="form.name" auto-complete="off"></el-input>
@@ -21,6 +21,11 @@ export default {
         name: ''
       },
       formLabelWidth: '120px'
+    }
+  },
+  computed: {
+    title () {
+      return `${this.mode === 'add' ? '添加' : '编辑'}分组`
     }
   },
   methods: {

@@ -60,10 +60,10 @@
       </div>
     </template>
     <div class="toolbar">
-      <i class="h-icon-trashcan" @click="deleteLibrary"></i>
-      <i class="h-icon-download" @click="downloadGlobalClick"></i>
       <i class="h-icon-plus" @click="addGlobalClick"></i>
-      <i class="h-icon-edit"></i>
+      <i class="h-icon-trashcan" @click="deleteLibrary"></i>
+      <i class="h-icon-restart"></i>
+      <i class="h-icon-download" @click="downloadGlobalClick"></i>
     </div>
     <add-group-dialog ref="addGroup" @addClick="addClick"></add-group-dialog>
     <upload-icons-dialog ref="upload"></upload-icons-dialog>
