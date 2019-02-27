@@ -30,6 +30,9 @@ export default (context, data) => {
     fill.color = MSColorFromString(color)
   }
   context.document.currentPage().addLayers([svgLayer])
+  /** 创建一个symbol
+   *https:// sketchplugins.com/d/65-create-symbol-api-reference
+  */
   // 导入的icon自动被选中
   // https:// sketchplugins.com/d/305-how-to-select-a-svg-automatically
   svgLayer.select_byExtendingSelection(true, false)
