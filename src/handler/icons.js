@@ -1,5 +1,6 @@
 import UI from 'sketch/ui'
 import sketch from 'sketch/dom'
+import iconProvider from './svg-to-symbol'
 function MSColorFromString (color) {
   // eslint-disable-next-line no-undef
   return MSImmutableColor.colorWithSVGString(color).newMutableCounterpart()
@@ -37,16 +38,18 @@ export default (context, data) => {
   // https:// sketchplugins.com/d/305-how-to-select-a-svg-automatically
   svgLayer.select_byExtendingSelection(true, false)
   // layersProvider.selectedLayerToSymbol(svgLayer)
-  const doc = sketch.getSelectedDocument()
-  const _layer = doc.getLayersNamed('SVG Layer').pop()
-  const canvasView = context.document.contentDrawView()
-  const center = canvasView.viewCenterInAbsoluteCoordinatesForViewPort(canvasView.viewPort())
-  const shiftX = _layer.frame.width / 2
-  const shiftY = _layer.frame.height / 2
-  const centerX = center.x - shiftX
-  const centerY = center.y - shiftY
-  positionInArtboard(_layer, centerX, centerY)
-  UI.message('icon inserted!')
+  // const doc = sketch.getSelectedDocument()
+  // const _layer = doc.getLayersNamed('SVG Layer').pop()
+  // const canvasView = context.document.contentDrawView()
+  // const center = canvasView.viewCenterInAbsoluteCoordinatesForViewPort(canvasView.viewPort())
+  // const shiftX = _layer.frame.width / 2
+  // const shiftY = _layer.frame.height / 2
+  // const centerX = center.x - shiftX
+  // const centerY = center.y - shiftY
+  // positionInArtboard(_layer, centerX, centerY)
+  // UI.message('icon inserted!')
+  const iconData = {name: data.name, colorValue: data.color}
+  iconProvider.convertSvgToSymbol(iconData)
 }
 
 function positionInArtboard (layer, x, y) {
