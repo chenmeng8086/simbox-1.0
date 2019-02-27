@@ -2,12 +2,18 @@
   <el-dialog title="上传图标库至Simbox" :visible.sync="visible" :append-to-body="true">
     <el-form :model="form">
       <el-form-item label="选择图标库">
-        <el-button type="primary" @click="uploadIconLibraryClick">上传图标库</el-button>
-        <span>{{libraryName}}</span>
+        <!-- <el-button type="primary" @click="uploadIconLibraryClick">上传图标库</el-button>
+        <span>{{libraryName}}</span> -->
+        <el-input placeholder="请选择图标库" v-model="libraryName">
+          <template slot="append"><i @click="uploadIconLibraryClick">...</i></template>
+        </el-input>
       </el-form-item>
       <el-form-item label="选择图片">
-        <el-button type="primary" @click="uploadCoverPhotoClick">选择图片</el-button>
-        <span>{{coverPhotoName}}</span>
+        <el-input placeholder="请选择要上传的图片" v-model="coverPhotoName">
+          <template slot="append"><i @click="uploadCoverPhotoClick">...</i></template>
+        </el-input>
+        <!-- <el-button type="primary" >选择图片</el-button>
+        <span>{{coverPhotoName}}</span> -->
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -51,6 +57,8 @@ export default {
     showDialog: function (item) {
       this.visible = true
       this.groupId = item.groupId
+      this.libraryName = ''
+      this.coverPhotoName = ''
     },
     submitUpload () {
       this.$refs.upload.submit()
@@ -91,3 +99,19 @@ export default {
   }
 }
 </script>
+<style lang="less" scoped>
+  /deep/.el-dialog{
+    width: 400px;
+    height: 400px;
+    .el-dialog__header{
+      text-align: center;
+      border: none;
+    }
+    .el-dialog__footer{
+      background-color: #fff;
+    }
+    /deep/.el-input-group__append{
+      background-color: #F5F5F5;
+    }
+  }
+</style>

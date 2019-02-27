@@ -52,7 +52,7 @@
                   </div>
                 </div>
                 <div class="name">{{_item.name}}</div>
-                <div class="upload"><el-button class="button" @click="() => downClickAgain(item)">下载</el-button></div>
+                <div class="upload"><el-button class="button" @click="() => downClickAgain(_item)">下载</el-button></div>
               </li>
             </ul>
           </el-collapse-item>
@@ -118,6 +118,12 @@ export default {
       } finally {
         this.loading = false
       }
+    },
+    downClickAgain (item) {
+      console.log(item)
+      // window.open(item.libraryUrl)
+      // http://localhost:8080/mock/upload/iconLibrary/1551240996043.zip
+      window.open('https://www.baidu.com/')
     },
     handleIconClick () {
       this.getGroups()

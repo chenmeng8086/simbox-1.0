@@ -15,6 +15,9 @@ export default (context, data) => {
   svgImporter.prepareToImportFromData(svgData)
   const svgLayer = svgImporter.importAsLayer()
   svgLayer.setName('LayerName')
+  console.log('------------layer的class是--------------')
+  console.log(svgLayer.class())
+  console.log('-----------layer结束---------------')
   const {size = 64, color = '#666'} = data
   const svgLayerFrame = svgLayer.frame()
   svgLayerFrame.setWidth(size)
