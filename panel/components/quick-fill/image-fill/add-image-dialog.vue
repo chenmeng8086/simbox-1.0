@@ -5,8 +5,11 @@
         <el-input v-model="form.type" auto-complete="off" placeholder="请输入图片类别名称"></el-input>
       </el-form-item>
       <el-form-item label="选择文件">
-        <el-button type="primary" @click="uploadClick">上传文件</el-button>
-        <span>{{fileName}}</span>
+        <!-- <el-button type="primary" @click="uploadClick">上传文件</el-button>
+        <span>{{fileName}}</span> -->
+        <el-input placeholder="支持仅含图片的文件" v-model="fileName">
+          <template slot="append"><i @click="uploadClick">...</i></template>
+        </el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
