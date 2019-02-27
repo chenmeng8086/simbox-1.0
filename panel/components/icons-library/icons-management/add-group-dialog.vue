@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="添加分组" :visible.sync="visible" :append-to-body="true">
+  <el-dialog title="添加分组" :visible.sync="visible" :append-to-body="true" :show-close="false">
     <el-form :model="form">
       <el-form-item label="分组名称" :label-width="formLabelWidth">
         <el-input v-model="form.name" auto-complete="off"></el-input>
@@ -39,3 +39,19 @@ export default {
   }
 }
 </script>
+<style lang="less" scoped>
+  /deep/.el-dialog{
+    width: 400px;
+    height: 180px;
+    .el-dialog__header{
+      text-align: center;
+      border: none;
+    }
+    .el-dialog__footer{
+      background-color: #fff;
+    }
+    /deep/.el-input-group__append{
+      background-color: #F5F5F5;
+    }
+  }
+</style>
