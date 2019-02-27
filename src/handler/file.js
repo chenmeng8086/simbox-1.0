@@ -3,7 +3,7 @@ export default {
   selectIconsFiles
 }
 
-const AVAILABLE_EXT = ['svg', 'pdf', 'png', 'jpg', 'jpeg']
+const AVAILABLE_EXT = ['svg', 'pdf', 'png', 'jpg', 'jpeg', 'zip', 'sketch']
 
 /**
  * @name selectIconsFiles

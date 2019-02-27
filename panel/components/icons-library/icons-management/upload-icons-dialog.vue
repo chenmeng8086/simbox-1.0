@@ -36,22 +36,28 @@ export default {
       form: {},
       libraryName: '',
       coverPhotoName: '',
-      groupId: ''
+      groupId: '',
+      libraryPath: '',
+      coverPhotoPath: ''
     }
   },
   methods: {
     uploadIconLibraryClick () {
       window.postMessage('uploadIconLibraryClick')
       const _this = this
-      window.uploadIconLibraryName = function (fileName) {
-        _this.libraryName = fileName[0]
+      window.uploadIconLibraryName = function (params) {
+        const {fileName, path} = params
+        _this.libraryName = fileName
+        _this.libraryPath = path
       }
     },
     uploadCoverPhotoClick () {
       window.postMessage('uploadCoverPhotoClick')
       const _this = this
-      window.uploadCoverPhotoName = function (fileName) {
-        _this.coverPhotoName = fileName[0]
+      window.uploadCoverPhotoName = function (params) {
+        const {fileName, path} = params
+        _this.coverPhotoName = fileName
+        _this.coverPhotoPath = path
       }
     },
     showDialog: function (item) {
@@ -62,14 +68,6 @@ export default {
     },
     submitUpload () {
       this.$refs.upload.submit()
-    },
-    onFileChange (file) {
-      console.log(file.name)
-      this.form.iconLibrary = file.name
-    },
-    onFileChange2 (file) {
-      console.log(file.name)
-      this.form.coverPhoto = file.name
     },
     handleRemove (file, fileList) {
       console.log(file, fileList)
@@ -84,7 +82,12 @@ export default {
     okClick () {
       this.$emit('submit', this.form)
       this.visible = false
-      const params = {groupId: this.groupId, libraryName: this.libraryName, coverPhotoName: this.coverPhotoName}
+      const params = {groupId: this.groupId,
+        libraryName: this.libraryName,
+        coverPhotoName: this.coverPhotoName,
+        libraryPath: this.libraryPath,
+        coverPhotoPath: this.coverPhotoPath
+      }
       window.postMessage('uploadLibrary', params)
     },
     async uploadImage (formData) {
