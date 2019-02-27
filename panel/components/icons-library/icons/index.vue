@@ -114,6 +114,7 @@ export default {
       }
     },
     /** 获取分组信息 */
+    /** TODO: 部门信息加上 */
     async getGroups (customParams) {
       try {
         const {data = []} = await iconApi.getGroupList({params: {deptId: '33c5d86b-6bdb-4527-a8c3-4c0796a0ea20', isPublic: this.isPublic}})
@@ -127,7 +128,7 @@ export default {
     /** 获取所在事业群 */
     async getDepartment (customParams) {
       try {
-        const {data = []} = await iconApi.getDeptList({params: {deptId: '33c5d86b-6bdb-4527-a8c3-4c0796a0ea20', isPublic: this.isPublic}})
+        const {data = []} = await iconApi.getDeptList({})
         this.departmentOpts = data
       } catch (error) {
         this.errorHandler(error)

@@ -1,16 +1,9 @@
-/*
- * @Author: mikey.zhaopeng
- * @Date: 2019-01-18 20:16:19
- * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-02-18 14:55:19
- */
 import UI from 'sketch/ui'
 import sketch from 'sketch/dom'
 function MSColorFromString (color) {
   // eslint-disable-next-line no-undef
   return MSImmutableColor.colorWithSVGString(color).newMutableCounterpart()
 }
-
 export default (context, data) => {
   // TODO:添加缺省图
   // eslint-disable-next-line no-undef
@@ -28,6 +21,8 @@ export default (context, data) => {
   svgLayerFrame.setHeight(size)
   const layer = svgLayer.layers().firstObject()
   if (layer && layer.style().firstEnabledFill()) {
+    console.log('传过来的color')
+    console.log(color)
     const fill = layer.style().firstEnabledFill()
     fill.color = MSColorFromString(color)
   }
@@ -55,7 +50,6 @@ function positionInArtboard (layer, x, y) {
   newFrame.x = x - parentOffset.x
   newFrame.y = y - parentOffset.y
   layer.frame = newFrame
-  console.log('我就是看看进取了梅哦')
 }
 function parentOffsetInArtboard (layer) {
   const offset = {x: 0, y: 0}

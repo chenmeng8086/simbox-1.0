@@ -110,6 +110,7 @@ export default {
     /** 获取所在事业群 获取后台接口 */
     async getDepartment (customParams) {
       try {
+        // TODO:
         const {data = []} = await iconApi.getDeptList({params: {deptId: 1, isPublic: true}})
         this.departmentOpts = data
       } catch (error) {
@@ -190,6 +191,7 @@ export default {
     /** 获取分组信息 获取后台接口 */
     async getGroups (customParams) {
       try {
+        // TODO:
         const {data = []} = await iconApi.getGroupList({params: {deptId: '33c5d86b-6bdb-4527-a8c3-4c0796a0ea20', isPublic: this.isPublic, libraryName: this.libraryName}})
         this.records = data
       } catch (error) {
@@ -199,6 +201,7 @@ export default {
     },
     /** 添加分组 */
     async addGroups (customParams) {
+      // TODO:
       const params = {deptId: '33c5d86b-6bdb-4527-a8c3-4c0796a0ea20', isPublic: this.isPublic, name: customParams.name}
       try {
         await iconApi.addGroup({params})

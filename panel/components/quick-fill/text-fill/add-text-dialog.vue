@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="新建文本" :visible.sync="visible" :show-close="false" :append-to-body="true">
+  <el-dialog title="新建文本" :visible.sync="visible" :show-close="false" :append-to-body="true" center>
     <el-form :model="form" label-position="left" ref="addTextForm">
       <el-form-item label="类别">
         <el-input v-model="form.name" auto-complete="off" placeholder="请输入文本类别名称"></el-input>
@@ -49,5 +49,12 @@ export default {
 /deep/.el-dialog{
   width: 400px;
   height: 400px;
+  .el-dialog__header{
+    text-align: center;
+    border: none;
+  }
+  .el-dialog__footer{
+    background-color: #fff;
+  }
 }
 </style>
