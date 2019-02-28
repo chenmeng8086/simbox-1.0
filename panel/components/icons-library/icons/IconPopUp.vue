@@ -11,7 +11,7 @@
     </div>
     <div class="right">
       <ul class="top">
-        <li v-for="item in colorConfig" :key="item.id" @click="colorClick(item)"></li>
+        <li v-for="item in colorConfig" :key="item.id" @click="colorClick(item)" :style="{backgroundColor: item.color}"></li>
       </ul>
       <div class="bottom">
         <el-color-picker v-model="iconColor" @change="colorChange"></el-color-picker>
@@ -170,45 +170,6 @@ export default {
         flex: 0 0 auto;
         width: 7%;
         height: 16px;
-      }
-      li:nth-child(1){
-        background-color:#8CC4FF;
-      }
-      li:nth-child(2){
-        background-color:#C7E6FC;;
-      }
-      li:nth-child(3){
-        background-color:#0DA194;
-      }
-      li:nth-child(4){
-        background-color:#84D9D2;
-      }
-      li:nth-child(5){
-        background-color:#B9EBE6;
-      }
-      li:nth-child(6){
-        background-color:#E84A10;
-      }
-      li:nth-child(7){
-        background-color:#F7B197;
-      }
-      li:nth-child(8){
-        background-color: #FCD6C7;;
-      }
-      li:nth-child(9){
-        background-color:#E8A01C;
-      }
-      li:nth-child(10){
-        background-color:#F7D797;
-      }
-      li:nth-child(11){
-        background-color: #FCEBC7;
-      }
-      li:nth-child(12){
-        background-color:#fff;
-      }
-      li:nth-child(13){
-        background-color:#000;
       }
     }
   }
