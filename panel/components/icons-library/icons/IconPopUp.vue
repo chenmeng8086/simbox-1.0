@@ -1,7 +1,7 @@
 <template>
   <div class="IconPopUp" :class="{iconActive: visible}">
     <div class="left">
-      <span v-html="iconItem['svg']"></span>
+      <span id='svg' v-html="iconItem['svg']"></span>
     </div>
     <div class="center">
       <p class="name">{{iconItem.name}}</p>
@@ -52,13 +52,22 @@ export default {
     },
     colorChange (val) {
       this.$emit('colorChange', {...this.iconItem, color: val})
+      this.setSvgFill(val)
     },
     setDefault () {
       this.iconColor = defaultColor
       this.iconSize = defaultSize
     },
     colorClick (item) {
-      this.$emit('colorChange', {...this.iconItem, color: item.value})
+      const {value} = item
+      this.$emit('colorChange', {...this.iconItem, color: value})
+      this.setSvgFill(value)
+    },
+    setSvgFill (color) {
+      const pathNodeArr = document.getElementById('svg').getElementsByTagName('path')
+      for (let i = 0; i < pathNodeArr.length; i++) {
+        pathNodeArr[i].setAttribute('fill', color)
+      }
     }
   }
 }

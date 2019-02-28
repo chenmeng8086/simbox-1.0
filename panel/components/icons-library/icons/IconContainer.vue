@@ -10,7 +10,7 @@
         draggable="true"
         @dragend="dragend(item)"
       >
-        <span v-html="item['svg']" :style="{color: item.color}"></span>
+        <span v-html="item['svg']"></span>
       </li>
     </ul>
     <IconPopUp
@@ -85,10 +85,10 @@ export default {
       this.color = color
       this.$emit('update:iconList', iconList)
       // 修改path的填充
-      const pathNodeArr = document.getElementById(iconId).getElementsByTagName('path')
-      for (let i = 0; i < pathNodeArr.length; i++) {
-        pathNodeArr[i].setAttribute('fill', color)
-      }
+      // const pathNodeArr = document.getElementById(iconId).getElementsByTagName('path')
+      // for (let i = 0; i < pathNodeArr.length; i++) {
+      //   pathNodeArr[i].setAttribute('fill', color)
+      // }
     }
   }
 }
