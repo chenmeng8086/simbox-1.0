@@ -59,9 +59,9 @@ export default {
       this.iconSize = defaultSize
     },
     colorClick (item) {
-      const {value} = item
-      this.$emit('colorChange', {...this.iconItem, color: value})
-      this.setSvgFill(value)
+      const {color} = item
+      this.$emit('colorChange', {...this.iconItem, color})
+      this.setSvgFill(color)
     },
     setSvgFill (color) {
       const pathNodeArr = document.getElementById('svg').getElementsByTagName('path')
