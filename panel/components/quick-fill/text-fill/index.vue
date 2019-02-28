@@ -6,7 +6,7 @@
     tag="ul">
       <Container @drop="onDrop" :get-ghost-parent="getGhostParent" drag-handle-selector=".column-drag-handle" lock-axis="y">
         <Draggable v-for="config in data" :key="config.type">
-          <div :class='{active:config.id==activeId, dragItem: true}' @mouseover="mouseover(config)" @click="fillClick(config)">
+          <div class="dragItem" @click="fillClick(config)">
             <template v-if="config.isCustom">
               <div class="custom">
                 <div class="customText">
@@ -144,9 +144,6 @@ export default {
     },
     addClick () {
       this.$refs.addText.showDialog({mode: 'add'})
-    },
-    mouseover (item) {
-      this.activeId = item.id
     },
     proTypeToText (item) {
       const {type} = item
@@ -288,14 +285,8 @@ export default {
       height: 540px;
       margin-bottom: -16px!important;
     }
-    .active{
+    .dragItem:hover{
       background-color: #F5F6F8;
-    }
-    .sortButton{
-      // background: #D8D8D8;
-      // width: 16px;
-      // height: 16px;
-      // border-radius: 16px;
     }
   }
 </style>

@@ -207,6 +207,9 @@ export default {
   .firstChildren{
     text-align: left;
     position: relative;
+    li:hover{
+      background-color: #F2F2F2;
+    }
   }
   .childrenContainer{
     text-align: left;

@@ -6,7 +6,7 @@
     tag="ul">
       <Container @drop="onDrop" :get-ghost-parent="getGhostParent" drag-handle-selector=".column-drag-handle" lock-axis="y">
         <Draggable v-for="item in config" :key="item.type">
-          <div @click="click(item)" @mouseover="mouseover(item)" :class='{active:item.value==activeId, dragItem: true}'>
+          <div @click="click(item)" class="dragItem">
             <svg-icon :iconClass="item.icon"></svg-icon>
             <!-- <i :class="item.icon"></i> -->
             <span class="text">{{item.label}}</span>
@@ -50,9 +50,6 @@ export default {
     },
     addClick () {
       this.$refs.addImage.showDialog({mode: 'add'})
-    },
-    mouseover (item) {
-      this.activeId = item.value
     },
     toolbarEditClick () {
 
@@ -100,7 +97,7 @@ export default {
     height: 544px;
     margin-bottom: -16px!important;
   }
-  .active{
+  .dragItem:hover{
     background-color: #F5F6F8;
   }
   .text{

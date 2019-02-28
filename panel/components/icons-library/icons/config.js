@@ -41,6 +41,6 @@ const colorConfig = [
   {id: '9', color: '#E8A01C'},
   {id: '10', color: '#F7D797'},
   {id: '11', color: '#FCEBC7'},
-  {id: '12', color: '#fff'},
-  {id: '13', color: '#000'} ]
+  {id: '12', color: '#ffffff'},
+  {id: '13', color: '#000000'} ]
 export {sizeOpts, defaultColor, defaultSize, VisionOpts, colorConfig}
