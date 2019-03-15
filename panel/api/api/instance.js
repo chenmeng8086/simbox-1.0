@@ -5,13 +5,14 @@ import { Message } from 'hui'
 
 const REQUEST_SUCCESS = '0'
 
+// 在生产环境下统一加上/api
 const baseUrl = {
   // 这里baseUrl不在这里指定，统一在API中指定，更方便灵活
   // mock: 'http://10.10.64.25:7300/mock/5c0b5c4b8e3399272cf2fb04/pdms/ui',
   mock: '',
   dev: '',
   pre: '',
-  prod: ''
+  prod: '/api'
 }[config.env || 'mock']
 
 const http = axios.create({
