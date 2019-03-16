@@ -12,7 +12,7 @@ const baseUrl = {
   mock: '',
   dev: '',
   pre: '',
-  prod: '/api'
+  production: '/api'
 }[config.env || 'mock']
 
 const http = axios.create({
