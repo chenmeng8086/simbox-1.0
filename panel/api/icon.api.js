@@ -2,16 +2,16 @@ import instance from './api/instance'
 import config from './config'
 const Qs = require('qs')
 const URL = {
-  GET_INTERFACE_LIST: '/api/api/file/dirList',
-  GET_DEPT_LIST: '/api/common/dept/list',
-  GET_GROUP_LIST: '/api/icon/group/list',
-  ADD_GROUP: '/api/icon/group/add',
-  EDIT_GROUP: '/api/icon/group/edit',
-  DELETE_GROUP: '/api/icon/group/delete',
-  GET_LIBRARY_LIST: '/api/icon/library/list',
-  DELETE_LIBRATY: '/api/icon/library/delete',
-  UPLOAD_LIBRARY: '/api/icon/icon/upload',
-  GET_ICON_LIST: '/api/icon/icon/list'
+  GET_INTERFACE_LIST: '/api/file/dirList',
+  GET_DEPT_LIST: '/common/dept/list',
+  GET_GROUP_LIST: '/icon/group/list',
+  ADD_GROUP: '/icon/group/add',
+  EDIT_GROUP: '/icon/group/edit',
+  DELETE_GROUP: '/icon/group/delete',
+  GET_LIBRARY_LIST: '/icon/library/list',
+  DELETE_LIBRATY: '/icon/library/delete',
+  UPLOAD_LIBRARY: '/icon/icon/upload',
+  GET_ICON_LIST: '/icon/icon/list'
 }
 
 // 这里在开发阶段预处理一下，用于适应同时请求多个后端的情况
