@@ -64,7 +64,6 @@ http.interceptors.response.use(function (response) {
 
 // 请求拦截器
 http.interceptors.request.use(function (config) {
-  debugger
   // if (config.method === 'get') {
   //   // 防止某些浏览器缓存get请求，导致数据不能实时刷新（这里的策略是在每个get请求后面加上时间戳，强制浏览器从服务器获取新数据）
   //   if (config.params) {
