@@ -1,5 +1,5 @@
 export default {
-  env: 'mock',
+  env: 'production',
   baseUrl: '',
   context: '/pdms'
 }
