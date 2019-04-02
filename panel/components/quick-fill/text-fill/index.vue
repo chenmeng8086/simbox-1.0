@@ -1,5 +1,6 @@
 <template>
   <div class="textFillContainer">
+    <div class="content">
     <el-scrollbar
     wrap-class="scrollbar__wrap"
     view-class="scrollbar__view"
@@ -89,6 +90,8 @@
           </div>
         </Draggable>
       </Container>
+    </el-scrollbar>
+    </div>
       <div class="toolbar">
         <i class="h-icon-plus" @click="addClick"></i>
         <i class="h-icon-edit" @click="toolbarEditClick"></i>
@@ -97,7 +100,7 @@
         ref="addText"
         @submit="submit">
       </add-text-dialog>
-    </el-scrollbar>
+
   </div>
 </template>
 <script>
@@ -275,9 +278,12 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+  .content{
+    height: 480px;
+  }
   .textFillContainer{
     transform: scale(1);
-    height: 100%;
+    height: 524px;
     // background-color: #ededed;
     text-align: left;
     .dragItem{
@@ -340,9 +346,16 @@ export default {
     .collapse{
       margin-left: 42px;
     }
+    // /deep/.scrollbar__wrap {
+    //   height: 540px;
+    //   margin-bottom: -16px!important;
+    // }
     /deep/.scrollbar__wrap {
-      height: 540px;
-      margin-bottom: -16px!important;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
     }
     .dragItem:hover{
       background-color: #F5F6F8;
