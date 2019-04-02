@@ -5,8 +5,9 @@
     view-class="scrollbar__view"
     tag="ul">
       <Container @drop="onDrop" :get-ghost-parent="getGhostParent" drag-handle-selector=".column-drag-handle" lock-axis="y">
-        <Draggable v-for="config in data" :key="config.type">
+        <Draggable v-for="config in textData" :key="config.type">
           <div class="dragItem" @click="fillClick(config)">
+            <!-- 自定义 -->
             <template v-if="config.isCustom">
               <div class="custom">
                 <div class="customText">
@@ -23,6 +24,7 @@
                 </div>
               </div>
             </template>
+            <!-- 剩余 -->
             <template v-else-if="config.collapse">
               <svg-icon :iconClass="config.icon"></svg-icon>
               <!-- <i :class="config.icon"></i> -->
@@ -67,6 +69,7 @@
                 </div>
               </template>
             </template>
+            <!-- 日期 -->
             <template v-else>
               <!-- <i :class="config.icon"></i> -->
               <svg-icon :iconClass="config.icon"></svg-icon>
@@ -114,6 +117,7 @@ import { applyDrag } from './helper'
 import randomName from 'chinese-random-name'
 import starwarsNames from 'starwars-names'
 import moment from 'moment'
+import { textApi } from '@/api'
 export default {
   name: 'textFill',
   components: {
@@ -123,7 +127,7 @@ export default {
   },
   data () {
     return {
-      data: configs,
+      textData: configs,
       isEdit: false,
       collapse: false,
       activeId: '',
@@ -137,7 +141,27 @@ export default {
       }
     }
   },
+  mounted () {
+    this.textList()
+  },
   methods: {
+    async textList (customParams) {
+      try {
+        const {data = []} = await textApi.textList()
+        data.map((item) => {
+          const selectedItem = configs.find(configItem => configItem.name === item.name) || {}
+          if (selectedItem.name) {
+            return {...selectedItem, ...item}
+          }
+          return {...item}
+        })
+        // this.textData = data
+      } catch (error) {
+        this.errorHandler(error)
+      } finally {
+        this.loading = false
+      }
+    },
     fillClick (item) {
       const text = this.proTypeToText(item)
       window.postMessage('onTextFill', {text})
@@ -191,15 +215,15 @@ export default {
       this.$confirm('删除后无法恢复，确定删除吗', '提示', {
         type: 'question'
       }).then(() => {
-        this.data = this.data.filter(_item => _item.id !== id)
+        this.textData = this.textData.filter(_item => _item.id !== id)
       }).catch(() => {
       })
     },
     submit (form) {
-      this.data = this.data.concat(new Array({id: getUUID(), name: form.name, isCustom: true}))
+      this.textData = this.textData.concat(new Array({id: getUUID(), name: form.name, isCustom: true}))
     },
     onDrop (dropResult) {
-      this.data = applyDrag(this.data, dropResult)
+      this.textData = applyDrag(this.textData, dropResult)
     },
     getGhostParent () {
       return document.body

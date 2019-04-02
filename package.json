@@ -5,14 +5,14 @@
   "author": "yanqingzhu <yanqingzhu@hikvision.com.cn>",
   "private": true,
   "scripts": {
-    "start": "concurrently \"yarn start:panel\" \"yarn start:plugin\"",
+    "start": "concurrently \"npm start:panel\" \"npm start:plugin\"",
     "start:plugin": "cross-env NODE_ENV=development skpm-build --watch",
     "start:panel": "npm run dev",
     "lint": "eslint --ext .js,.vue panel",
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "build:plugin": "cross-env NODE_ENV=production skpm-build",
     "build:panel": "node build/build.js",
-    "build": "yarn build:panel && yarn build:plugin"
+    "build": "npm build:panel && npm build:plugin"
   },
   "skpm": {
     "name": "simbox",

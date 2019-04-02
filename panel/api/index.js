@@ -1,8 +1,11 @@
 import iconApi from './icon.api'
+import textApi from './text.api'
 export default {
-  iconApi
+  iconApi,
+  textApi
 }
 // 支持按需引入特定API
 export {
-  iconApi
+  iconApi,
+  textApi
 }

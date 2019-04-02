@@ -20,14 +20,6 @@ Object.keys(URL).forEach(key => {
 })
 
 const API = {
-  /** 查询接口列表 */
-  interfaceList (opts) {
-    return instance({
-      method: 'get',
-      url: URL.GET_INTERFACE_LIST,
-      opts: opts
-    })
-  },
   /** 获取部门列表 */
   getDeptList (opts) {
     return instance({

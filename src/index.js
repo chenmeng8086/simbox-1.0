@@ -9,7 +9,7 @@ import {
 } from './handler'
 import {openURL} from './utils'
 const isDev = process.env.NODE_ENV === 'development'
-const Panel = isDev ? 'http://10.10.83.30:9090/api/dist/index.html#/' : 'http://10.10.83.30:9090/api/dist/index.html#/'
+const Panel = isDev ? 'index.html' : 'http://10.10.83.30:9090/api/dist/index.html#/'
 export default context => {
   const panelID = 'sketch-simbox.panel'
   const browserWindow = new BrowserWindow({
@@ -20,10 +20,8 @@ export default context => {
     height: 600,
     title: 'simbox',
     onlyShowCloseButton: true,
-    // hideTitleBar: false,
     shouldKeepAround: true,
     resizable: false,
-    // frame: false,
     movable: true
   })
   // 加载index.html
