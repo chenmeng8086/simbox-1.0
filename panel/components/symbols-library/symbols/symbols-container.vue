@@ -17,7 +17,8 @@
               <span @click="nodeContentClick(item)">{{item.name}}</span>
             </template>
             <template v-else>
-              <span class="leaf" @mouseenter="mouseenter(item)" @mouseleave="mouseleave">{{item.name.split('_')[0]}}</span>
+              <!-- <span class="leaf" @mouseenter="mouseenter(item)" @mouseleave="mouseleave">{{item.name.split('_')[0]}}</span> -->
+              <span class="leaf">{{item.name.split('_')[0]}}</span>
               <p class="picture" :class="{active: activeId === item.id, noActive: activeId !== item.id}"><img src="../../../assets/logo.png"/></p>
             </template>
             <template v-if="!item['is_leaf']">
@@ -43,7 +44,8 @@
                   <span class="svg"><svg-icon iconClass="arrowRight"></svg-icon></span>
                 </template>
                 <template v-else>
-                  <p class="leaf" draggable="true" @dragend="dragend(item)" @mouseenter="mouseenter(item)" @mouseleave="mouseleave">{{item.name.split('_')[0]}}</p>
+                  <!-- <p class="leaf" draggable="true" @dragend="dragend(item)" @mouseenter="mouseenter(item)" @mouseleave="mouseleave">{{item.name.split('_')[0]}}</p> -->
+                  <p class="leaf" draggable="true" @dragend="dragend(item)">{{item.name.split('_')[0]}}</p>
                   <p class="picture" :class="{active: activeId === item.id, noActive: activeId !== item.id}"><img src="../../../assets/logo.png"/></p>
                 </template>
               </li>

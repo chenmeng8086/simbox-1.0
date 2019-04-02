@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="新建文本" :visible.sync="visible" :show-close="false" :append-to-body="true" center>
+  <el-dialog :title="`${mode==='add' ? '新建': '编辑'}文本`" :visible.sync="visible" :show-close="false" :append-to-body="true" center>
     <el-form :model="form" label-position="left" ref="addTextForm">
       <el-form-item label="类别">
         <el-input v-model="form.name" auto-complete="off" placeholder="请输入文本类别名称"></el-input>
@@ -22,23 +22,27 @@ export default {
     return {
       visible: false,
       form: {
-        type: '',
+        name: '',
         content: ''
-      }
+      },
+      mode: 'add'
     }
   },
   methods: {
     showDialog ({mode, data}) {
       this.$refs.addTextForm && this.$refs.addTextForm.resetFields()
       this.visible = true
+      this.mode = mode
       if (mode === 'add') {
         this.form = {}
       } else {
-        this.form = data
+        console.log('data', data)
+        this.form = {...data, content: data.contentArray[0], mode: this.mode}
       }
     },
     /** 保存接口 */
     okClick () {
+      console.log('this.form', this.form)
       this.$emit('submit', this.form)
       this.visible = false
     }

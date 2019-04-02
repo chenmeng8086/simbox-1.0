@@ -1,9 +1,11 @@
 import instance from './api/instance'
 import config from './config'
+const Qs = require('qs')
 const URL = {
   GET_TEXT_LIST: '/quicklyFillIn/listText',
   DELETE_TEXT: '/quicklyFillIn/deleteText',
-  SAVE_TEXT: '/quicklyFillIn/saveText'
+  SAVE_TEXT: '/quicklyFillIn/saveText',
+  SORT_TEXT: '/quicklyFillIn/sortText'
 }
 
 // 这里在开发阶段预处理一下，用于适应同时请求多个后端的情况
@@ -32,6 +34,16 @@ const API = {
       method: 'post',
       url: URL.SAVE_TEXT,
       opts: opts
+    })
+  },
+  sortText (opts) {
+    return instance({
+      method: 'post',
+      url: URL.SORT_TEXT,
+      opts: {...opts,
+        paramsSerializer: function (params) {
+          return Qs.stringify(params, {arrayFormat: 'repeat'})
+        }}
     })
   }
 }

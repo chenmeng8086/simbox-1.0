@@ -9,7 +9,8 @@ import {
 } from './handler'
 import {openURL} from './utils'
 const isDev = process.env.NODE_ENV === 'development'
-const Panel = isDev ? 'index.html' : 'http://pc-fanqiuhua:8080/index.html'
+// const Panel = isDev ? 'index.html' : 'http://pc-fanqiuhua:8080/index.html'
+const Panel = isDev ? 'index.html' : 'http://10.10.64.16:8080'
 export default context => {
   const panelID = 'sketch-simbox.panel'
   const browserWindow = new BrowserWindow({

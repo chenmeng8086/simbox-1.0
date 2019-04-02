@@ -29,7 +29,7 @@
               <svg-icon :iconClass="config.icon"></svg-icon>
               <!-- <i :class="config.icon"></i> -->
               <span class="text" @click="fillClick(config)">{{config.name}}</span>
-              <el-radio-group v-model="form[config.type]" @change="fillClick(config)">
+              <el-radio-group v-model="form[config.icon]" @change="fillClick(config)">
                 <el-radio-button
                   v-for="opt in config.opts"
                   :label="opt.value"
@@ -45,7 +45,7 @@
               </template>
               <template v-if="collapse">
                 <div class='collapse'>
-                  <el-radio-group v-model="form[config.type]">
+                  <el-radio-group v-model="form[config.icon]">
                     <el-radio-button
                       v-for="opt in config.opts_2"
                       :label="opt.value"
@@ -55,7 +55,7 @@
                   </el-radio-group>
                 </div>
                 <div class='collapse'>
-                  <el-radio-group v-model="form[config.type]">
+                  <el-radio-group v-model="form[config.icon]">
                     <el-radio-button
                       v-for="opt in config.opts_3"
                       :label="opt.value"
@@ -74,7 +74,7 @@
               <!-- <i :class="config.icon"></i> -->
               <svg-icon :iconClass="config.icon"></svg-icon>
               <span class="text">{{config.name}}</span>
-              <el-radio-group v-model="form[config.type]" @change="fillClick(config)">
+              <el-radio-group v-model="form[config.icon]" @change="fillClick(config)">
                 <el-radio-button
                   v-for="opt in config.opts"
                   :label="opt.value"
@@ -111,13 +111,14 @@ import {
   getTimeByNum
 } from './config.js'
 import addTextDialog from './add-text-dialog'
-// import getUUID from '../../../utils/uuid.js'
+import getUUID from '../../../utils/uuid.js'
 import { Container, Draggable } from 'vue-smooth-dnd'
 import { applyDrag } from './helper'
 import randomName from 'chinese-random-name'
 import starwarsNames from 'starwars-names'
 import moment from 'moment'
 import { textApi } from '@/api'
+import {reduceByKey} from '../../../utils/commonFn.js'
 export default {
   name: 'textFill',
   components: {
@@ -127,7 +128,7 @@ export default {
   },
   data () {
     return {
-      textData: configs,
+      textData: [],
       isEdit: false,
       collapse: false,
       activeId: '',
@@ -151,9 +152,9 @@ export default {
         const newData = data.map((item) => {
           const selectedItem = configs.find(configItem => configItem.name === item.name) || {}
           if (selectedItem.name) {
-            return {...selectedItem, ...item, isCustom: item.type}
+            return {...selectedItem, ...item, isCustom: item.type, id: getUUID()}
           }
-          return {...item, isCustom: item.type}
+          return {...item, isCustom: item.type, id: getUUID(), icon: 'custom'}
         })
         this.textData = newData
       } catch (error) {
@@ -164,23 +165,23 @@ export default {
     },
     fillClick (item) {
       const text = this.proTypeToText(item)
+      console.log(text, 'text')
       window.postMessage('onTextFill', {text})
     },
     addClick () {
       this.$refs.addText.showDialog({mode: 'add'})
     },
     proTypeToText (item) {
-      const {type} = item
-      const key = this.form[type]
-      console.log(key)
-      switch (type) {
+      const {icon} = item
+      const key = this.form[icon]
+      switch (icon) {
         case 'name':
           if (key === 'EN') return starwarsNames.random()
           return randomName.generate()
-        case 'phone':
+        case 'mobile':
           if (key === 'mobile') return generateMobile()
           return generateLandline()
-        case 'email':
+        case 'mail':
           return 'dabai@hikvision.com.cn'
         case 'address':
           return '杭州滨江区阡陌路555号'
@@ -197,7 +198,7 @@ export default {
           const week = key === 'CN' ? getCNWeekByNum(moment().day()) : moment().format('dddd')
           return week
         case 'custom':
-          return '自定义'
+          return item.contentArray[0]
         default:
           return '默认'
       }
@@ -229,13 +230,24 @@ export default {
       }
     },
     submit (form) {
-      const params = {...form, type: 1}
+      let params = {}
+      const {mode, name, content, textId} = form
+      if (mode === 'add') {
+        params = {name, content, type: 1}
+      } else {
+        params = {name, content, textId, type: 1}
+      }
       textApi.saveText({params}).then(rsp => {
         this.textList()
       })
     },
     onDrop (dropResult) {
       this.textData = applyDrag(this.textData, dropResult)
+      const textIdList = reduceByKey(this.textData, 'textId')
+      const params = {textIdList}
+      textApi.sortText({params}).then(rsp => {
+        this.textList()
+      })
     },
     getGhostParent () {
       return document.body
@@ -253,7 +265,7 @@ export default {
       this.activeId = item.id
     },
     saveText (item) {
-      debugger
+      console.log(item)
       const params = {...item}
       textApi.saveText({params}).then(rsp => {
         this.textList()
