@@ -264,7 +264,6 @@ export default {
       this.collapse = !this.collapse
     },
     mouseover (item) {
-      // debugger
       this.activeId = item.id
     },
     saveText (item) {
