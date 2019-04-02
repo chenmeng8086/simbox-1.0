@@ -105,9 +105,11 @@ export default {
     async getIcons (customParams) {
       try {
         const {data = []} = await iconApi.getIconList({params: {groupId: this.groupId, isPublic: this.isPublic, name: this.name}})
+        debugger
         const _data = data.map(item => ({...item, iconId: getUUID()}))
         this.iconList = _data
       } catch (error) {
+        debugger
         this.errorHandler(error)
       } finally {
         this.loading = false

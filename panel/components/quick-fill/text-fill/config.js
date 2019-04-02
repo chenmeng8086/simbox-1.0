@@ -3,25 +3,30 @@ const configs = [{
   name: '姓名',
   type: 'name',
   opts: [{label: '中', value: 'CN'}, {label: '英', value: 'EN'}],
-  icon: 'name'
+  icon: 'name',
+  textId: '1'
 }, {
   name: '电话',
   type: 'phone',
   opts: [{label: '手机', value: 'mobile'}, {label: '座机', value: 'landline'}],
-  icon: 'mobile'
+  icon: 'mobile',
+  textId: '2'
 }, {
   name: '邮箱',
   type: 'email',
-  icon: 'mail'
+  icon: 'mail',
+  textId: '3'
 }, {
   name: '地址',
   type: 'address',
-  icon: 'address'
+  icon: 'address',
+  textId: '4'
 }, {
   name: '时刻',
   type: 'time',
   opts: [{label: '上午xx:xx', value: 'CN'}, {label: 'xx:xxAM', value: 'EN'}],
-  icon: 'time'
+  icon: 'time',
+  textId: '5'
 }, {
   name: '日期',
   type: 'date',
@@ -37,17 +42,20 @@ const configs = [{
     {label: '2018/11/19', value: 'YYYY/MM/DD'}
   ],
   collapse: true,
-  icon: 'date'
+  icon: 'date',
+  textId: '6'
 }, {
   name: '星期',
   type: 'week',
   opts: [{label: '中', value: 'CN'}, {label: '英', value: 'EN'}],
-  icon: 'week'
+  icon: 'week',
+  textId: '7'
 }, {
   name: '月份',
   type: 'month',
   opts: [{label: '中', value: 'CN'}, {label: '英', value: 'EN'}],
-  icon: 'month'
+  icon: 'month',
+  textId: '8'
 }].map(item => ({...item, id: getUUID()}))
 const prefixMobil = [139, 138, 137, 136, 135, 134, 159, 158, 157, 150, 151, 152, 147, 188, 187, 182, 183, 184, 178, 130, 131, 132, 156, 155, 186, 185, 145, 176, 133, 153, 189, 180, 181, 177, 173]
 const generateMobile = () => {

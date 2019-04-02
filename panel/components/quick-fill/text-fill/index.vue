@@ -5,8 +5,8 @@
     view-class="scrollbar__view"
     tag="ul">
       <Container @drop="onDrop" :get-ghost-parent="getGhostParent" drag-handle-selector=".column-drag-handle" lock-axis="y">
-        <Draggable v-for="config in textData" :key="config.type">
-          <div class="dragItem" @click="fillClick(config)">
+        <Draggable v-for="config in textData" :key="config.textId">
+          <div class="dragItem" @click="fillClick(config)" @mouseover="mouseover(config)">
             <!-- 自定义 -->
             <template v-if="config.isCustom">
               <div class="custom">
@@ -111,7 +111,7 @@ import {
   getTimeByNum
 } from './config.js'
 import addTextDialog from './add-text-dialog'
-import getUUID from '../../../utils/uuid.js'
+// import getUUID from '../../../utils/uuid.js'
 import { Container, Draggable } from 'vue-smooth-dnd'
 import { applyDrag } from './helper'
 import randomName from 'chinese-random-name'
@@ -148,14 +148,14 @@ export default {
     async textList (customParams) {
       try {
         const {data = []} = await textApi.textList()
-        data.map((item) => {
+        const newData = data.map((item) => {
           const selectedItem = configs.find(configItem => configItem.name === item.name) || {}
           if (selectedItem.name) {
-            return {...selectedItem, ...item}
+            return {...selectedItem, ...item, isCustom: item.type}
           }
-          return {...item}
+          return {...item, isCustom: item.type}
         })
-        // this.textData = data
+        this.textData = newData
       } catch (error) {
         this.errorHandler(error)
       } finally {
@@ -211,16 +211,28 @@ export default {
     },
     /** 删除 */
     deleteClick (item) {
-      const {id} = item
-      this.$confirm('删除后无法恢复，确定删除吗', '提示', {
-        type: 'question'
-      }).then(() => {
-        this.textData = this.textData.filter(_item => _item.id !== id)
-      }).catch(() => {
-      })
+      const {textId} = item
+      try {
+        this.$confirm('删除后无法恢复，确定删除吗', '提示', {
+          type: 'question'
+        }).then(() => {
+          const params = {textId}
+          console.log(params)
+          textApi.deleteText({params}).then(rsp => {
+            this.textList()
+          })
+        }).catch((error) => {
+          console.log(error)
+        })
+      } catch (error) {
+        console.log(error)
+      }
     },
     submit (form) {
-      this.textData = this.textData.concat(new Array({id: getUUID(), name: form.name, isCustom: true}))
+      const params = {...form, type: 1}
+      textApi.saveText({params}).then(rsp => {
+        this.textList()
+      })
     },
     onDrop (dropResult) {
       this.textData = applyDrag(this.textData, dropResult)
@@ -235,6 +247,17 @@ export default {
     upClick (e) {
       e.stopPropagation()
       this.collapse = !this.collapse
+    },
+    mouseover (item) {
+      // debugger
+      this.activeId = item.id
+    },
+    saveText (item) {
+      debugger
+      const params = {...item}
+      textApi.saveText({params}).then(rsp => {
+        this.textList()
+      })
     }
   }
 }
