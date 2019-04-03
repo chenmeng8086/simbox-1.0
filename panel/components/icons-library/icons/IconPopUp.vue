@@ -77,7 +77,7 @@ export default {
     padding: 12px 0px;
     text-align: left;
     position: fixed;
-    bottom: 30px;
+    bottom: -16px;
     left: 0px;
     width: 100%;
     height: 105px;

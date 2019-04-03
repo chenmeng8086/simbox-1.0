@@ -100,7 +100,6 @@
         ref="addText"
         @submit="submit">
       </add-text-dialog>
-
   </div>
 </template>
 <script>

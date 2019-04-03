@@ -80,7 +80,7 @@ const uploadLibraryHandler = (context, data) => {
     // headers: { 'Content-Type': 'multipart/form-data' } <- no need, it's automatically set by fetch when providing a FormData
     body: formData
   }
-  const url = 'http://10.10.83.30:9090/icon/icon/upload?groupId='+groupId
+  const url = 'http://10.11.84.24:8080/icon/icon/upload?groupId='+groupId
   fetch(url, fetchOptions)
     .then(response => response.json())
     .then(data => log(data))

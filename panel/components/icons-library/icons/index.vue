@@ -28,26 +28,29 @@
           </el-select>
         </template>
     </div>
+    <div class="content">
       <el-scrollbar
         wrap-class="scrollbar__wrap"
         view-class="scrollbar__view"
       >
         <icon-container :iconList.sync="iconList"></icon-container>
       </el-scrollbar>
-      <div class="vision">
-        <label class="label">当前版本：</label>
-        <el-select
-          v-model="version"
-          @change="visionChange"
-          placeholder="请选择当前版本">
-          <el-option
-            v-for="item in visionOpts"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
-      </div>
+    </div>
+
+    <div class="vision">
+      <label class="label">当前版本：</label>
+      <el-select
+        v-model="version"
+        @change="visionChange"
+        placeholder="请选择当前版本">
+        <el-option
+          v-for="item in visionOpts"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
+    </div>
   </div>
 </template>
 <script>
@@ -164,11 +167,20 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-  /deep/.scrollbar__wrap {
-    height: 458px;
-  }
   .iconContainer{
+    // border: 1px solid red;
     transform: scale(1);
+    .content{
+      height: 430px;
+      /deep/.scrollbar__wrap {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+
+    }
   }
   .iconQueryBar{
     display: flex;
@@ -195,7 +207,7 @@ export default {
   }
   .vision{
     position: fixed;
-    bottom: 4px;
+    bottom: -20px;
     width: 100%;
     text-align: left;
     background-color: #fff;

@@ -14,7 +14,8 @@ module.exports = {
     proxyTable: [{
       context: '/mock',
       // 代理的后台地址
-      target: 'http://10.10.83.30:9090/',
+      // target: 'http://10.10.83.30:9090/',
+      target: 'http://10.11.84.24:8080/',
       pathRewrite: {'/mock': ''},
       changeOrigin: true
     }],
