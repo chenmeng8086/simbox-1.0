@@ -316,6 +316,7 @@ export default {
     text-align: left;
     .dragItem{
       margin: 4px 0px;
+      padding-left: 12px;
     }
     .text{
       width: 100%;
@@ -368,6 +369,18 @@ export default {
     }
     .dragItem:hover{
       background-color: #F5F6F8;
+      .customText{
+         color: #3C99FC!important;
+      }
+      .text{
+        color: #3C99FC!important;
+      }
+      svg{
+        path{
+          fill: #3C99FC!important;
+        }
+
+      }
     }
   }
 </style>
