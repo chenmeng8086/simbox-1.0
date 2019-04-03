@@ -17,7 +17,7 @@
                   <span class="text">{{config.name}}</span>
                 </div>
                 <template v-if="config.id==activeId">
-                  <i class="h-icon-update column-drag-handle" style="float:right; padding:10px;"></i>
+                  <i class="h-icon-update column-drag-handle sort"></i>
                 </template>
                 <div v-if="isEdit" class="toolbarIcons">
                   <i class="h-icon-edit" @click="editClick(config)"></i>
@@ -65,7 +65,7 @@
                     </el-radio-button>
                   </el-radio-group>
                   <template v-if="config.id==activeId">
-                    <i class="h-icon-update column-drag-handle" style="float:right; padding:10px;"></i>
+                    <i class="h-icon-update column-drag-handle sort"></i>
                   </template>
                 </div>
               </template>
@@ -84,7 +84,7 @@
                 </el-radio-button>
               </el-radio-group>
               <template v-if="config.id==activeId">
-                <i class="h-icon-update column-drag-handle" style="float:right; padding:10px;"></i>
+                <i class="h-icon-update column-drag-handle sort"></i>
               </template>
             </template>
           </div>
@@ -276,16 +276,46 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+  /deep/.smooth-dnd-draggable-wrapper{
+    position: relative;
+  }
   .content{
     height: 480px;
   }
+  /deep/.el-radio-group{
+    margin-left: 12px;
+    .el-radio-button{
+      margin-left: 12px;
+      .el-radio-button__inner{
+        padding: 0px 12px;
+        border: 1px solid #D8D8D8;
+        border-radius: 5px;
+        font-size: 14px;
+        max-width: 192px;
+        font-size: 14px;
+        color: rgba(24,25,26,0.70);
+        text-align: center;
+        line-height: 24px;
+      }
+      .el-radio-button__orig-radio:checked+.el-radio-button__inner{
+        border: none;
+        color: #fff;
+      }
+    }
+  }
+  .sort{
+    position: absolute;
+    right: 12px;
+    top: -5px;
+    padding: 0px;
+    border-radius: 50%;
+    background-color: #D8D8D8;
+  }
   .textFillContainer{
-    transform: scale(1);
     height: 524px;
-    // background-color: #ededed;
     text-align: left;
     .dragItem{
-      padding: 4px 20px;
+      margin: 4px 0px;
     }
     .text{
       width: 100%;
@@ -294,11 +324,8 @@ export default {
       margin-top: 10px;
     }
     .custom{
-      width: 100%;
       height: 36px;
       line-height: 40px;
-      margin-top: 10px;
-      overflow: hidden;
       .customText{
         float: left;
       }
@@ -312,18 +339,6 @@ export default {
     .text{
       font-size: 14px;
       color: rgba(24,25,26,0.90);
-    }
-    /deep/.el-radio-group{
-      margin-left: 12px;
-      .el-radio-button{
-        margin-left: 12px;
-        .el-radio-button__inner{
-          border: 1px solid #ccc;
-        }
-        .el-radio-button__orig-radio:checked+.el-radio-button__inner{
-          border: none
-        }
-      }
     }
     .toolbar{
       position: fixed;
@@ -344,10 +359,6 @@ export default {
     .collapse{
       margin-left: 42px;
     }
-    // /deep/.scrollbar__wrap {
-    //   height: 540px;
-    //   margin-bottom: -16px!important;
-    // }
     /deep/.scrollbar__wrap {
       position: absolute;
       top: 0;
