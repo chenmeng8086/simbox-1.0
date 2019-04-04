@@ -4,7 +4,7 @@
     <el-scrollbar
     wrap-class="scrollbar__wrap"
     view-class="scrollbar__view"
-    tag="ul">
+    >
       <Container @drop="onDrop" :get-ghost-parent="getGhostParent" drag-handle-selector=".column-drag-handle" lock-axis="y">
         <Draggable v-for="config in textData" :key="config.textId">
           <div class="dragItem" @click="fillClick(config)" @mouseover="mouseover(config)">
@@ -38,6 +38,9 @@
                   {{opt.label}}
                 </el-radio-button>
               </el-radio-group>
+              <template v-if="config.id==activeId">
+                <i class="h-icon-update column-drag-handle sort"></i>
+              </template>
               <template v-if='collapse'>
                 <i class='h-icon-angle-sm-down' @click="downClick"></i>
               </template>
@@ -45,7 +48,7 @@
                 <i class='h-icon-angle-sm-up' @click="upClick"></i>
               </template>
               <template v-if="collapse">
-                <div class='collapse'>
+                <div class='collapseSecond'>
                   <el-radio-group v-model="form[config.icon]">
                     <el-radio-button
                       v-for="opt in config.opts_2"
@@ -55,7 +58,7 @@
                     </el-radio-button>
                   </el-radio-group>
                 </div>
-                <div class='collapse'>
+                <div class='collapseThird'>
                   <el-radio-group v-model="form[config.icon]">
                     <el-radio-button
                       v-for="opt in config.opts_3"
@@ -64,9 +67,6 @@
                       {{opt.label}}
                     </el-radio-button>
                   </el-radio-group>
-                  <template v-if="config.id==activeId">
-                    <i class="h-icon-update column-drag-handle sort"></i>
-                  </template>
                 </div>
               </template>
             </template>
@@ -167,7 +167,6 @@ export default {
     },
     fillClick (item) {
       const text = this.proTypeToText(item)
-      console.log(text, 'text')
       window.postMessage('onTextFill', {text})
     },
     addClick () {
@@ -220,7 +219,6 @@ export default {
           type: 'question'
         }).then(() => {
           const params = {textId}
-          console.log(params)
           textApi.deleteText({params}).then(rsp => {
             this.textList()
           })
@@ -266,7 +264,6 @@ export default {
       this.activeId = item.id
     },
     saveText (item) {
-      console.log(item)
       const params = {...item}
       textApi.saveText({params}).then(rsp => {
         this.textList()
@@ -335,9 +332,13 @@ export default {
         float: left;
       }
       .toolbarIcons{
-        float: right;
+        position: absolute;
+        right: 29px;
+        top: -16px;
         i{
-          width: 20px;
+          // width: 20px;
+          border-radius: 50%;
+          background-color: #D8D8D8;
         }
       }
     }
@@ -364,6 +365,14 @@ export default {
     .collapse{
       margin-left: 42px;
     }
+    .collapseSecond{
+      margin-left: 42px;
+    }
+    .collapseThird{
+      margin-left: 42px;
+      margin-top: 8px;
+      margin-bottom: 4px;
+    }
     /deep/.scrollbar__wrap {
       position: absolute;
       top: 0;
@@ -380,8 +389,15 @@ export default {
       .text{
         color: #3C99FC;
       }
-      svg{
+      svg {
         fill: currentColor;
+      }
+      .sort {
+        color: #000!important;
+      }
+      .toolbarIcons{
+        fill: #000;
+        color: #000!important;
       }
     }
   }
