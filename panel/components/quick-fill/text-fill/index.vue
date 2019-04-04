@@ -314,9 +314,13 @@ export default {
   .textFillContainer{
     height: 524px;
     text-align: left;
+    color:#000;
     .dragItem{
       margin: 4px 0px;
       padding-left: 12px;
+      svg{
+        fill: currentColor;
+      }
     }
     .text{
       width: 100%;
@@ -368,18 +372,16 @@ export default {
       right: 0;
     }
     .dragItem:hover{
+      color: #3C99FC;
       background-color: #F5F6F8;
       .customText{
-         color: #3C99FC!important;
+        color: #3C99FC;
       }
       .text{
-        color: #3C99FC!important;
+        color: #3C99FC;
       }
       svg{
-        path{
-          fill: #3C99FC!important;
-        }
-
+        fill: currentColor;
       }
     }
   }
