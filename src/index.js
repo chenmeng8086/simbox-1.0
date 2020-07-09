@@ -11,11 +11,6 @@ import {
 } from './handler'
 import {openURL} from './utils'
 const isDev = process.env.NODE_ENV === 'development'
-// const Panel = isDev ? 'index.html' : 'http://pc-fanqiuhua:8080/index.html'
-// const Panel = isDev ? 'index.html' : 'http://10.10.64.16:8080'
-// const Panel = isDev ? 'index.html' : 'http://10.11.84.42:8080'
-// const Panel = isDev ? 'index.html' : 'http://10.11.84.41:8080'
-// const Panel = isDev ? 'index.html' : 'http://10.11.84.41:8080'
 const Panel = isDev ? 'index.html' : 'http://100.64.2.145:8080'
 export default context => {
   const panelID = 'sketch-simbox.panel'
@@ -26,7 +21,6 @@ export default context => {
     width: 540,
     height: 600,
     title: 'simbox',
-    // 窗口置顶
     alwaysOnTop: true,
     onlyShowCloseButton: true,
     shouldKeepAround: true,

@@ -6,34 +6,21 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
-    // Paths
     assetsSubDirectory: '.',
-    // 去掉"/"
     assetsPublicPath: '',
     proxyTable: [{
       context: '/mock',
-      // 代理的后台地址
-      // target: 'http://10.10.83.30:9090/',
       target: 'http://10.11.65.24:9090',
-      // target: 'http://10.11.84.42:8080/',
       pathRewrite: {'/mock': ''},
       changeOrigin: true,
-      // gai
       secure: false,
       headers: {
         Referer: 'http://10.11.65.24:9090'
       },
       onProxyReq(proxyReq,req,res){
-        // proxyReq.setHeader('Cookie','JSESSIONID=6E2DAA2F12EA3AC1AFFF43A6B5639940')
         proxyReq.setHeader('Cookie','JSESSIONID=PnWrEIeL8Pxmn5_p0BAcwUmbFdtIL44ohV7eLgX_')
       }
     }],
-
-    // Various Dev Server settings
-    // host: '0.0.0.0', // can be overwritten by process.env.HOST
-    // host:'localhost',
-    // host:'10.11.84.41',
     host: 'localhost',
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true, //can be opened the browser, if the value is setted true
@@ -71,7 +58,6 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: '.',
-    // 去掉"/"
     assetsPublicPath: '',
 
     /**
