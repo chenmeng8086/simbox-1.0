@@ -30,16 +30,19 @@ const configs = [{
 }, {
   name: '日期',
   type: 'date',
-  opts: [{label: '年月日', value: 'YYYY年MM月DD日'},
-    {label: '年/月/日', value: 'YYYY年/MM月/DD日'}
+  opts: [
+    // {label: '年/月/日', value: 'YYYY年/MM月/DD日'}
+    {label: 'YYYY/MM/DD', value: 'YYYY/MM/DD'},
+    {label: '年月日', value: 'YYYY年MM月DD日'}
   ],
   opts_2: [
     {label: '年-月-日', value: 'YYYY年-MM月-DD日'},
-    {label: '2018-11-19', value: 'YYYY-MM-DD'}
+    {label: 'YYYY-MM-DD', value: 'YYYY-MM-DD'}
   ],
   opts_3: [
-    {label: '20181119', value: 'YYYYMMDD'},
-    {label: '2018/11/19', value: 'YYYY/MM/DD'}
+    {label: 'YYYYMMDD', value: 'YYYYMMDD'},
+    // {label: '2018/11/19', value: 'YYYY/MM/DD'}
+    {label: '年/月/日', value: 'YYYY年/MM月/DD日'}
   ],
   collapse: true,
   icon: 'date',

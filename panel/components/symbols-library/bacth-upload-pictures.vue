@@ -8,7 +8,10 @@
           placeholder='请选择上传位置'/>
       </el-form-item>
       <el-form-item label="选择文件" :label-width="formLabelWidth">
-        <el-input v-model="form.name" auto-complete="off"></el-input>
+        <!--<el-input v-model="form.name" auto-complete="off"></el-input>-->
+        <el-input v-model="libraryName" auto-complete="off">
+          <template slot="append"><i @click="uploadIconLibraryClick">...</i></template>
+        </el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -25,6 +28,7 @@ export default {
   components: { Treeselect },
   data () {
     return {
+      libraryName: '',
       visible: false,
       form: {
         position: '',
@@ -52,6 +56,17 @@ export default {
     }
   },
   methods: {
+    uploadIconLibraryClick () {
+      window.postMessage('uploadIconLibraryClick')
+      const _this = this
+      window.uploadIconLibraryName = function (params) {
+        const {fileName, path} = params
+        _this.libraryName = fileName
+        _this.form.name = path
+        // console.log(_this.form.name)
+        // _this.libraryPath = path
+      }
+    },
     showDialog ({mode = 'add', data}) {
       this.visible = true
       if (mode === 'edit') {
@@ -68,3 +83,20 @@ export default {
   }
 }
 </script>
+<style lang="less" scoped>
+  /deep/.el-dialog{
+    width: 400px;
+    height: 400px;
+    left: 206px !important;
+    .el-dialog__header{
+      text-align: center;
+      border: none;
+    }
+    .el-dialog__footer{
+      background-color: #fff;
+    }
+    /deep/.el-input-group__append{
+      background-color: #F5F5F5;
+    }
+  }
+</style>

@@ -82,6 +82,7 @@ export default {
         return {...item}
       })
       const color = selectedItem.color
+      console.log('2')
       this.color = color
       this.$emit('update:iconList', iconList)
       // 修改path的填充

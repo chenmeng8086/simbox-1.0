@@ -1,5 +1,7 @@
 <template>
-  <el-dialog :title="title" :visible.sync="visible" :append-to-body="true" :show-close="false">
+  <!--:append-to-body="true"-->
+  <el-dialog :title="title" :visible.sync="visible" :append-to-body="true" :show-close="false"
+  >
     <el-form :model="form">
       <el-form-item label="分组名称" :label-width="formLabelWidth">
         <el-input v-model="form.name" auto-complete="off"></el-input>
@@ -38,6 +40,7 @@ export default {
       }
     },
     okClick () {
+      // this.$confirm('修改成功')
       this.visible = false
       this.$emit('addClick', this.form)
     }
@@ -46,9 +49,13 @@ export default {
 </script>
 <style lang="less" scoped>
   /deep/.el-dialog{
+    /*border:1px red solid;*/
+    left: 206px !important;
+    top: 200px !important;
     width: 400px;
-    height: 180px;
+    /*height: 180px;*/
     .el-dialog__header{
+      padding-left: 20px;
       text-align: center;
       border: none;
     }

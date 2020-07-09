@@ -12,6 +12,7 @@ import fetch from 'sketch-polyfill-fetch'
 import FormData from 'sketch-polyfill-fetch/lib/form-data'
 import fs from '@skpm/fs'
 import file from './file'
+import UI from 'sketch/ui'
 
 console.log('FormData')
 console.log(FormData)
@@ -50,7 +51,9 @@ const imageFillHandler = (context, data) => {
     layerArr.forEach(layer => {
       if (layer && layer.style().firstEnabledFill()) {
         const fill = layer.style().firstEnabledFill()
-        const image = fetchImage(data.url)
+        // const image = fetchImage(data.url)
+        const image = fetchImage("https://s3.amazonaws.com/sketch-plugins-cookbook/jake_the_dog.png")
+        // const image = 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=4066156726,250262276&fm=26&gp=0.jpg'
         if (image) {
           fill.fillType = FillType.Pattern
           fill.patternFillType = PatternFillType.Fill
@@ -65,6 +68,7 @@ const imageFillHandler = (context, data) => {
 }
 
 //https://sketchplugins.com/d/811-how-to-access-a-file-for-upload-via-web-view/5
+// 选中上传图片的路径以及名字
 const uploadImageHandler = (context, webContents) => {
   file.selectIconsFiles(function(resultUrl){
     const firstUrl = resultUrl[0]
@@ -102,6 +106,7 @@ const addFillImageHandler = (context, data) => {
   console.log('我是添加的图片啊')
   console.log(data)
   console.log(JSON.stringify(data))
+  // const filePath = '/Users/yunmoushijue/Desktop/dog/hello.jpg'
   const filePath = '/Users/yunmoushijue/Desktop/dog/hello.jpg'
   const formData = new FormData()
   // formData.append('groupId', 'ff38a23c-ec9e-4f19-b801-032e20a67ce1')
@@ -110,7 +115,8 @@ const addFillImageHandler = (context, data) => {
     mimeType: 'image/jpg', // or whichever mime type is your file
     data: NSData.alloc().initWithContentsOfFile(filePath)
   })
-  const _filePath = '/Users/yunmoushijue/Desktop/font.zip'
+  // const _filePath = '/Users/yunmoushijue/Desktop/font.zip'
+  const _filePath = '/Users/chengyuanyuan/Desktop/font.zip'
   formData.append('iconLibrary', {
     fileName: 'font.zip',
     mimeType: 'application/zip', // or whichever mime type is your file
@@ -123,7 +129,9 @@ const addFillImageHandler = (context, data) => {
       // headers: { 'Content-Type': 'multipart/form-data' } <- no need, it's automatically set by fetch when providing a FormData
       body: formData
   }
-  fetch('http://10.10.83.30:9090/icon/icon/upload?groupId=ff38a23c-ec9e-4f19-b801-032e20a67ce1', fetchOptions)
+  // const imageLibraryUrl = 'http://10.10.83.30:9090/icon/icon/upload?groupId=ff38a23c-ec9e-4f19-b801-032e20a67ce1'
+  const imageLibraryUrl = 'http://10.11.65.24:9090/icon/icon/upload?groupId=ff38a23c-ec9e-4f19-b801-032e20a67ce1'
+  fetch(imageLibraryUrl, fetchOptions)
       .then(response => response.json())
       .then(data => log(data))
       .catch(err => {

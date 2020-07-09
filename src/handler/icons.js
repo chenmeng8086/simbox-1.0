@@ -24,6 +24,9 @@ export default (context, data) => {
   svgLayerFrame.setWidth(size)
   svgLayerFrame.setHeight(size)
   const layer = svgLayer.layers().firstObject()
+  console.log(svgLayer)
+  console.log(layer)
+  console.log(layer.style().firstEnabledFill())
   if (layer && layer.style().firstEnabledFill()) {
     console.log('传过来的color')
     console.log(color)
@@ -40,10 +43,12 @@ export default (context, data) => {
   // layersProvider.selectedLayerToSymbol(svgLayer)
   // const doc = sketch.getSelectedDocument()
   // const _layer = doc.getLayersNamed('SVG Layer').pop()
-  // const canvasView = context.document.contentDrawView()
-  // const center = canvasView.viewCenterInAbsoluteCoordinatesForViewPort(canvasView.viewPort())
+  const canvasView = context.document.contentDrawView()
+  const center = canvasView.viewCenterInAbsoluteCoordinatesForViewPort(canvasView.viewPort())
   // const shiftX = _layer.frame.width / 2
   // const shiftY = _layer.frame.height / 2
+  svgLayerFrame.setX(center.x)
+  svgLayerFrame.setY(center.y)
   // const centerX = center.x - shiftX
   // const centerY = center.y - shiftY
   // positionInArtboard(_layer, centerX, centerY)

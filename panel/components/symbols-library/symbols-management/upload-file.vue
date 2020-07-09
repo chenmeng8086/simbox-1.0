@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="上传文件至simbox" :visible.sync="visible">
+  <el-dialog title="上传文件至simbox" :visible.sync="visible" :append-to-body="true" :show-close="false">
     <el-form :model="form">
       <el-form-item label="上传位置" :label-width="formLabelWidth">
         <treeselect
@@ -8,7 +8,10 @@
           placeholder='请选择上传位置'/>
       </el-form-item>
       <el-form-item label="选择文件" :label-width="formLabelWidth">
-        <el-input v-model="form.name" auto-complete="off"></el-input>
+        <!--<el-input v-model="form.name" auto-complete="off"></el-input>-->
+        <el-input v-model="libraryName" auto-complete="off">
+          <template slot="append"><i @click="uploadSymbolLibraryClick">...</i></template>
+        </el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -25,6 +28,8 @@ export default {
   components: { Treeselect },
   data () {
     return {
+      libraryPath: '',
+      libraryName: '',
       visible: false,
       form: {
         position: '',
@@ -52,6 +57,17 @@ export default {
     }
   },
   methods: {
+    uploadSymbolLibraryClick () {
+      window.postMessage('uploadSymbolLibraryClick')
+      const _this = this
+      window.uploadSymbolLibraryName = function (params) {
+        const {fileName, path} = params
+        _this.libraryName = fileName
+        // _this.form.name = path
+        // console.log(_this.form.name)
+        _this.libraryPath = path
+      }
+    },
     showDialog ({mode = 'add', data}) {
       this.visible = true
       if (mode === 'edit') {
@@ -62,9 +78,33 @@ export default {
     },
     okClick () {
       this.visible = false
+      console.log(1)
       console.log(this.form)
       this.$emit('okClick', this.form)
+      const params = {uploadPlace: this.form.position,
+        libraryName: this.libraryName,
+        libraryPath: this.libraryPath
+      }
+      console.log(params)
+      window.postMessage('uploadLibraryHandler', params)
     }
   }
 }
 </script>
+<style lang="less" scoped>
+  /deep/.el-dialog{
+    width: 400px;
+    height: 400px;
+    left: 206px !important;
+    .el-dialog__header{
+      text-align: center;
+      border: none;
+    }
+    .el-dialog__footer{
+      background-color: #fff;
+    }
+    /deep/.el-input-group__append{
+      background-color: #F5F5F5;
+    }
+  }
+</style>

@@ -48,11 +48,16 @@
                 <div class="top">
                   <div class="checkbox"><el-checkbox v-model="checkedList[_item.iconLibraryId]"></el-checkbox></div>
                   <div class="name">
+                    <!--checkedList[_item.iconLibraryId]-->
                     <img :src="_item.coverPhotoUrl"/>
+                    <!--{{_item.coverPhotoUrl}}-->
                   </div>
                 </div>
                 <div class="name">{{_item.name}}</div>
-                <div class="upload"><el-button class="button" @click="() => downClickAgain(_item)">下载</el-button></div>
+                <div class="upload">
+                  <el-button class="button" @click="() => downClickAgain(_item)">
+                    下载
+                  </el-button></div>
               </li>
             </ul>
           </el-collapse-item>
@@ -120,10 +125,12 @@ export default {
       }
     },
     downClickAgain (item) {
-      console.log(item)
       // window.open(item.libraryUrl)
       // http://localhost:8080/mock/upload/iconLibrary/1551240996043.zip
-      window.open('https://www.baidu.com/')
+      // window.open('https://www.baidu.com/')
+      window.postMessage('onOpenUrl', item.coverPhotoUrl)
+      // window.open(item.coverPhotoUrl)
+      // console.log(this.simpleData)
     },
     handleIconClick () {
       this.getGroups()
@@ -144,6 +151,7 @@ export default {
     },
     /** 全局下载 */
     downloadGlobalClick () {
+      // 使用window.postMessage()方法实现文件下载
       console.log(this.checkedList)
     },
     /** 编辑分组 */
@@ -223,6 +231,7 @@ export default {
       try {
         const {data = []} = await iconApi.getLibraryList({params})
         this.simpleData = data
+        console.log(this.simpleData)
       } catch (error) {
         this.errorHandler(error)
         this.simpleData = []

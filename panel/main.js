@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import HUI from 'hui'
+// import HUI from 'hui'
 // import common from 'dolphin_common'
 import './index.less'
-import 'hui/lib/theme-default/index.css'
+// import 'hui/lib/theme-default/index.css'
 import axios from 'axios'
 import './icons'
 
-Vue.use(HUI)
+// Vue.use(HUI)
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
 // document.cookie = 'JSESSIONID=FB3D670FB426CB40162B9DD13310F600'

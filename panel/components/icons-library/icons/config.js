@@ -18,6 +18,7 @@ const sizeOpts = [{
   value: '96'
 }]
 const defaultColor = '#2c3e50'
+// var defaultColor = '#0DA194'
 const defaultSize = '64'
 const VisionOpts = [{
   value: 'v2.1',

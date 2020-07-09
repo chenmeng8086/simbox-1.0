@@ -1,7 +1,7 @@
 import { createAPI } from '../util'
 import config from '../config'
 import axios from 'axios'
-import { Message } from 'hui'
+// import { Message } from 'hui'
 
 const REQUEST_SUCCESS = '0'
 
@@ -39,11 +39,13 @@ http.interceptors.response.use(function (response) {
   // 对错误进行统一处理
   if (response.data.code !== REQUEST_SUCCESS) {
     if (!response.config.noMsg && response.data.msg) {
-      Message.error('错误')
+      // Message.error('错误')
+      alert('错误')
     }
     return Promise.reject(response)
   } else if (response.data.code === REQUEST_SUCCESS && response.config.successNotify) { // 弹出成功提示
-    Message.success('success !')
+      alert('sueecss')
+      // Message.success('success !')
   }
   return Promise.resolve({
     code: response.data.code,
@@ -53,10 +55,12 @@ http.interceptors.response.use(function (response) {
 }, function (error) {
   if (error.message.indexOf('timeout') > -1) {
     // 多语言需要自己在项目中配置
-    Message.error('超时')
+      alert('超时')
+      // Message.error('超时')
   } else {
     // 其他错误返回错误的message字段内容（如有其他需求可修改）
-    Message.error(error.message)
+      alert(error.message)
+      // Message.error(error.message)
   }
   // 对响应错误做点什么
   return Promise.reject(error)

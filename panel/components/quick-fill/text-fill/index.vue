@@ -17,7 +17,7 @@
                   <span class="text">{{config.name}}</span>
                 </div>
                 <template v-if="config.id==activeId">
-                  <i class="h-icon-update column-drag-handle sort"></i>
+                  <i class="h-icon-update column-drag-handle sort" style = "top:12px;"></i>
                 </template>
                 <div v-if="isEdit" class="toolbarIcons">
                   <i class="h-icon-edit" @click="editClick(config)"></i>
@@ -39,7 +39,7 @@
                 </el-radio-button>
               </el-radio-group>
               <template v-if="config.id==activeId">
-                <i class="h-icon-update column-drag-handle sort"></i>
+                <i class="h-icon-update column-drag-handle sort" style = "top:12px;"></i>
               </template>
               <template v-if='collapse'>
                 <i class='h-icon-angle-sm-down' @click="downClick"></i>
@@ -84,7 +84,7 @@
                 </el-radio-button>
               </el-radio-group>
               <template v-if="config.id==activeId">
-                <i class="h-icon-update column-drag-handle sort"></i>
+                <i class="h-icon-update column-drag-handle sort" style = "top:12px;"></i>
               </template>
             </template>
           </div>
@@ -199,13 +199,21 @@ export default {
           const week = key === 'CN' ? getCNWeekByNum(moment().day()) : moment().format('dddd')
           return week
         case 'custom':
-          return item.contentArray[0]
+        // 此处使用随机数实现换行输入
+        // Math.floor(Math.random()*10);    // 可均衡获取 0 到 9 的随机整数。
+        // Math.ceil(Math.random() * item.contentArray.length)
+          return item.contentArray[Math.floor(Math.random() * item.contentArray.length)]
         default:
           return '默认'
       }
     },
     toolbarEditClick () {
-      this.isEdit = true
+      // this.isEdit = true
+      if (this.isEdit === false) {
+        this.isEdit = true
+      } else {
+        this.isEdit = false
+      }
     },
     /** 单条信息编辑 */
     editClick (item) {
@@ -273,6 +281,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+
   /deep/.smooth-dnd-draggable-wrapper{
     position: relative;
   }
@@ -334,7 +343,7 @@ export default {
       .toolbarIcons{
         position: absolute;
         right: 29px;
-        top: -16px;
+        /*top: -16px;*/
         i{
           // width: 20px;
           border-radius: 50%;

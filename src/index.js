@@ -5,12 +5,18 @@ import {
   iconDragHandler,
   symbolHandler,
   dragSymbolHandler,
-  libraryHandler
+  libraryHandler,
+  // 组件库上传操作
+  symbolLibraryhander
 } from './handler'
 import {openURL} from './utils'
 const isDev = process.env.NODE_ENV === 'development'
 // const Panel = isDev ? 'index.html' : 'http://pc-fanqiuhua:8080/index.html'
-const Panel = isDev ? 'index.html' : 'http://10.10.64.16:8080'
+// const Panel = isDev ? 'index.html' : 'http://10.10.64.16:8080'
+// const Panel = isDev ? 'index.html' : 'http://10.11.84.42:8080'
+// const Panel = isDev ? 'index.html' : 'http://10.11.84.41:8080'
+// const Panel = isDev ? 'index.html' : 'http://10.11.84.41:8080'
+const Panel = isDev ? 'index.html' : 'http://100.64.2.145:8080'
 export default context => {
   const panelID = 'sketch-simbox.panel'
   const browserWindow = new BrowserWindow({
@@ -20,6 +26,8 @@ export default context => {
     width: 540,
     height: 600,
     title: 'simbox',
+    // 窗口置顶
+    alwaysOnTop: true,
     onlyShowCloseButton: true,
     shouldKeepAround: true,
     resizable: false,
@@ -60,5 +68,12 @@ export default context => {
   })
   webContents.on('uploadLibrary', data => {
     libraryHandler.uploadLibraryHandler(context, data)
+  })
+  // 实现图标库上传功能
+  webContents.on('uploadSymbolLibraryClick', data => {
+    symbolLibraryhander.uploadSymbolLibraryClick(context, webContents)
+  })
+  webContents.on('uploadLibraryHandler', data => {
+    symbolLibraryhander.uploadLibraryHandler(context, data)
   })
 }

@@ -53,6 +53,7 @@ export default {
 /deep/.el-dialog{
   width: 400px;
   height: 400px;
+  left: 206px !important;
   .el-dialog__header{
     text-align: center;
     border: none;

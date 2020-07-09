@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="新建文件夹" :visible.sync="visible">
+  <el-dialog class="dialog" title="新建文件夹" :visible.sync="visible" :append-to-body="true" :show-close="false">
     <el-form :model="form">
       <el-form-item label="上传位置" :label-width="formLabelWidth">
         <treeselect
@@ -8,7 +8,8 @@
           placeholder='请选择上传位置'/>
       </el-form-item>
       <el-form-item label="请输入文件夹名称" :label-width="formLabelWidth">
-        <el-input v-model="form.name" auto-complete="off"></el-input>
+        <!--<el-input v-model="form.name" auto-complete="off"></el-input>-->
+        <el-input v-model="form.name"></el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -25,6 +26,7 @@ export default {
   components: { Treeselect },
   data () {
     return {
+      libraryName: '',
       visible: false,
       form: {
         position: '',
@@ -68,3 +70,20 @@ export default {
   }
 }
 </script>
+<style lang="less" scoped>
+  /deep/.el-dialog{
+    width: 400px;
+    height: 400px;
+    left: 206px !important;
+    .el-dialog__header{
+      text-align: center;
+      border: none;
+    }
+    .el-dialog__footer{
+      background-color: #fff;
+    }
+    /deep/.el-input-group__append{
+      background-color: #F5F5F5;
+    }
+  }
+</style>

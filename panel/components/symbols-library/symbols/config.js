@@ -18,14 +18,14 @@ const Tabs = [{
 }]
 
 const VisionOpts = [{
-  value: 'v2.1',
-  label: 'v2.1'
+  value: 'v2.1.0',
+  label: 'v2.1.0'
 }, {
-  value: 'v1.1',
-  label: 'v1.1'
+  value: 'v1.1.0',
+  label: 'v1.1.0'
 }, {
-  value: 'v0.1',
-  label: 'v0.1'
+  value: 'v0.1.0',
+  label: 'v0.1.0'
 }]
 
 const symbolsRecords = [{name: '文字/禁用文字/左/W55%', id: '1'},

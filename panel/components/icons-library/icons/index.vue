@@ -38,11 +38,11 @@
     </div>
 
     <div class="vision">
-      <label class="label">当前版本：</label>
+      <label class="label">当前版本</label>
       <el-select
         v-model="version"
         @change="visionChange"
-        placeholder="请选择当前版本">
+        placeholder="">
         <el-option
           v-for="item in visionOpts"
           :key="item.value"
@@ -83,7 +83,8 @@ export default {
       deptId: '',
       name: '',
       iconList: [],
-      version: '--'
+      // version: '--'
+      version: 'v2.1'
     }
   },
   created () {
@@ -213,11 +214,12 @@ export default {
     background-color: #fff;
     .label{
       display: inline-block;
-      width: 30%;
+      /*width: 30%;*/
     }
     /deep/.el-select{
       display: inline-block;
-      width: 40%;
+      /*width: 40%;*/
+      width: 20%;
       input{
         border: 0;
         background: transparent;

@@ -62,14 +62,8 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-  .upload{
-    /deep/.el-upload__input{
-      display: inline-block;
-      visibility: hidden;
-      position: absolute;
-    }
-  }
   /deep/.el-dialog{
+    left:206px !important;
     width: 400px;
     height: 400px;
     .el-dialog__header{

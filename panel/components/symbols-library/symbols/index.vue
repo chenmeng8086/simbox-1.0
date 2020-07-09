@@ -9,8 +9,12 @@
         :on-icon-click="handleIconClick"
         :clear-icon-click="clearIconClick"
         @keyup.enter.native="handleIconClick">>
-        <el-select v-model="group" slot="prepend" placeholder="请选择分组" @change='groupChange'>
+        <!--改-->
+        <!--<el-select v-model="group" slot="prepend" placeholder="请选择分组" @change='groupChange'>
           <el-option label="第一分组" value="1"></el-option>
+        </el-select>-->
+        <el-select v-model="value" slot="prepend" placeholder="请选择分组" @change='groupChange'>
+          <el-option v-for="group in groups" :key="group.value" :label="group.label" :value="group.value"></el-option>
         </el-select>
       </el-input>
     </div>
@@ -20,11 +24,11 @@
     >
       <symbols-container :records="records"></symbols-container>
       <div class="vision">
-        <label class="label">当前版本：</label>
+        <label class="label">当前版本</label>
         <el-select
           v-model="version"
           @change="visionChange"
-          placeholder="请选择当前版本">
+          placeholder="">
           <el-option
             v-for="item in VisionOpts"
             :key="item.value"
@@ -52,9 +56,17 @@ export default {
       VisionOpts,
       options: IconQueryBarOption,
       records: [],
-      version: '--',
+      // 改
+      // version: '--',
+      version: 'v2.1.0',
       name: '',
-      group: '',
+      // group: '',
+      value: '分组一',
+      groups: [{
+        label: '分组一', value: 'value1'
+      }, {
+        label: '分组二', value: 'value2'
+      }],
       Tabs: []
     }
   },
@@ -104,14 +116,17 @@ export default {
     bottom: 4px;
     width: 100%;
     text-align: left;
+    /*padding-right: 0 !important;*/
     background-color: #fff;
     .label{
       display: inline-block;
-      width: 30%;
+      /*width: 30%;*/
     }
     /deep/.el-select{
+      /*border: red 1px solid;*/
       display: inline-block;
-      width: 40%;
+      width: 20%;
+      /*width: 10px;*/
       input{
         border: 0;
         background: transparent;

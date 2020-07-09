@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import IconComponent from '../components/icons-library/index.vue'
 import Symbol from '../components/symbols-library/index'
 import QuickFill from '../components/quick-fill/index'
+// import myFun from '../components/newFun/myFun'
 
 Vue.use(Router)
 
@@ -11,7 +12,8 @@ export default new Router({
     {
       path: '/',
       redirect: '/components'
-    }, {
+    },
+    {
       path: '/components',
       name: 'Symbol',
       component: Symbol
